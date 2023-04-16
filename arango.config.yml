@@ -1,3 +1,8 @@
+# This file exists in the repository but is ignored by git when checking in your changes.
+# If you're using a custom Arango server or logging into the shared Autogram server,
+# you can put the authentication information here and add this file to other projects'
+# `extends` config property.
+
 arango:
   url: http://127.0.0.1:8529
   auth:
