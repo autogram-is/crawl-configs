@@ -1,9 +1,10 @@
 {
+  version: '0.9.22',
   extends: ['./spider.json5', './audit.json5', './queries.json5', './reports.json5'],
   arango: {
     databaseName: "va",
   },
-  outputDirectory: './',
+  outputDirectory: './output',
   offloadBodyHtml: 'db',
   normalizer: {
     forceProtocol: 'https:',
