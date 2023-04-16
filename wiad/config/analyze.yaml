@@ -1,0 +1,56 @@
+analysis:
+  site: parsed.hostname
+  content:
+    selector:
+      - 'body.home div.layout-container'
+      - 'body.talks #block-mainpagecontent > div > div.group-left > div:nth-child(2)'
+      - '#root article section'
+      - 'main'
+  properties: 
+    'content.cms':
+      - 'tech.CMS.[0]'
+      - 'tech.Blogs.[0]'
+    'content.type':
+      - data.meta.og.type
+      - source: data.attributes.classes
+        in:
+          - people
+          - events
+          - talks
+          - themes
+          - about
+        limit: 1
+    'content.title':
+      - data.meta.og.title
+      - data.title
+      - source: body
+        selector: h1.page-title
+    'content.date': 
+      - data.schemaOrg.NewsArticle.datePublished
+      - data.meta.article.published_time
+      - data.info.CreationDate
+      - source: body
+        selector: 'div.td-presented-on > div:nth-child(2)'
+    'content.author':
+      - data.schemaOrg.NewsArticle.author.name
+      - data.meta.author
+      - source: body
+        selector: 'div.article-content div.td-presented-by > div'
+    'content.location': 
+      - source: body
+        selector: 'div.article-content div.td-location'
+    'content.tags': 
+      - source: body
+        selector: 'div.article-content div.td-topics > div > div > a'
+        join: ', '
+      - source: body
+        selector: '#root main > div > div:nth-child(4) > div > div'
+        join: ', '
+    'content.pages': data.info.pages
+  patterns:
+    - name: grid-card
+      selector: 'div.grid-list-item'
+    - name: filter-form
+      selector: 'div.views-exposed-form'
+    - name: video-embed
+      selector: 'video-embed-field-responsive-video'

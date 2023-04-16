@@ -1,0 +1,29 @@
+version: 0.9.22
+extends:
+  - ./analyze.yaml
+
+arango:
+  databaseName: wiad
+  
+offloadBodyHtml: 'db'
+
+spider:
+  maxConcurrency: 2,
+  maxRequests: 240,
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: true
+  urls:
+    regions:
+      header: 'div.site--header--wrapper'
+      content: 'main'
+      footer: 'footer.site-footer'
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: "http*//*{worldiaday.org,medium.com/worldiaday}{*,*/**}"
+  downloadMimeTypes:
+    - '*/*'
