@@ -1,12 +1,12 @@
 {
-  pageAnalysis: {
+  analysis: {
     content: { selector: [
       'section#--transcript div.bcn-modal-content',
       'div#block-sch-beacon-retail-content',
       'div#block-main-page-content',
       '#content'
     ]},
-    propertyMap: {
+    properties: {
       // CMS-specific metadata we pull when possible
       'cms.type': ['data.json.[0].content.schwab_tealium.editorial_type'],
       'cms.id': ['data.json.[0].content.schwab_tealium.nid'],

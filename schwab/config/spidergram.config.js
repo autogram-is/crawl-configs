@@ -1,13 +1,14 @@
 module.exports = (spidergram) => {
   return {
-    extends: ['./queries.json5', './reports.json5', './spider.json5', './analysis.json5' ],
+    extends: [
+      './spider.json5', './audit.json5', './queries.json5', './reports.json5' '../../arango.config.yml'
+    ],
     configVersion: '0.9.22',
     arango: {
       databaseName: "schwab",
     },
-    outputDirectory: './',
     offloadBodyHtml: 'db',
-    urlNormalizer: (url) => {
+    normalizer: (url) => {
       spidergram.globalNormalizer(url, {
         forceProtocol: 'https:',
         forceLowercase: 'href',

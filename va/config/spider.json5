@@ -1,5 +1,5 @@
- {
-   spider: {
+{
+  spider: {
     maxConcurrency: 8,
     maxRequestsPerMinute: 300,
     urls: {
