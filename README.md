@@ -26,8 +26,8 @@ This setup also means you can run crawls in these directories without worrying t
 
 
 ## The crawl list
-
-- WIAD: World IA Day. Around 3000 pages total, with its blog hanging out on a separate Medium.com account.
-- Schwab: 
-- VA: 
-- ULI: The Urban Land Institute, with piles of local and SIG subsites and high profile magazine site used as a hub.
+- **ethan**: Ethan Marcotte's home page. We know it and love it.
+- **wiad**: World IA Day. Around 3000 pages total, with its blog hanging out on a separate Medium.com account.
+- **schwab**: A dozen or two subsites with ~7,0000 crawled pages.
+- **va**: The Veteran's Administration, a government agency with about 200 distinct subdomains, 100k+ crawled HTML pages, and 50k or so downloaded files.
+- **uli**: The Urban Land Institute, with piles of local and SIG subsites and high profile magazine site used as a hub. These settings are copied over from the verrrry old 0.5.0 era custom code we used to do the first crawl.

@@ -1,7 +1,7 @@
 module.exports = (spidergram) => {
   return {
     extends: [
-      './spider.json5', './audit.json5', './queries.json5', './reports.json5', '../../arango.config.yml'
+      './spider.json5', './analysis.json5', './queries.json5', './reports.json5', '../../arango.config.yml'
     ],
     configVersion: '0.9.22',
     arango: {

@@ -9,7 +9,7 @@
         header: { selector: "#schwab_header, div#page>header" },
         footer: { selector: "#footer, #footerContainer, footer" },
         main: { selector: "#content, #block-sch-beacon-retail-content" },
-      }
+      },
       recursionThreshold: 3,
     },
     downloadMimeTypes: ['*/*'],
