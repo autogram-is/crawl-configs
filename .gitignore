@@ -3,3 +3,4 @@
 storage
 output
 arango.config.*
+/arango.config.yml
