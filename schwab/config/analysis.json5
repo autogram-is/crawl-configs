@@ -1,0 +1,72 @@
+{
+  pageAnalysis: {
+    content: { selector: [
+      'section#--transcript div.bcn-modal-content',
+      'div#block-sch-beacon-retail-content',
+      'div#block-main-page-content',
+      '#content'
+    ]},
+    propertyMap: {
+      // CMS-specific metadata we pull when possible
+      'cms.type': ['data.json.[0].content.schwab_tealium.editorial_type'],
+      'cms.id': ['data.json.[0].content.schwab_tealium.nid'],
+      
+      // This has quite a few fallbacks, as the rules vary from type to type and site to site
+      'content.type': [
+        'data.meta.og.type', // If OpenGraph data is set, try it
+        
+        { source: 'parsed.path.[1]', eq: 'topic', value: 'Topic' },         // schwab.com
+        { source: 'parsed.path.[0]', eq: 'research', value: 'Research'  },  // schwab.com
+        { source: 'parsed.path.[2]', eq: 'resources', value: 'Resource'  }, // schwab.com
+         
+        { source: 'parsed.path.[2]', eq: 'branchdetails.aspx', value: 'Branch'  },      // client.schwab.com
+        { source: 'parsed.path.[2]', eq: 'CustomerCenterLogin.aspx', value: 'Login'  }, // client.schwab.com
+        { source: 'parsed.path.[1]', eq: 'consultant', value: 'Consultant'  },          // client.schwab.com
+        
+        'data.meta.dimension10', // schwabjobs.com
+      ],
+      
+      'content.hasVideo': [
+        { source: 'body', selector: 'body.nodetype--story section.bcn-ps-media__video', value: true } // Only applies on schwab.com
+      ],
+      
+      'content.title': [
+        'data.meta.og.title', // OpenGraph
+        'data.title',         // HEAD description tag
+        'data.info.Title',    // PDF metadata
+        { source: 'body', selector: '.branch-details h2, #h4_displayName' }, // branch and consultant on client.schwab.com
+      ],
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.head.description',    // HEAD description tag
+        'data.dc.description'       // PDF metadata
+      ],
+      'content.dek': [
+        { source: 'body', selector: '.bcn-marquee-story__summary' }
+      ],
+      'content.authors': [
+        'data.info.Author', { source: 'body', selector: 'span.authors' }
+      ], 
+      'content.date': [
+        'data.meta.og.article.published_time',  // Try Opengraph data first
+        'headers.x-schwab-last-published',      // Schwab drupal sites expose this header on most node pages
+        'data.schemaOrg.JobPosting.datePosted', // The jobs site exposes Schema.org data!
+        'data.xmp.createdate',                  // PDF files
+        { source: 'body', selector: '_ctrl0_ctl66_lblDate' }, // The About Schwab press site
+      ],
+      'content.complianceNumber': [
+        'data.meta.ComplianceNumber'
+      ]
+    }
+  },
+  pageTechnologies: {
+    technologies: {
+      "Drupal": {
+        "html": [
+          "<(?:link|style)[^>]+\"/sites/(?:default|all)/(?:themes|modules)/",
+          "<(?:script)[^>]+\"drupal-settings-json",
+        ],
+      }
+    }
+  }
+}

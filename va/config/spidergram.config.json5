@@ -1,0 +1,20 @@
+{
+  extends: ['./spider.json5', './audit.json5', './queries.json5', './reports.json5'],
+  arango: {
+    databaseName: "va",
+  },
+  outputDirectory: './',
+  offloadBodyHtml: 'db',
+  normalizer: {
+    forceProtocol: 'https:',
+    forceLowercase: 'href',
+    discardFirstSegment: 'www?([0-9])',
+    supplySubdomain: 'www',
+    discardAnchor: true,
+    discardAuth: true,
+    discardIndex: '**/{index,default}.{htm,html,aspx,php}',
+    discardSearch: '!{page,p}',
+    discardTrailingSlash: false,
+    sortSearchParams: true,
+  }
+}

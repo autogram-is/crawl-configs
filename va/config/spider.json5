@@ -1,0 +1,21 @@
+ {
+   spider: {
+    maxConcurrency: 8,
+    maxRequestsPerMinute: 300,
+    urls: {
+      crawl: { property: 'hostname', regex: '^(?!vaww).*va.gov$' },
+      regions: {
+        header: '#va-header, .header[role="banner"], .header, .main-header-wrap, .merger header',
+        sectionNav: '.va-sidebarnav, #leftNavContainer, #hub-rail, #leftNavContainer, #tier4RightContent, #rightContent, #innerRightContent, .search-row .usa-width-one-fourth, body:not(.home) .post-content aside.fusion-layout-column',
+        footer: '#footer-effect, #footer, footer.footer, .fusion-tb-footer, .footer',
+        content: '#HomeContent, #homeinnerContent,  #homeContentWrapper, #tier4innerContent, #innerContent, #tier4innerContent, #innerContent, #content.interior main, #vhlMainContent .col-xs-12.col-sm-12.col-md-8, #container .col-md-9, #main-wrap .col-md-9, .homepage-hub, article.usa-content, article.usa-width-two-thirds, .search-row .usa-width-three-fourths, body.home .post-content, body.author #content, body:not(.home) .post-content article.fusion-layout-column',
+      },
+    },
+    downloadMimeTypes: ['*/*'],
+    auditAccessibility: true,
+    savePerformance: true,
+    saveCookies: true,
+    saveXhrList: true,
+    recursionThreshold: 3,
+  }
+}

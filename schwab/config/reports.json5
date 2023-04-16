@@ -1,0 +1,78 @@
+{
+  reports: {
+    default: {
+      name: 'Schwab Content',
+      category: 'Schwab',
+      description: 'Page, error, and link summaries',
+      queries: {
+        'Crawl Overview': 'summary',
+        'Pages': {
+          base: 'pages',
+          expand: {
+            property: 'Site',
+            values: [
+              'pressroom.aboutschwab.com',
+              'client.schwab.com',
+              'career-schwab.icims.com',
+              'www.schwabjobs.com'
+            ]
+          }
+        },
+        'PDF Files': 'pdfs',
+        'Non-Schwab PDFs': 'pdf_links',
+        'Media': 'media',
+        'Errors': 'errors'
+      }
+    },
+    page_details: {
+      name: 'Page Report',
+      category: 'Schwab',
+      description: 'Detailed report for a single page',
+      pivotSingleResults: true,
+      dropEmptyQueries: true,
+      queries: {
+        'Page Overview': {
+          collection: 'resources',
+          return: [
+            { name: 'Site', path: 'parsed.hostname' },
+            { name: 'URL', path: 'parsed.href' },
+            { name: 'Title', path: 'content.title' },
+            { name: 'CMS', path: 'tech.CMS[0]' },
+          ]
+        },
+        'Performance': {
+          collection: 'resources',
+          return: ['timing']
+        },
+        'Accessibility': {
+          collection: 'resources',
+          return: ['accessibility']
+        },
+        'Cookies': {
+          collection: 'resources',
+          return: ['cookies']
+        },
+        'External Requests': {
+          collection: 'resources',
+          return: ['xhr']
+        },
+        'Detected Technologies': {
+          collection: 'resources',
+          return: ['tech']
+        },
+      }
+    },
+    url_details: {
+      name: 'URL Details',
+      category: 'Schwab',
+      description: 'Link permutations, redirect chains, and broken URLs',
+      queries: {
+        'Redirects': 'redirects',
+        'Inlink variations': 'variations',
+        'Non-web URLs': 'nonweb',
+        'Invalid URLs': 'invalid',
+        'Errors': 'errors',
+      }
+    }
+  }
+}

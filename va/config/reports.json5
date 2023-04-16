@@ -1,0 +1,18 @@
+{
+  reports: {
+    default: {
+      name: 'VA.Gov Report',
+      category: 'Core',
+      description: 'Page, error, and link summaries',
+      queries: {
+        'Crawl Overview': 'summary',
+        'Pages': 'pages',
+        'PDFs': 'pdfs',
+        'Media': 'media',
+      },
+      settings: {
+        
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  spider: {
+    maxConcurrency: 8,
+    maxRequestsPerMinute: 240,
+    urls: {
+      selectors: 'a, iframe, video, audio',
+      crawl: ['http*/*schwab*', 'http*/*schwab*/**'],
+      regions: {
+        header: { selector: "#schwab_header, div#page>header" },
+        footer: { selector: "#footer, #footerContainer, footer" },
+        main: { selector: "#content, #block-sch-beacon-retail-content" },
+      }
+      recursionThreshold: 3,
+    },
+    downloadMimeTypes: ['*/*'],
+    auditAccessibility: true,
+    savePerformance: true,
+    saveCookies: true,
+    saveXhrList: true,
+  }
+}
