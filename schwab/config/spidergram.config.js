@@ -1,6 +1,7 @@
 module.exports = (spidergram) => {
   return {
     extends: ['./queries.json5', './reports.json5', './spider.json5', './analysis.json5' ],
+    configVersion: '0.9.22',
     arango: {
       databaseName: "schwab",
     },

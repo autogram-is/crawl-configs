@@ -1,4 +1,4 @@
-version: 0.9.22
+configVersion: 0.9.22
 extends:
   - ./analyze.yaml
 

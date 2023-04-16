@@ -1,5 +1,5 @@
 {
-  version: '0.9.22',
+  configVersion: '0.9.22',
   extends: ['./spider.json5', './audit.json5', './queries.json5', './reports.json5'],
   arango: {
     databaseName: "va",
