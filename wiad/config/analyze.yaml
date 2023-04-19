@@ -31,26 +31,45 @@ analysis:
       - data.info.CreationDate
       - source: body
         selector: 'div.td-presented-on > div:nth-child(2)'
+      - source: body
+        selector: 'header.pw-post-byline-header p.pw-published-date'
     'content.author':
       - data.schemaOrg.NewsArticle.author.name
       - data.meta.author
       - source: body
         selector: 'div.article-content div.td-presented-by > div'
+      - source: body
+        selector: 'header.pw-post-byline-header div.pw-author'
     'content.location': 
       - source: body
         selector: 'div.article-content div.td-location'
     'content.tags': 
       - source: body
         selector: 'div.article-content div.td-topics > div > div > a'
-        join: ', '
       - source: body
         selector: '#root main > div > div:nth-child(4) > div > div'
-        join: ', '
     'content.pages': data.info.pages
   patterns:
-    - name: grid-card
-      selector: 'div.grid-list-item'
-    - name: filter-form
-      selector: 'div.views-exposed-form'
-    - name: video-embed
-      selector: 'video-embed-field-responsive-video'
+    - property: 'parsed.domain'
+      eq: 'worldiaday.org'
+      patterns:
+        - name: card
+          selector: 'div.grid-list-item'
+        - name: filter-form
+          selector: 'div.views-exposed-form'
+        - name: video-embed
+          selector: 'video-embed-field-responsive-video'
+    - property: 'parsed.domain'
+      eq: 'medium.com'
+      patterns:
+        - name: bio
+          selector: 'header.pw-post-byline-header'
+          properties:
+            author:
+              source: html
+              selector: 'div.pw-author'
+            published:
+              source: html
+              selector: 'p.pw-published-date'
+        - name: recirc
+          selector: 'main footer~div span article'
