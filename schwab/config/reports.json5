@@ -1,77 +1,181 @@
 {
   reports: {
-    default: {
+    'default': {
       name: 'Schwab Content',
-      category: 'Schwab',
-      description: 'Page, error, and link summaries',
+      group: 'Schwab',
+      description: 'Page, error, and media summaries',
       queries: {
         'Crawl Overview': 'summary',
-        'Pages': {
-          base: 'pages',
-          expand: {
-            property: 'Site',
-            values: [
-              'pressroom.aboutschwab.com',
-              'client.schwab.com',
-              'career-schwab.icims.com',
-              'www.schwabjobs.com'
-            ]
-          }
-        },
+        'Pages': 'pages',
         'PDF Files': 'pdfs',
         'Non-Schwab PDFs': 'pdf_links',
         'Media': 'media',
         'Errors': 'errors'
+      },
+      settings: {
+        sheets: {
+          'client.schwab.com': { name: 'Client Pages' },
+          'www.schwabjobs.com': { name: 'Jobs Pages' },
+          'career-schwab.icims.com': { name: 'ICIMS Pages' },
+        }
+      },
+      alterData: {
+        Pages: {
+          action: 'split',
+          property: 'Site',
+          mustMatch: [
+            'client.schwab.com',
+            'career-schwab.icims.com',
+            'www.schwabjobs.com',
+          ]
+        }
       }
     },
+
     page_details: {
-      name: 'Page Report',
-      category: 'Schwab',
+      name: 'Page Inspection',
+      group: 'Schwab',
       description: 'Detailed report for a single page',
-      pivotSingleResults: true,
       dropEmptyQueries: true,
+      
+      repeat: {
+        'Schwab Home': { path: 'url', eq: 'https://www.schwab.com/' },
+        'Intelligent-Portfolios': { path: 'url', eq: 'https://www.schwab.com/intelligent-portfolios' },
+        'Author-Carrie': { path: 'url', eq: 'https://www.schwab.com/learn/author/carrie-schwab-pomerantz' },
+        'Article-ID-Theft': { path: 'url', eq: 'https://www.schwab.com/resource/identity-theft-checklist' },
+        'Learn-Divorce': { path: 'url', eq: 'https://www.schwab.com/learn/story/divorce-after-50-impact-on-retirement-savings' },
+        'Learn-Podcast': { path: 'url', eq: 'https://www.schwab.com/learn/story/out-focus-with-guests-dolly-chugh-max-bazerman-mark-pendergrast' },
+        'Learn-DJI': { path: 'url', eq: 'https://www.schwab.com/learn/story/what-is-dow-jones-industrial-average' },
+        'Pages-Leadgen-Form': { path: 'url', eq: 'https://pages.schwab.com/form-leadgen-ext-contact-fi-prospect' },
+        'Content-Invested': { path: 'url', eq: 'https://content.schwab.com/invested/' },
+        'Topic-Planning': { path: 'url', eq: 'https://www.schwab.com/learn/topic/financial-planning' },
+        'Client-Login': { path: 'url', eq: 'https://client.schwab.com/Login/SignOn/CustomerCenterLogin.aspx' },
+        'Client-Branch': { path: 'url', eq: 'https://client.schwab.com/public/branchlocator/branchdetails.aspx?branchid=1024' },
+        'Client-Consultant': { path: 'url', eq: 'https://client.schwab.com/public/consultant?fc=andrew.thompson' },
+        'PDF-Acct-Transfer': { path: 'url', eq: 'https://schwab.bynder.com/m/384985927c341ade' },
+      },
+      
+      settings: {
+        path: 'Page Details - {{date}}/{{name}}',
+        sheets: {
+          overview: { name: 'Page Overview', template: 'inspector' },
+          content: { name: 'Content Details', template: 'inspector' },
+          tech: { name: 'Technologies', template: 'inspector' },
+          timing: { name: 'Load Time', template: 'inspector' },
+          a11y: { name: 'Accessibility', template: 'inspector' },
+          cookies: { name: 'Cookies' },
+          xhr: {
+            name: 'External Requests',
+            template: 'table',
+            columns: { xhr: { name: 'Address' } }
+          },
+          inlinks: { name: 'Inbound Links' },
+          outlinks: { name: 'Outbound Links' },
+          file_data: { name: 'Embedded Data' },
+        }
+      },
+      
       queries: {
-        'Page Overview': {
+        overview: {
           collection: 'resources',
           return: [
             { name: 'Site', path: 'parsed.hostname' },
             { name: 'URL', path: 'parsed.href' },
+            { name: 'Type', path: 'content.type' },
             { name: 'Title', path: 'content.title' },
-            { name: 'CMS', path: 'tech.CMS[0]' },
+            { name: 'CMS', path: 'tech.CMS', function: 'first' },
+            { name: 'Load Time', path: 'timing.duration' },
+            { name: 'Accessibility', path: 'accessibility.totalViolations' },
+            { name: 'Cookies', path: 'cookies', function: 'length' },
+            { name: 'External Requests', path: 'xhr', function: 'length' }
           ]
         },
-        'Performance': {
+        content: {
           collection: 'resources',
-          return: ['timing']
+          return: [
+            { name: 'Title', path: 'content.title' },
+            { name: 'Date', path: 'content.date' },
+            { name: 'Summary', path: 'content.summary' },
+            { name: 'Text', path: 'content.text' },
+            { name: 'Words', path: 'content.readability.words' },
+            { name: 'Sentences', path: 'content.readability.sentences' },
+            { name: 'Readability', path: 'content.readability.score' },
+            { name: 'Compliance Number', path: 'content.complianceNumber' },
+          ]
         },
-        'Accessibility': {
+        cookies: {
           collection: 'resources',
-          return: ['accessibility']
+          subqueries: [{
+            collection: 'item.cookies',
+            document: 'cookie'
+          }],
+          filters: [{ path: 'cookies', eq: null, negate: true }],
+          return: [
+            { name: 'Name', document: 'cookie', path: 'name' },
+            { name: 'Domain', document: 'cookie', path: 'domain' },
+            { name: 'Secure', document: 'cookie', path: 'secure' },
+            { name: 'Same Site', document: 'cookie', path: 'sameSite' },
+            { name: 'Value', document: 'cookie', path: 'value' },
+          ]
         },
-        'Cookies': {
+        tech: {
           collection: 'resources',
-          return: ['cookies']
+          return: [{ path: 'tech' }]
         },
-        'External Requests': {
+        xhr: {
           collection: 'resources',
-          return: ['xhr']
+          return: [{ path: 'xhr' }]
         },
-        'Detected Technologies': {
+        a11y: {
           collection: 'resources',
-          return: ['tech']
+          return: [{ path: 'accessibility' }]
         },
-      }
+        timing: {
+          collection: 'resources',
+          return: [{ path: 'timing' }]
+        },
+        inlinks: 'inlinks',
+        outlinks: 'outlinks',
+        file_data: {
+          collection: 'resources',
+          return: [{ name: 'Urls', path: 'content.urls' }]
+        }
+      },
     },
+    
+    
     url_details: {
       name: 'URL Details',
-      category: 'Schwab',
+      group: 'Schwab',
       description: 'Link permutations, redirect chains, and broken URLs',
       queries: {
         'Redirects': 'redirects',
-        'Inlink variations': 'variations',
+        'Link variations': 'variations',
         'Non-web URLs': 'nonweb',
         'Invalid URLs': 'invalid',
-        'Errors': 'errors',
+      }
+    },
+    
+    site_network: {
+      name: 'Site Network',
+      group: 'Schwab',
+      description: "Data to map sites' relationships to each other",
+      settings: {
+        type: 'json',
+        path: 'schwab-site-graph',
+        combine: true
+      },
+      queries: {
+        nodes: {
+          collection: 'resources',
+          filters: [
+            { path: 'code', eq: 200 }, 
+            { path: 'mime', eq: 'text/html' }
+          ],
+          aggregates: [{ name: 'site', path: 'parsed.hostname', function: 'collect' }],
+          count: 'pages'
+        },
+        links: 'network',
       }
     }
   }

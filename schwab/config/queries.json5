@@ -12,17 +12,17 @@
           query: {
             collection: 'responds_with',
             document: 'rw',
-            filters: [{ path: '_to', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_to', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'links_to',
                 document: 'lt',
-                filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+                filters: [{ path: '_to', join: 'rw._from' }],
                 subqueries: [
                   {
                     collection: 'resources',
                     document: 'source',
-                    filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                    filters: [{ path: '_id', join: 'lt._from' }],
                   },
                 ],
               }
@@ -36,12 +36,12 @@
           query: {
             collection: 'links_to',
             document: 'lt',
-            filters: [{ path: '_from', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_from', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'unique_urls',
                 document: 'target',
-                filters: [{ path: '_id', eq: 'lt._to', value: 'dynamic' }],
+                filters: [{ path: '_id', join: 'lt._to' }],
               }
             ],
             return: [{ path: 'url', document: 'target' }],
@@ -54,7 +54,10 @@
         { name: 'Speed', path: 'timing.duration', function: 'average' }
       ],
       count: 'total',
-      sorts: [{ name: 'total', direction: 'desc' }],
+      sorts: [
+        { name: 'total', direction: 'desc' },
+        { name: 'Site', direction: 'asc' },
+      ],
     },
 
     pages: {
@@ -69,17 +72,17 @@
           query: {
             collection: 'responds_with',
             document: 'rw',
-            filters: [{ path: '_to', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_to', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'links_to',
                 document: 'lt',
-                filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+                filters: [{ path: '_to', join: 'rw._from' }],
                 subqueries: [
                   {
                     collection: 'resources',
                     document: 'source',
-                    filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                    filters: [{ path: '_id', join: 'lt._from' }],
                   },
                 ],
               }
@@ -93,12 +96,12 @@
           query: {
             collection: 'links_to',
             document: 'lt',
-            filters: [{ path: '_from', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_from', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'unique_urls',
                 document: 'target',
-                filters: [{ path: '_id', eq: 'lt._to', value: 'dynamic' }],
+                filters: [{ path: '_id', join: 'lt._to' }],
               }
             ],
             return: [{ path: 'url', document: 'target' }],
@@ -162,17 +165,17 @@
           query: {
             collection: 'responds_with',
             document: 'rw',
-            filters: [{ path: '_to', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_to', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'links_to',
                 document: 'lt',
-                filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+                filters: [{ path: '_to', join: 'rw._from' }],
                 subqueries: [
                   {
                     collection: 'resources',
                     document: 'source',
-                    filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                    filters: [{ path: '_id', join: 'lt._from' }],
                   },
                 ],
               }
@@ -186,12 +189,12 @@
           query: {
             collection: 'links_to',
             document: 'lt',
-            filters: [{ path: '_from', eq: 'item._id', value: 'dynamic' }],
+            filters: [{ path: '_from', join: 'item._id' }],
             subqueries: [
               {
                 collection: 'unique_urls',
                 document: 'target',
-                filters: [{ path: '_id', eq: 'lt._to', value: 'dynamic' }],
+                filters: [{ path: '_id', join: 'lt._to' }],
               }
             ],
             return: [{ path: 'url', document: 'target' }],
@@ -209,8 +212,8 @@
         // Content analysis
         { name: 'Title', path: 'content.title' },
         { name: 'Date', path: 'content.date', function: '' },
-        { name: 'Pages', path: 'content.pages' },
-        { name: 'Form Fields', path: 'data.formFields' },
+        { name: 'Pages', path: 'data.pages' },
+        { name: 'Fillable Form', path: 'data.info.IsAcroFormPresent' },
         { name: 'Words', path: 'content.readability.words' },
         { name: 'Readability', path: 'content.readability.score' },
         
@@ -233,17 +236,17 @@
         query: {
           collection: 'responds_with',
           document: 'rw',
-          filters: [{ path: '_to', eq: 'item._id', value: 'dynamic' }],
+          filters: [{ path: '_to', join: 'item._id' }],
           subqueries: [
             {
               collection: 'links_to',
               document: 'lt',
-              filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+              filters: [{ path: '_to', join: 'rw._from' }],
               subqueries: [
                 {
                   collection: 'resources',
                   document: 'source',
-                  filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                  filters: [{ path: '_id', join: 'lt._from' }],
                 },
               ],
             }
@@ -275,17 +278,17 @@
         query: {
           collection: 'responds_with',
           document: 'rw',
-          filters: [{ path: '_to', eq: 'item._id', value: 'dynamic' }],
+          filters: [{ path: '_to', join: 'item._id' }],
           subqueries: [
             {
               collection: 'links_to',
               document: 'lt',
-              filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+              filters: [{ path: '_to', join: 'rw._from' }],
               subqueries: [
                 {
                   collection: 'resources',
                   document: 'source',
-                  filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                  filters: [{ path: '_id', join: 'lt._from' }],
                 },
               ],
             }
@@ -315,12 +318,12 @@
         {
           collection: 'links_to',
           document: 'lt',
-          filters: [{ path: '_to', eq: 'target._id', value: 'dynamic' }],
+          filters: [{ path: '_to', join: 'target._id' }],
           subqueries: [
             {
               collection: 'resources',
               document: 'source',
-              filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+              filters: [{ path: '_id', join: 'lt._from' }],
             },
           ],
         },
@@ -354,7 +357,7 @@
     
     inlinks: {
       metadata: {
-        description: "Internal links within the site",
+        description: "Links from many sources to a given page",
       },
       collection: 'resources',
       document: 'target',
@@ -362,17 +365,17 @@
         {
           collection: 'responds_with',
           document: 'rw',
-          filters: [{ path: '_to', eq: 'target._id', value: 'dynamic' }],
+          filters: [{ path: '_to', join: 'target._id' }],
           subqueries: [
             {
               collection: 'links_to',
               document: 'lt',
-              filters: [{ path: '_to', eq: 'rw._from', value: 'dynamic' }],
+              filters: [{ path: '_to', join: 'rw._from' }],
               subqueries: [
                 {
                   collection: 'resources',
                   document: 'source',
-                  filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+                  filters: [{ path: '_id', join: 'lt._from' }],
                 },
               ],
             }
@@ -380,11 +383,40 @@
         },
       ],
       return: [
-        { name: 'Source URL', path: 'parsed.href', 'document': 'source' },
-        { name: 'Target URL', path: 'parsed.href', 'document': 'target' },
-        { name: 'Link Text', path: 'text', 'document': 'lt' },
-        { name: 'Region', path: 'region', 'document': 'lt' },
+        { name: "Source", document: 'source', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
       ]
+    },
+    
+    outlinks: {
+      metadata: {
+        description: "Links from a page to many target URLs",
+      },
+      collection: 'resources',
+      document: 'source',
+      subqueries: [
+        {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_from', join: 'source._id' }],
+          subqueries: [
+            {
+              collection: 'unique_urls',
+              document: 'target',
+              filters: [{ path: '_id', join: 'lt._to' }],
+            },
+          ],
+        }
+      ],
+      return: [
+        { name: "Target", document: 'target', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
+      ]
+
     },
     
     invalid: {
@@ -396,11 +428,11 @@
         query: {
           collection: 'links_to',
           document: 'lt',
-          filters: [{ path: '_to', eq: 'uu._id', value: 'dynamic' }],
+          filters: [{ path: '_to', join: 'uu._id' }],
           subqueries: [{
             collection: 'resources',
             document: 'source',
-            filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+            filters: [{ path: '_id', join: 'lt._from' }],
           }],
         },
         return: [{ path: 'url', document: 'source' }],
@@ -418,11 +450,11 @@
       subqueries: [{
         collection: 'links_to',
         document: 'lt',
-        filters: [{ path: '_to', eq: 'uu._id', value: 'dynamic' }],
+        filters: [{ path: '_to', join: 'uu._id' }],
         subqueries: [{
           collection: 'resources',
           document: 'source',
-          filters: [{ path: '_id', eq: 'lt._from', value: 'dynamic' }],
+          filters: [{ path: '_id', join: 'lt._from' }],
         }],
       }],
       filters: [{ path: 'parsed.protocol', in: ['https:', 'http:'], negate: true }],
@@ -443,7 +475,7 @@
       subqueries: [{
         collection: 'links_to',
         document: 'lt',
-        filters: [{ path: '_to', eq: 'uu._id', value: 'dynamic' }]
+        filters: [{ path: '_to', join: 'uu._id' }]
       }],
       aggregates: [
         { name: 'url', path: 'parsed.href', function: 'collect' },
@@ -470,19 +502,19 @@
           collection: 'responds_with',
           document: 'rw',
           filters: [
-            { 'path': '_from', eq: 'uu._id', value: 'dynamic' },
+            { 'path': '_from', join: 'uu._id' },
           ],
         },
         {
           collection: 'resources',
           document: 'rs',
           filters: [
-            { 'path': '_id', eq: 'rw._to', value: 'dynamic' },
+            { 'path': '_id', join: 'rw._to' },
           ]
         }
       ],
       filters: [
-        { path: 'parsed.href', eq: 'rs.parsed.href', value: 'dynamic', negate: true },
+        { path: 'parsed.href', join: 'rs.parsed.href', negate: true },
         { document: 'rw', path: 'redirects', gt: 1, function: 'count' },
       ],
       sorts: [{ document: 'rw', path: 'redirects', function: 'length', direction: 'desc' }],
