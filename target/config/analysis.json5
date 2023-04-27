@@ -1,0 +1,53 @@
+{
+  analysis: {
+    data: { all: true },
+    content: {
+      selector: [
+        'div.modal div.modal--content.is-active',
+        '#pageBodyContainer',
+        '#main-content',
+        '#page, #content, #body, #main, #epContent',
+        '#root > div[class^="css-"] > .MuiGrid-root',
+        '#root > div, #root > .MuiBox-root > .MuiBox-root > .MuiBox-root:nth-child(2)',
+        'body > form[id]',
+        '.main-wrapper',
+        '.contentWrapper > main',
+      ]
+    },
+    properties: {
+      'content.type': [
+        'data.meta.press_category',
+        'data.meta.mediaType',
+        'data.meta.og.type', // If OpenGraph data is set, try it
+      ],
+      'content.title': [
+        { source: 'body', selector: 'timeline--detail-content-title' },
+        'data.meta.og.title', // OpenGraph
+        'data.title',         // HEAD description tag
+        'data.info.Title',    // PDF metadata
+      ],
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.head.description',    // HEAD description tag
+        'data.dc.description'       // PDF metadata
+      ],
+      'content.date': [
+        'data.meta.press_date',
+        'data.meta.publishDate',
+        'data.meta.og.article.published_time',  // Try Opengraph data
+        'data.xmp.createdate',                  // PDF files
+      ],
+      'content.topic': 'data.meta.topic',
+      'content.category': 'data.meta.category',
+      'content.keywords': 'data.keywords',
+      'content.tags': [
+        'data.meta.tag',
+        'data.meta.press_tags'
+      ],
+      'content.theme': {
+        source: 'body',
+        selector: '#main-content section.secondary.gtm-secondary-region > div > div:nth-child(1) h3'
+      }
+    }
+  },
+}
