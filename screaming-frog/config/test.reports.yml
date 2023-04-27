@@ -1,0 +1,33 @@
+queries:
+  scratch:
+    description: Scratchpad for query testing
+    document: rs
+    collection: resources
+    subqueries:
+    - collection: responds_with
+      document: rw
+      filters:
+      - path: _to
+        eq: rs._id
+        value: dynamic
+      subqueries:
+      - collection: unique_urls
+        document: uu
+        filters:
+        - path: _id
+          eq: rw._from
+          value: dynamic
+    return:
+    - name: Page_ID
+      document: rs
+      path: _key
+    - name: Response_URL
+      path: url
+    - name: Title
+      path: data.title
+    - name: Redirects
+      document: rw
+      path: redirects
+      function: length
+    - name: Content_Type
+      path: mime

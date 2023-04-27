@@ -1,0 +1,25 @@
+arango:
+  databaseName: chromeos
+spider:
+  seed: https://chromeos.dev/en
+  urls:
+    regions: 
+      header: "header"
+      sidenav: "body > main > article > aside"
+      footer: "footer"
+      main: "main"
+  downloadMimeTypes:
+    - application/pdf
+analysis:
+  content:
+    selector: 
+      - "body > main > article > div.tech-detail__hero ~ *"
+      - "body > main > article"
+      - "body > main"
+  properties:
+    "content.locale": "data.meta.og.locale"
+    "content.type": "data.meta.og.type"
+    "content.title": "data.meta.og.title"
+    "content.description": "data.meta.og.description"
+    "content.published": "data.meta.og.article.published_time"
+    "content.section": "data.meta.og.article.section"

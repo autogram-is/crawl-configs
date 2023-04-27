@@ -1,0 +1,45 @@
+{
+  "queries": {
+    "internal_html": {
+      "description": "Basic metadata for internal HTML pages",
+      "document": "rs",
+      "collection": "resources",
+      "subqueries": [
+        {
+          "collection": "responds_with",
+          "document": "rw",
+          "filters": [{ "path": "_to", "eq": "rs._id", "value": "dynamic" }],
+          "subqueries": [
+            {
+              "collection": "unique_urls",
+              "document": "uu",
+              "filters": [{ "path": "_id", "eq": "rw._from", "value": "dynamic" }]
+            }
+          ]
+        }
+      ],
+      "return": [
+        { "name": "Page_ID", "document": "rs", "path": "_key" },
+        { "name": "Response_URL", "path": "url" },
+        { "name": "Title", "path": "data.title" },
+        { "name": "Redirects", "document": "rw", "path": "redirects", "function": "length" },
+        { "name": "Content_Type", "path": "mime" },
+        { "name": "Status_Code", "path": "code" }, 
+        { "name": "Status", "path": "message" },
+        { "name": "Size_bytes", "path": "size" }, 
+        { "name": "Last_Modified", "path": "headers.`last-modified`" }, 
+        { "name": "Crawl_Depth", "document": "uu", "path": "depth" },
+        { "name": "Keywords", "path": "data.meta.keywords" },
+        { "name": "H1-1", "path": "content.h1[0]" },
+        { "name": "H1-2", "path": "content.h1[1]" },
+        { "name": "H2-1", "path": "content.h2[0]" },
+        { "name": "H2-2", "path": "content.h2[1]" },
+        { "name": "Cookies", "path": "cookies", "function": "length" },
+        { "name": "Text_Size_bytes", "path": "content.text", "function": "length" },
+        { "name": "Word_Count", "path": "content.readability.words" },
+        { "name": "Sentence_Count", "path": "content.readability.sentences" },
+        { "name": "Readability_Score", "path": "content.readability.score" }
+      ]
+    }
+  }
+}

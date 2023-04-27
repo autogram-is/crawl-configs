@@ -175,8 +175,6 @@
           aggregates: [{ name: 'site', path: 'parsed.hostname', function: 'collect' }],
           count: 'pages'
         },
-        links: 'network',
-      }
     }
   }
 }

@@ -1,5 +1,6 @@
 {
   spider: {
+    seed: "https://schwab.com",
     maxConcurrency: 8,
     maxRequestsPerMinute: 240,
     urls: {
