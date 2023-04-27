@@ -10,7 +10,6 @@
         'PDF Files': 'pdfs',
         'Non-Schwab PDFs': 'pdf_links',
         'Media': 'media',
-        'Errors': 'errors'
       },
       settings: {
         sheets: {
@@ -153,6 +152,7 @@
         'Link variations': 'variations',
         'Non-web URLs': 'nonweb',
         'Invalid URLs': 'invalid',
+        'Errors': 'errors'
       }
     },
     
