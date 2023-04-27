@@ -1,0 +1,525 @@
+{
+  queries: {
+    summary: {
+      metadata: {
+        description: "Summary of crawled URLs",
+      },
+      collection: 'resources',
+      subqueries: [
+        {
+          name: 'inlinks',
+          function: 'unique',
+          query: {
+            collection: 'responds_with',
+            document: 'rw',
+            filters: [{ path: '_to', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'links_to',
+                document: 'lt',
+                filters: [{ path: '_to', join: 'rw._from' }],
+                subqueries: [
+                  {
+                    collection: 'resources',
+                    document: 'source',
+                    filters: [{ path: '_id', join: 'lt._from' }],
+                  },
+                ],
+              }
+            ],
+            return: [{ path: 'url', document: 'source' }],
+          },
+        },
+        {
+          name: 'outlinks',
+          function: 'unique',
+          query: {
+            collection: 'links_to',
+            document: 'lt',
+            filters: [{ path: '_from', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'unique_urls',
+                document: 'target',
+                filters: [{ path: '_id', join: 'lt._to' }],
+              }
+            ],
+            return: [{ path: 'url', document: 'target' }],
+          },
+        },
+      ],
+      aggregates: [
+        { name: 'Site', path: 'parsed.hostname', function: 'collect' },
+        { name: 'Type', path: 'mime', function: 'collect' },
+        { name: 'Speed', path: 'timing.duration', function: 'average' }
+      ],
+      count: 'total',
+      sorts: [
+        { name: 'total', direction: 'desc' },
+        { name: 'Site', direction: 'asc' },
+      ],
+    },
+
+    pages: {
+      metadata: {
+        description: "HTML pages checked or crawled by Spidergram",
+      },
+      collection: 'resources',
+      subqueries: [
+        {
+          name: 'inlinks',
+          function: 'unique',
+          query: {
+            collection: 'responds_with',
+            document: 'rw',
+            filters: [{ path: '_to', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'links_to',
+                document: 'lt',
+                filters: [{ path: '_to', join: 'rw._from' }],
+                subqueries: [
+                  {
+                    collection: 'resources',
+                    document: 'source',
+                    filters: [{ path: '_id', join: 'lt._from' }],
+                  },
+                ],
+              }
+            ],
+            return: [{ path: 'url', document: 'source' }],
+          },
+        },
+        {
+          name: 'outlinks',
+          function: 'unique',
+          query: {
+            collection: 'links_to',
+            document: 'lt',
+            filters: [{ path: '_from', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'unique_urls',
+                document: 'target',
+                filters: [{ path: '_id', join: 'lt._to' }],
+              }
+            ],
+            return: [{ path: 'url', document: 'target' }],
+          },
+        },
+      ],
+      filters: [
+        { name: "code", eq: 200 },
+        { name: "mime", eq: 'text/html' },
+      ],
+      sorts: [{ path: 'url', direction: 'asc' }],
+      return: [
+        { name: 'Site', path: 'parsed.hostname' },
+        { name: 'Path', path: 'parsed.pathname' },
+        { name: 'Params', path: 'parsed.search' },
+        { name: 'CMS', path: 'tech.CMS[0]' },
+        
+        // Content analysis
+        { name: 'Type', path: 'content.type' },
+        { name: 'Title', path: 'content.title' },
+        { name: 'Description', path: 'content.description' },
+        { name: 'Date', path: 'content.date' },
+        { name: 'Topic', path: 'content.topic' },
+        { name: 'Tag', path: 'content.tag' },
+        { name: 'Category', path: 'content.category' },
+        { name: 'Theme', path: 'content.theme' },
+        { name: 'Words', path: 'content.readability.words' },
+        { name: 'Readability', path: 'content.readability.score' },
+        
+        // Detected data
+        { name: 'Cookies', path: 'cookies', function: 'length' },
+        { name: 'Technologies', path: 'tech', function: 'length' },
+        { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
+        { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
+        { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
+                
+        // Pagespeed data
+        { name: 'Load Time', path: 'timing.duration' }, // we can use pagespeed.speedIndex if it's loaded
+                
+        // Inlink/outlink counts
+        { name: 'Canonical URL', path: 'data.links.canonical[0].href' },
+        { name: 'Inlinks', path: 'inlinks', function: 'length', document: false },
+        { name: 'Outlinks', path: 'outlinks', function: 'length', document: false },
+      ],
+    },
+
+    pdfs: {
+      metadata: {
+        source: 'Core',
+        description: "Downloadable PDFs",
+      },
+      collection: 'resources',
+      subqueries: [
+        {
+          name: 'inlinks',
+          function: 'unique',
+          query: {
+            collection: 'responds_with',
+            document: 'rw',
+            filters: [{ path: '_to', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'links_to',
+                document: 'lt',
+                filters: [{ path: '_to', join: 'rw._from' }],
+                subqueries: [
+                  {
+                    collection: 'resources',
+                    document: 'source',
+                    filters: [{ path: '_id', join: 'lt._from' }],
+                  },
+                ],
+              }
+            ],
+            return: [{ path: 'url', document: 'source' }],
+          },
+        },
+        {
+          name: 'outlinks',
+          function: 'unique',
+          query: {
+            collection: 'links_to',
+            document: 'lt',
+            filters: [{ path: '_from', join: 'item._id' }],
+            subqueries: [
+              {
+                collection: 'unique_urls',
+                document: 'target',
+                filters: [{ path: '_id', join: 'lt._to' }],
+              }
+            ],
+            return: [{ path: 'url', document: 'target' }],
+          },
+        },
+      ],
+      filters: [
+        { name: "code", eq: 200 },
+        { name: "mime", eq: 'application/pdf' },
+      ],
+      return: [
+        { name: 'Site', path: 'parsed.hostname' },
+        { name: 'Path', path: 'parsed.pathname' },
+        
+        // Content analysis
+        { name: 'Title', path: 'content.title' },
+        { name: 'Date', path: 'content.date', function: '' },
+        { name: 'Pages', path: 'data.pages' },
+        { name: 'Words', path: 'content.readability.words' },
+        { name: 'Readability', path: 'content.readability.score' },
+        
+        // Inlink/outlink counts
+        { name: 'Inlinks', path: 'inlinks', function: 'length', document: false },      
+        { name: 'Outlinks', path: 'content.urls', function: 'length' },        
+      ],
+      sorts: [{ path: 'url', direction: 'asc' }],
+    },
+
+    media: {
+      metadata: {
+        source: 'Core',
+        description: "All non-HTML resources crawled by Spidergram",
+      },
+      collection: 'resources',
+      subqueries: [{
+        name: 'inlinks',
+        function: 'unique',
+        query: {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [{ path: '_to', join: 'item._id' }],
+          subqueries: [
+            {
+              collection: 'links_to',
+              document: 'lt',
+              filters: [{ path: '_to', join: 'rw._from' }],
+              subqueries: [
+                {
+                  collection: 'resources',
+                  document: 'source',
+                  filters: [{ path: '_id', join: 'lt._from' }],
+                },
+              ],
+            }
+          ],
+          return: [{ path: 'url', document: 'source' }],
+        },
+      }],
+      filters: [
+        { name: "code", eq: 200 },
+        { name: "mime", eq: 'text/html', negate: true },
+        { name: "mime", eq: 'application/pdf', negate: true },
+      ],
+      sorts: [{ path: 'url', direction: 'asc' }],
+      return: [
+        { name: 'URL', path: 'parsed.pathname' },
+        { name: 'Mime', path: 'mime' },
+        { name: 'Size', path: 'size' },
+        { name: 'Inlinks', path: 'inlinks', function: 'length', document: false },      
+      ]
+    },
+
+    errors: {
+      metadata: {
+        description: "Resources that returned errors when visited",
+      },
+      collection: 'resources',
+      subqueries: [{
+        name: 'inlinks',
+        function: 'unique',
+        query: {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [{ path: '_to', join: 'item._id' }],
+          subqueries: [
+            {
+              collection: 'links_to',
+              document: 'lt',
+              filters: [{ path: '_to', join: 'rw._from' }],
+              subqueries: [
+                {
+                  collection: 'resources',
+                  document: 'source',
+                  filters: [{ path: '_id', join: 'lt._from' }],
+                },
+              ],
+            }
+          ],
+          return: [{ path: 'url', document: 'source' }],
+        },
+      }],
+      filters: [
+        { name: "code", eq: 200, negate: true }
+      ],
+      sorts: [{ path: 'inlinks', document: false, direction: 'desc', function: 'length' }],
+      return: [
+        { name: 'URL', path: 'url' },
+        { name: 'Code', path: 'code' },
+        { name: 'Message', path: 'message' },
+        { name: 'Inlinks', path: 'inlinks', function: 'length', document: false },
+      ]
+    },
+
+    links: {
+      metadata: {
+        description: "Links to other sites",
+      },
+      collection: 'unique_urls',
+      document: 'target',
+      subqueries: [
+        {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_to', join: 'target._id' }],
+          subqueries: [
+            {
+              collection: 'resources',
+              document: 'source',
+              filters: [{ path: '_id', join: 'lt._from' }],
+            },
+          ],
+        },
+      ],
+      filters: [
+        { path: "parsed.domain", eq: 'source.parsed.domain', negate: true, value: 'dynamic' }
+      ],
+      return: [
+        { name: 'Source URL', path: 'parsed.href', 'document': 'source' },
+        { name: 'Target URL', path: 'parsed.href', 'document': 'target' },
+        { name: 'Link Text', path: 'text', 'document': 'lt' },
+        { name: 'Region', path: 'region', 'document': 'lt' },
+      ]
+    },
+
+    pdf_links: "FOR target IN unique_urls \
+      FOR lt IN links_to \
+        FOR source IN resources \
+        FILTER source._id == lt._from \
+      FILTER lt._to == target._id \
+    FILTER target.parsed.hostname != source.parsed.hostname \
+    FILTER target.parsed.hostname NOT LIKE '%schwab%' \
+    FILTER target.parsed.pathname  LIKE '%.pdf' \
+    RETURN DISTINCT { \
+      Target_Host: target.parsed.hostname, \
+      Source_URL: source.parsed.href, \
+      Target_URL: target.parsed.href, \
+      Link_Text: lt.text, \
+      Region: lt.region \
+    }",
+    
+    inlinks: {
+      metadata: {
+        description: "Links from many sources to a given page",
+      },
+      collection: 'resources',
+      document: 'target',
+      subqueries: [
+        {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [{ path: '_to', join: 'target._id' }],
+          subqueries: [
+            {
+              collection: 'links_to',
+              document: 'lt',
+              filters: [{ path: '_to', join: 'rw._from' }],
+              subqueries: [
+                {
+                  collection: 'resources',
+                  document: 'source',
+                  filters: [{ path: '_id', join: 'lt._from' }],
+                },
+              ],
+            }
+          ],
+        },
+      ],
+      return: [
+        { name: "Source", document: 'source', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
+      ]
+    },
+    
+    outlinks: {
+      metadata: {
+        description: "Links from a page to many target URLs",
+      },
+      collection: 'resources',
+      document: 'source',
+      subqueries: [
+        {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_from', join: 'source._id' }],
+          subqueries: [
+            {
+              collection: 'unique_urls',
+              document: 'target',
+              filters: [{ path: '_id', join: 'lt._to' }],
+            },
+          ],
+        }
+      ],
+      return: [
+        { name: "Target", document: 'target', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
+      ]
+
+    },
+    
+    invalid: {
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        name: 'inlinks',
+        function: 'unique',
+        query: {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_to', join: 'uu._id' }],
+          subqueries: [{
+            collection: 'resources',
+            document: 'source',
+            filters: [{ path: '_id', join: 'lt._from' }],
+          }],
+        },
+        return: [{ path: 'url', document: 'source' }],
+      }],
+      filters: [{ path: 'parsed', function: 'is_null', eq: true }],
+      return: ['url', 'inlinks']
+    },
+
+    nonweb: {
+      metadata: {
+        description: "Links to non-web URL",
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        collection: 'links_to',
+        document: 'lt',
+        filters: [{ path: '_to', join: 'uu._id' }],
+        subqueries: [{
+          collection: 'resources',
+          document: 'source',
+          filters: [{ path: '_id', join: 'lt._from' }],
+        }],
+      }],
+      filters: [{ path: 'parsed.protocol', in: ['https:', 'http:'], negate: true }],
+      aggregates: [
+        { name: 'Protocol', path: 'parsed.protocol', function: 'collect' },
+        { name: 'Link', path: 'url', function: 'collect' },
+        { name: 'Pages', path: 'url', document: 'source', function: 'count_unique' },
+      ],
+      sorts: [{ path: 'Pages', direction: 'desc' }],
+    },
+
+    variations: {
+      metadata: {
+        description: 'Unique inlink variations'
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        collection: 'links_to',
+        document: 'lt',
+        filters: [{ path: '_to', join: 'uu._id' }]
+      }],
+      aggregates: [
+        { name: 'url', path: 'parsed.href', function: 'collect' },
+        { name: 'variations', path: 'url', document: 'lt', function: 'count_unique' },
+      ],
+      filters: [
+        { path: 'parsed.protocol', in: ['https:', 'http:'] },
+        { path: 'variations', document: false, gt: 1 }
+      ],
+      sorts: [{ path: 'variations', document: false, direction: 'desc' }],
+      return: [
+        { name: 'Variations', document: false, path: 'variations' },
+      ]
+    },
+
+    redirects: {
+      metadata: {
+        description: 'Link redirects'
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [
+        {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [
+            { 'path': '_from', join: 'uu._id' },
+          ],
+        },
+        {
+          collection: 'resources',
+          document: 'rs',
+          filters: [
+            { 'path': '_id', join: 'rw._to' },
+          ]
+        }
+      ],
+      filters: [
+        { path: 'parsed.href', join: 'rs.parsed.href', negate: true },
+        { document: 'rw', path: 'redirects', gt: 1, function: 'count' },
+      ],
+      sorts: [{ document: 'rw', path: 'redirects', function: 'length', direction: 'desc' }],
+      return: [
+        { name: 'Requested URL', path: 'url' },
+        { name: 'Redirects', path: '', document: 'rw', path: 'redirects', function: 'count' },
+        { name: 'Final URL', document: 'rs', path: 'url' }
+      ]
+    },
+
+  },
+}

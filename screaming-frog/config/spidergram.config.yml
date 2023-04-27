@@ -1,0 +1,4 @@
+extends:
+  - ./propertymap.config.yml
+  - ./reports.config.yml
+  

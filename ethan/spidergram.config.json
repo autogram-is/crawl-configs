@@ -1,0 +1,29 @@
+{
+  "arango": {
+    "databaseName": "ethanmarcotte",
+  },
+  "spider": {
+    "seed": "https://ethanmarcotte.com",
+    "urls": {
+      "selectors": {
+        "header": { "selector": "header", "linkSelector": "a" },
+        "main": { "selector": "main", "linkSelector": "a" },
+        "footer": { "selector": "footer", "linkSelector": "a" }
+      }
+    }
+  },
+  "analysis": {
+    "content": { "selector": ["article div.content-main.post-content", "#content"] },
+    "properties": {
+      "content.template": [
+        { "source": "data.attributes.classes", "in": ["tmpl-post", "tmpl-project", "tmpl-landing"] },
+        { "source": "parsed.path[1]", "eq": "tag" }
+      ],
+      "content.section": { "source": "data.attributes.classes", "in": ["sect-work", "sect-writing"] },
+      "content.title": "data.title",
+      "content.published": { "source": "body", "selector": "#content > header > aside > time" },
+      "content.headline": { "source": "body", "selector": "h1" },
+      "content.description": "data.meta.description"
+    }
+  }
+}

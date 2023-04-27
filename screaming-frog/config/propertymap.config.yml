@@ -1,0 +1,17 @@
+analysis:
+  content:
+    # SF actually EXCLUDES portions of the page by default rather than
+    # using a positive selector. We can simulate that using our regions
+    # feature, but it's not automatic yet.
+    selector: main 
+  properties:
+    # Screaming Frog's default report shows the first two H1 and H2 tags;
+    # we'll pull them out for reporting purposes.
+    content.h1:
+      source: body
+      selector: "h1"
+      limit: 2
+    content.h2:
+      source: body
+      selector: "h2"
+      limit: 2

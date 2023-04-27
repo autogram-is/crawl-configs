@@ -1,21 +1,19 @@
 {
   reports: {
     'default': {
-      name: 'Schwab Content',
-      group: 'Schwab',
+      name: 'Target Content',
+      group: 'target',
       description: 'Page, error, and media summaries',
       queries: {
         'Crawl Overview': 'summary',
         'Pages': 'pages',
         'PDF Files': 'pdfs',
-        'Non-Schwab PDFs': 'pdf_links',
         'Media': 'media',
       },
       settings: {
         sheets: {
-          'client.schwab.com': { name: 'Client Pages' },
-          'www.schwabjobs.com': { name: 'Jobs Pages' },
-          'career-schwab.icims.com': { name: 'ICIMS Pages' },
+          'www.target.com': { name: 'Ecomm' },
+          'corporate.target.com': { name: 'Corporate' },
         }
       },
       alterData: {
@@ -23,9 +21,8 @@
           action: 'split',
           property: 'Site',
           mustMatch: [
-            'client.schwab.com',
-            'career-schwab.icims.com',
-            'www.schwabjobs.com',
+            'www.target.com',
+            'corporate.target.com'
           ]
         }
       }
@@ -33,27 +30,18 @@
 
     page_details: {
       name: 'Page Inspection',
-      group: 'Schwab',
+      group: 'target',
       description: 'Detailed report for a single page',
       dropEmptyQueries: true,
       
       repeat: {
-        'Schwab Home': { path: 'url', eq: 'https://www.schwab.com/' },
-        'Intelligent-Portfolios': { path: 'url', eq: 'https://www.schwab.com/intelligent-portfolios' },
-        'Author-Carrie': { path: 'url', eq: 'https://www.schwab.com/learn/author/carrie-schwab-pomerantz' },
-        'Article-ID-Theft': { path: 'url', eq: 'https://www.schwab.com/resource/identity-theft-checklist' },
-        'Learn-Divorce': { path: 'url', eq: 'https://www.schwab.com/learn/story/divorce-after-50-impact-on-retirement-savings' },
-        'Learn-Podcast': { path: 'url', eq: 'https://www.schwab.com/learn/story/out-focus-with-guests-dolly-chugh-max-bazerman-mark-pendergrast' },
-        'Learn-DJI': { path: 'url', eq: 'https://www.schwab.com/learn/story/what-is-dow-jones-industrial-average' },
-        'Pages-Leadgen-Form': { path: 'url', eq: 'https://pages.schwab.com/form-leadgen-ext-contact-fi-prospect' },
-        'Content-Invested': { path: 'url', eq: 'https://content.schwab.com/invested/' },
-        'Topic-Planning': { path: 'url', eq: 'https://www.schwab.com/learn/topic/financial-planning' },
-        'Client-Login': { path: 'url', eq: 'https://client.schwab.com/Login/SignOn/CustomerCenterLogin.aspx' },
-        'Client-Branch': { path: 'url', eq: 'https://client.schwab.com/public/branchlocator/branchdetails.aspx?branchid=1024' },
-        'Client-Consultant': { path: 'url', eq: 'https://client.schwab.com/public/consultant?fc=andrew.thompson' },
-        'PDF-Acct-Transfer': { path: 'url', eq: 'https://schwab.bynder.com/m/384985927c341ade' },
+        'Corporate Home': { path: 'url', eq: 'https://corporate.target.com/' },
+        'Article': { path: 'url', eq: 'https://corporate.target.com/article/2023/02/expanded-partnership-black-owned-farms' },
+        'Evergreen Page': { path: 'url', eq: 'https://corporate.target.com/sustainability-esg/strategy-target-forward' },
+        'Press Release': { path: 'url', eq: 'https://corporate.target.com/press/releases/2017/08/target-to-acquire-grand-junction-to-expand-and-imp' },
+        'Fact Sheet': { path: 'url', eq: 'https://corporate.target.com/press/fact-sheets/2023/02/how-target-s-sortation-centers-deliver-joy-for-gue' }
       },
-      
+
       settings: {
         path: 'Page Details - {{date}}/{{name}}',
         sheets: {
@@ -61,7 +49,6 @@
           content: { name: 'Content Details', template: 'inspector' },
           tech: { name: 'Technologies', template: 'inspector' },
           timing: { name: 'Load Time', template: 'inspector' },
-          a11y: { name: 'Accessibility', template: 'inspector' },
           cookies: { name: 'Cookies' },
           xhr: {
             name: 'External Requests',
@@ -79,7 +66,8 @@
           collection: 'resources',
           return: [
             { name: 'Site', path: 'parsed.hostname' },
-            { name: 'URL', path: 'parsed.href' },
+            { name: 'Linked URL', path: 'parsed.href' },
+            { name: 'Canonical URL', path: 'data.links.canonical[0].href' },
             { name: 'Type', path: 'content.type' },
             { name: 'Title', path: 'content.title' },
             { name: 'CMS', path: 'tech.CMS', function: 'first' },
@@ -95,11 +83,14 @@
             { name: 'Title', path: 'content.title' },
             { name: 'Date', path: 'content.date' },
             { name: 'Summary', path: 'content.summary' },
+            { name: 'Topic', path: 'content.topic' },
+            { name: 'Tag', path: 'content.tag' },
+            { name: 'Category', path: 'content.category' },
+            { name: 'Theme', path: 'content.theme' },
             { name: 'Text', path: 'content.text' },
             { name: 'Words', path: 'content.readability.words' },
             { name: 'Sentences', path: 'content.readability.sentences' },
             { name: 'Readability', path: 'content.readability.score' },
-            { name: 'Compliance Number', path: 'content.complianceNumber' },
           ]
         },
         cookies: {
@@ -142,10 +133,9 @@
       },
     },
     
-    
     url_details: {
       name: 'URL Details',
-      group: 'Schwab',
+      group: 'target',
       description: 'Link permutations, redirect chains, and broken URLs',
       queries: {
         'Redirects': 'redirects',
@@ -158,11 +148,11 @@
     
     site_network: {
       name: 'Site Network',
-      group: 'Schwab',
+      group: 'target',
       description: "Data to map sites' relationships to each other",
       settings: {
         type: 'json',
-        path: 'schwab-site-graph',
+        path: 'target-site-graph',
         combine: true
       },
       queries: {
@@ -175,6 +165,8 @@
           aggregates: [{ name: 'site', path: 'parsed.hostname', function: 'collect' }],
           count: 'pages'
         },
+        links: 'network',
+      }
     }
   }
 }

@@ -1,0 +1,22 @@
+{
+  extends: [
+    './spider.json5', './analysis.json5', './queries.json5', './reports.json5', '../../arango.config.yml'
+  ],
+  configVersion: '0.9.22',
+  arango: {
+    databaseName: "target",
+  },
+  offloadBodyHtml: 'db',
+  normalizer: {
+    forceProtocol: 'https:',
+    forceLowercase: ['hostname', 'pathname'],
+    discardSubdomain: 'ww*',
+    supplySubdomain: 'www',
+    discardAnchor: true,
+    discardAuth: true,
+    discardIndex: '**/{index,default}.{htm,html,aspx,php}',
+    discardSearch: '!{page,p,childcat,parentcat,code,tag,category,searchTerm,searchQuery,articleId,id,era,mediaType}',
+    discardTrailingSlash: false,
+    sortSearchParams: true,
+  }
+}
