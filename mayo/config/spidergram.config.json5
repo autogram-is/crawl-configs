@@ -1,0 +1,32 @@
+{
+    configVersion: '0.10.1',
+    storageDirectory: './storage',
+    outputDirectory: './output',
+    arango: {
+        databaseName: 'mayo',
+    },
+    offloadBodyHtml: 'db',
+    spider: {
+        seed: ['https://mayoclinic.org'],
+        urls: {
+            crawl: { property: 'domain', glob: '{mayoclinic.org,mayo.edu}' },
+        },
+        downloadMimeTypes: ['*/*'],
+        auditAccessibility: false,
+        saveCookies: true,
+        saveXhrList: true,
+        savePerformance: true,
+    },
+    normalizer: {
+        forceProtocol: 'https:',
+        forceLowercase: 'href',
+        discardFirstSegment: 'www?([0-9])',
+        supplySubdomain: 'www',
+        discardAnchor: true,
+        discardAuth: true,
+        discardIndex: '**/{index,default}.{htm,html,aspx,php}',
+        discardSearch: '!{page,p,letter,lastInitial}',
+        discardTrailingSlash: false,
+        sortSearchParams: true,
+    }
+}
