@@ -1,0 +1,55 @@
+configVersion: 0.9.22
+extends:
+  - ../../arango.config.yml
+  - ./analysis.json5
+  - ./queries.json5
+  - ./reports.json5
+
+arango:
+  databaseName: natgeo
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p,page\[number\]}'
+  discardTrailingSlash: false
+  collapseSearchParams: page
+  sortSearchParams: true
+
+spider:
+  seed: 
+    - https://www.nationalgeographic.org
+  maxConcurrency: 2,
+  maxRequests: 240,
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: false
+  headless: true
+  stealth: true
+  urls:
+    regions:
+      header: '.site-header, .ng-edu-custom-header, header[role="banner"], #__next > nav.navbar'
+      footer: '.site-footer, #main-footer, .ng-footer, #footer, #__next > .ng-footer'
+      sidebar: '.widget-area'
+      content: '.post-template-default .entry-content, body:not(.post-template-default) .site-content, .ng-container, .ng-container-large, .ng-edu-homepage-wrapper > .d-flex.container, main.container > article, main:not([class]) .col-lg-8, .archive-posts, main article.ng-width-large-2-3, article.flex-column, [data-test-id="row"]'
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - "http*//*{nationalgeographic,natgeo}*.org{*,*/**}"
+      - property: pathname
+        glob: '**/{NatGeoEd.org/NatGeoEd.org,img/uploads/img/uploads}/**'
+        reject: true
+
+  downloadMimeTypes:
+    - '*/*'

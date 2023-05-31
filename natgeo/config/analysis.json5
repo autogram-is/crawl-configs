@@ -1,0 +1,40 @@
+{
+  analysis: {
+    content: { selector: [
+      '.site-content, .ng-container, .ng-container-large',
+      '.archive-posts, main article.ng-width-large-2-3',
+      '.ng-edu-homepage-wrapper > .d-flex.container, main.container > article, main:not([class]) .col-lg-8',
+      '.post-template-default .entry-content, body:not(.post-template-default) .site-main',
+      'article.flex-column, [data-test-id="row"]',
+    ]},
+    properties: {
+      'content.cms': [
+        'tech.CMS.[0]',
+        'tech.Blogs.[0]',
+      ],
+      'content.type': [
+        'data.meta.og.type', // If OpenGraph data is set, try it
+      ],
+      'content.title': [
+        'data.meta.og.title', // OpenGraph
+        'data.title',         // HEAD description tag
+        'data.info.Title',    // PDF metadata
+      ],
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.meta.description',    // HEAD description tag
+        'data.schemaOrg.WebPage.description',    // SchemaOrg
+        'data.dc.description',       // PDF metadata
+      ],
+      'content.author': [
+        'data.meta.author',
+      ], 
+      'content.date': [
+        'data.meta.og.article.published_time',  // Try Opengraph data first
+        'data.schemaOrg.WebPage.datePublished', // The jobs site exposes Schema.org data!
+        'data.info.CreationDate',                  // PDF files
+        'data.meta.article.modified_time',
+      ],
+    }
+  }
+}

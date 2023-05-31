@@ -1,16 +1,10 @@
 {
+  "extends": ["../arango.config.yml"],
   "arango": {
-    "databaseName": "ethanmarcotte",
+    "databaseName": "ethanmarcotte"
   },
   "spider": {
-    "seed": "https://ethanmarcotte.com",
-    "urls": {
-      "selectors": {
-        "header": { "selector": "header", "linkSelector": "a" },
-        "main": { "selector": "main", "linkSelector": "a" },
-        "footer": { "selector": "footer", "linkSelector": "a" }
-      }
-    }
+    "seed": ["https://ethanmarcotte.com"]
   },
   "analysis": {
     "content": { "selector": ["article div.content-main.post-content", "#content"] },

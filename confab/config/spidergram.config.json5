@@ -1,0 +1,21 @@
+{
+  extends: [
+    '../../arango.config.yml'
+  ],
+  configVersion: '0.10.2',
+  arango: {
+    databaseName: "mayo",
+  },
+  offloadBodyHtml: 'db',
+  normalizer: {
+    forceLowercase: 'hostname',
+    discardFirstSegment: 'ww*',
+    supplySubdomain: 'www',
+    discardAnchor: true,
+    discardAuth: true,
+    discardIndex: '**/{index,default}.{htm,html,aspx,php}',
+    discardSearch: '!{page,p,childcat,parentcat,code,tag,category,searchTerm,searchQuery,articleId,id,era,mediaType}',
+    discardTrailingSlash: false,
+    sortSearchParams: true,
+  }
+}

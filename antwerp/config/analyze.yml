@@ -1,0 +1,29 @@
+analysis:
+  site: parsed.hostname
+  content:
+    selector:
+      - 'main'
+      - 'body'
+  properties: 
+    'content.cms':
+      - 'tech.CMS.[0]'
+      - 'tech.Blogs.[0]'
+    'content.type':
+      - data.meta.og.type
+    'content.title':
+      - data.meta.og.title
+      - data.title
+      - source: body
+        selector: h1.page-title
+    'content.date': 
+      - data.schemaOrg.NewsArticle.datePublished
+      - data.meta.article.published_time
+      - data.info.CreationDate
+      - source: body
+        selector: 'main section.wdg-u-section time'
+        attribute: datetime
+    'content.tags': 
+      - source: body
+        selector: 'div.article-content div.td-topics > div > div > a'
+      - source: body
+        selector: '#root main > div > div:nth-child(4) > div > div'

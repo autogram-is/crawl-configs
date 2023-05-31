@@ -1,0 +1,213 @@
+{
+  queries: {
+    ngs_sites: {
+      document: 'resource',
+      metadata: { category: 'natgeo', description: 'Builds a rough approximation of sites' },
+      collection: 'resources',
+      subqueries: [
+        { collection: 'responds_with', document: 'request' },
+        { collection: 'unique_urls', document: 'url' },
+      ],
+      filters: [
+        { document: 'request', path: '_to', join: 'resource._id' },
+        { document: 'request', path: '_from', join: 'url._id' },
+        { document: 'resource', path: 'code', eq: 200 },
+        { document: 'resource', path: 'parsed.publicSuffix', eq: 'org' },
+      ],
+      count: 'total',
+      aggregates: [
+        { path: 'r.parsed.hostname', name: 'host', function: 'collect' },
+        { path: 'r.parsed.subdomain', name: 'subdomain', function: 'collect' },
+        { path: 'r.parsed.domainWithoutSuffix', name: 'property', function: 'collect' },
+        { path: 'r.parsed.publicSuffix', name: 'tld', function: 'collect' },
+      ],
+      return: [
+        { name: 'host', path: 'parsed.hostname' },
+        { name: 'subdomain', path: 'parsed.subdomain' },
+        { name: 'property', path: 'parsed.domainWithoutSuffix' },
+        { name: 'tld', path: 'parsed.publicSuffix' },
+      ]
+    },
+
+    ngs_summary: {
+      document: 'resource',
+      metadata: { category: 'natgeo', description: 'Overview of crawled sites' },
+      collection: 'resources',
+      filters: [
+        { document: 'resource', path: 'code', eq: 200 },
+        { document: 'resource', path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+      ],
+      aggregates: [
+        { path: 'parsed.hostname', name: 'Site', function: 'collect' },
+      ],
+      count: 'total',
+      sorts: [{ path: 'total', direction: 'desc' }],
+    },
+
+    ngs_pages: {
+      document: "resource",
+      metadata: { category: "natgeo", description: "Successfully crawled Society pages" },
+      collection: "resources",
+      subqueries: [{
+        name: "inlinks",
+        function: "unique",
+        query: {
+          collection: "responds_with",
+          document: "rw",
+          filters: [{ path: "_to", join: "resource._id" }],
+          subqueries: [{
+            collection: "links_to",
+            document: "lt",
+            filters: [{ path: "_to", join: "rw._from" }],
+            subqueries: [{
+              collection: "resources",
+              document: "source",
+              filters: [{ path: "_id", join: "lt._from" }],
+              inline: true
+            }],
+            inline: true
+          }],
+          "return": [{ path: "url", document: "source" }]
+        }
+      }, {
+        name: "outlinks",
+        function: "unique",
+        query: {
+          collection: "links_to",
+          document: "lt",
+          filters: [{ path: "_from", join: "resource._id" }],
+          subqueries: [{
+            collection: "unique_urls",
+            document: "target",
+            filters: [{ path: "_id", join: "lt._to" }],
+            inline: true
+          }],
+          return: [{ path: "url", document: "target" }]
+        }
+      }],
+      count: "total",
+      filters: [
+        { path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: "code", eq: 200},
+        { path: "mime", eq: "text/html" }
+      ],
+      "sorts": [
+        { path: "url", direction: "asc" }
+      ],
+      "return": [
+        { name: "Site", path: "parsed.hostname" },
+        { name: "Path", path: "parsed.pathname" },
+        { name: "Params", path: "parsed.search" },
+
+        // Content analysis
+        { name: 'CMS', path: 'tech.CMS[0]' },
+        { name: 'Type', path: 'content.type' },
+        { name: 'Title', path: 'content.title' },
+        { name: 'Description', path: 'content.description' },
+        { name: 'Date', path: 'content.date' },
+        { name: 'Words', path: 'content.readability.words' },
+        { name: 'Readability', path: 'content.readability.score' },
+
+         // Detected data
+        { name: 'Cookies', path: 'cookies', function: 'length' },
+        { name: 'Technologies', path: 'tech', function: 'length' },
+        { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
+        { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
+        { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
+        { name: 'Load Time', path: 'timing.duration' },
+
+        // Inlink/outlink counts
+        { document: false, name: "Inlinks", path: "inlinks", function: "length" },
+        { document: false, name: "Outlinks", path: "outlinks", function: "length" }
+      ]
+    },
+    
+    ngs_errors: {
+      document: "resource",
+      metadata: { category: "natgeo", description: "Errors encountered" },
+      collection: "resources",
+      subqueries: [{
+        name: "inlinks",
+        function: "unique",
+        query: {
+          collection: "responds_with",
+          document: "rw",
+          filters: [{ path: "_to", join: "resource._id" }],
+          subqueries: [{
+            collection: "links_to",
+            document: "lt",
+            filters: [{ path: "_to", join: "rw._from" }],
+            subqueries: [{
+              collection: "resources",
+              document: "source",
+              filters: [{ path: "_id", join: "lt._from" }],
+              inline: true
+            }],
+            inline: true
+          }],
+          "return": [{ path: "url", document: "source" }]
+        }
+      }],
+      count: "total",
+      filters: [
+        { path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: "code", eq: 200, negate: true},
+      ],
+      sorts: [{ path: "inlinks", function: "length", direction: "desc" }],
+      return: [
+        { name: "Site", path: "parsed.hostname" },
+        { name: "Path", path: "parsed.pathname" },
+        { name: "Params", path: "parsed.search" },
+        { name: "Code", path: "code" },
+        { name: "Message", path: "message" },
+        { name: "Inlinks", document: false, path: "inlinks", function: "length" },
+      ]
+    },
+    
+    ngs_media: {
+      document: "resource",
+      metadata: { category: "natgeo", description: "Linked media files" },
+      collection: "resources",
+      subqueries: [{
+        name: "inlinks",
+        function: "unique",
+        query: {
+          collection: "responds_with",
+          document: "rw",
+          filters: [{ path: "_to", join: "resource._id" }],
+          subqueries: [{
+            collection: "links_to",
+            document: "lt",
+            filters: [{ path: "_to", join: "rw._from" }],
+            subqueries: [{
+              collection: "resources",
+              document: "source",
+              filters: [{ path: "_id", join: "lt._from" }],
+              inline: true
+            }],
+            inline: true
+          }],
+          "return": [{ path: "url", document: "source" }]
+        }
+      }],
+      count: "total",
+      filters: [
+        { path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: "code", eq: 200},
+        { path: "mime", eq: "text/html", negate: true }
+      ],
+      "sorts": [
+        { path: "mime", direction: "asc" },
+        { path: "parsed.subdomain", direction: "asc" },
+      ],
+      "return": [
+        { name: "Site", path: "parsed.subdomain" },
+        { name: "Path", path: "parsed.pathname" },
+        { name: 'URL', path: 'parsed.href' },
+        { name: "Type", path: "mime" },
+        { name: "Bytes", path: "size" },
+        { document: false, name: "Inlinks", path: "inlinks", function: "length" },
+      ]
+    }
+  }
+}

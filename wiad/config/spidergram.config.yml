@@ -1,6 +1,8 @@
 configVersion: 0.9.22
 extends:
-  - ./analyze.yaml
+  - ../../arango.config.yml
+  - ./analyze.yml
+  - ./report.yml
 
 arango:
   databaseName: wiad
@@ -8,6 +10,9 @@ arango:
 offloadBodyHtml: 'db'
 
 spider:
+  seed: 
+    - https://worldiaday.org
+    - https://medium.com/worldiaday
   maxConcurrency: 2,
   maxRequests: 240,
   saveCookies: true

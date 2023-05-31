@@ -1,0 +1,29 @@
+queries:
+  wiad_pages:
+    name: 'Pages'
+    group: 'WIAD'
+    parent: 'pages'
+    return:
+      - name: 'Type'
+        path: 'content.type'
+      - name: 'Title'
+        path: 'content.title'
+      - name: 'Date'
+        path: 'content.date'
+      - name: 'Author'
+        path: 'content.author'
+      - name: 'Location'
+        path: 'content.location'
+      - name: 'Tags'
+        path: 'content.tags'
+
+reports: 
+  default: 
+    name: 'WIAD'
+    group: 'WIAD'
+    description: 'Page, error, and media summaries'
+    queries:
+      'Crawl Overview': 'summary'
+      'Pages': 'wiad_pages'
+      'Media': 'media'
+      'Errors': 'errors'

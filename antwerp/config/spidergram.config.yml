@@ -1,0 +1,45 @@
+configVersion: 0.9.22
+extends:
+  - ../../arango.config.yml
+  - ./analyze.yml
+
+arango:
+  databaseName: antwerp
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p}'
+  discardTrailingSlash: false
+  sortSearchParams: true
+
+spider:
+  seed: 
+    - https://www.antwerpen.be
+  maxConcurrency: 2,
+  maxRequests: 240,
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: true
+  headless: false
+  urls:
+    regions:
+      header: '#mtn-o-header '
+      content: 'main'
+      footer: '#footer-wrapper'
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: "http*//*{antwerpen.be}{*,*/**}"
+  downloadMimeTypes:
+    - '*/*'

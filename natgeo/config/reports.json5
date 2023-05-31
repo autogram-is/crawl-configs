@@ -1,0 +1,49 @@
+{
+  reports: {
+    default: {
+      name: 'NGS Pages',
+      group: 'NatGeo',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'Crawl Overview': 'ngs_summary',
+        'Other Pages': 'ngs_pages',
+        'Media': 'ngs_media',
+      },
+      alterData: {
+        'Other Pages': {
+          action: 'split',
+          property: 'Site',
+          mustMatch: [
+            'www.nationalgeographic.org',
+            'blog.nationalgeographic.org',
+            'education.nationalgeographic.org',
+            'blog.education.nationalgeographic.org',
+            'explorer-directory.nationalgeographic.org',
+          ]
+        }
+      },
+      settings: {
+        sheets: {
+          'default': { headingStyle: false },
+          'www.nationalgeographic.org': { name: 'WWW' },
+          'blog.nationalgeographic.org': { name: 'Blog' },
+          'education.nationalgeographic.org': { name: 'Edu' },
+          'blog.education.nationalgeographic.org': { name: 'Edu Blog' },
+          'explorer-directory.nationalgeographic.org': { name: 'Explorers' },
+        }
+      },
+    },
+    errors: {
+      name: 'NGS Error URLs',
+      group: 'NatGeo',
+      description: 'Error summaries',
+      queries: {
+        'All Errors': 'ngs_errors',
+      },
+      alterData: {
+        'Other': { action: 'split', property: 'Site' }
+      }
+    }
+
+  }
+}
