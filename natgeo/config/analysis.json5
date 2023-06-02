@@ -13,7 +13,19 @@
         'tech.Blogs.[0]',
       ],
       'content.type': [
-        'data.meta.og.type', // If OpenGraph data is set, try it
+        {
+          source: 'parsed.path.[2]',
+          in: ['explorer-magazine', 'event'],
+        },
+        {
+          source: 'parsed.path.[0]',
+          in: ['glossary', 'resource', 'search', 'activity', 'tag', 'category', 'projects', 'quiz', 'unit', 'lesson' ],
+        },
+        'data.meta.og.type',
+      ],
+      'paged': [
+        { source: 'parsed.searchParams.page', gt: 0, value: true },
+        { source: 'parsed.pathname', matching: '/**/page/[[:digit:]]', value: true }
       ],
       'content.title': [
         'data.meta.og.title', // OpenGraph
@@ -30,10 +42,11 @@
         'data.meta.author',
       ], 
       'content.date': [
-        'data.meta.og.article.published_time',  // Try Opengraph data first
+        'data.meta.article.published_time',     // Many pages put the info here
         'data.schemaOrg.WebPage.datePublished', // The jobs site exposes Schema.org data!
-        'data.info.CreationDate',                  // PDF files
-        'data.meta.article.modified_time',
+        'data.info.CreationDate',               // PDF files
+        'data.format.creationTime',             // audio
+        'data.ModifyDate'                       // many photos
       ],
     }
   }

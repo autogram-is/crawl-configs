@@ -5,9 +5,16 @@
       group: 'NatGeo',
       description: 'Page, media, and error summaries',
       queries: {
-        'Crawl Overview': 'ngs_summary',
+        'Overview': {
+          parent: 'ngs_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
         'Other Pages': 'ngs_pages',
-        'Media': 'ngs_media',
       },
       alterData: {
         'Other Pages': {
@@ -38,12 +45,91 @@
       group: 'NatGeo',
       description: 'Error summaries',
       queries: {
-        'All Errors': 'ngs_errors',
+        'Other Errors': 'ngs_errors',
       },
       alterData: {
-        'Other': { action: 'split', property: 'Site' }
+        'Other Errors': {
+          action: 'split',
+          property: 'Site',
+          mustMatch: [
+            'www.nationalgeographic.org',
+            'blog.nationalgeographic.org',
+            'education.nationalgeographic.org',
+            'blog.education.nationalgeographic.org',
+            'explorer-directory.nationalgeographic.org',
+            'admin.nationalgeographic.org',
+            'staging.nationalgeographic.org',
+          ]
+        }
+      },
+      settings: {
+        sheets: {
+          'www.nationalgeographic.org': { name: 'WWW' },
+          'blog.nationalgeographic.org': { name: 'Blog' },
+          'education.nationalgeographic.org': { name: 'Edu' },
+          'blog.education.nationalgeographic.org': { name: 'Edu Blog' },
+          'explorer-directory.nationalgeographic.org': { name: 'Explorers' },
+          'admin.nationalgeographic.org': { name: 'Admin' },
+          'staging.nationalgeographic.org': { name: 'Staging' },
+        }
+      },
+    },
+    media: {
+      name: 'NGS Downloadable Files',
+      group: 'NatGeo',
+      description: 'Non-HMTL files linked by NGS sites',
+      queries: {
+        'Overview': {
+          parent: 'ngs_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html', negate: true },
+          ],
+        },
+        'PDFs': {
+          parent: 'ngs_media',
+          filters: [{ path: 'mime', eq: 'application/pdf' }],
+          return: [
+            { name: 'Title', path: 'content.title' },
+            { name: 'Date', path: 'content.date' },
+            { name: 'Pages', path: 'data.pages' },
+            { name: 'Words', path: 'content.readability.words' },
+            { name: 'Language', path: 'data.info.Language' },
+            { name: 'Links', path: 'content.urls', function: 'LENGTH' },
+          ]
+        },
+        'Photos': {
+          parent: 'ngs_media',
+          filters: [{ path: 'mime', in: ['image/png', 'image/jpeg'] }],
+          return: [
+            { name: 'Date', path: 'data.ModifyDate' },
+            { name: 'Height', path: 'data.height' },
+            { name: 'Width', path: 'data.width' },
+            { name: 'Copyright', path: 'data.Copyright' },
+          ]
+        },
+        'Audio': {
+          parent: 'ngs_media',
+          filters: [{ path: 'mime', eq: 'audio/mpeg' }],
+          return: [
+            { name: 'Duration', path: 'data.format.duration' },
+          ]
+        },
+        'Videos': {
+          parent: 'ngs_media',
+          filters: [{ path: 'mime', eq: 'video/mp4' }],
+          return: [
+            { name: 'Date', path: 'data.format.creationTime' },
+            { name: 'Duration', path: 'data.format.duration' },
+          ]
+        },
+        'Other Files': {
+          parent: 'ngs_media',
+          filters: [{ path: 'mime', in: ['application/pdf', 'image/png', 'image/jpeg', 'audio/mpeg', 'video/mp4'], negate: true }]
+        },
       }
     }
-
   }
 }

@@ -17,6 +17,7 @@
       count: 'total',
       aggregates: [
         { path: 'r.parsed.hostname', name: 'host', function: 'collect' },
+        { path: 'r.mime', name: 'mime', function: 'collect' },
         { path: 'r.parsed.subdomain', name: 'subdomain', function: 'collect' },
         { path: 'r.parsed.domainWithoutSuffix', name: 'property', function: 'collect' },
         { path: 'r.parsed.publicSuffix', name: 'tld', function: 'collect' },
@@ -201,9 +202,9 @@
         { path: "parsed.subdomain", direction: "asc" },
       ],
       "return": [
-        { name: "Site", path: "parsed.subdomain" },
+        { name: "Site", path: "parsed.hostname" },
         { name: "Path", path: "parsed.pathname" },
-        { name: 'URL', path: 'parsed.href' },
+        { name: "Params", path: "parsed.search" },
         { name: "Type", path: "mime" },
         { name: "Bytes", path: "size" },
         { document: false, name: "Inlinks", path: "inlinks", function: "length" },
