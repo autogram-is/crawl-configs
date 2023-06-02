@@ -46,6 +46,7 @@
       description: 'Error summaries',
       queries: {
         'Other Errors': 'ngs_errors',
+        "Staging Links": 'ngs_stage_links',
       },
       alterData: {
         'Other Errors': {
@@ -57,8 +58,6 @@
             'education.nationalgeographic.org',
             'blog.education.nationalgeographic.org',
             'explorer-directory.nationalgeographic.org',
-            'admin.nationalgeographic.org',
-            'staging.nationalgeographic.org',
           ]
         }
       },
@@ -69,8 +68,6 @@
           'education.nationalgeographic.org': { name: 'Edu' },
           'blog.education.nationalgeographic.org': { name: 'Edu Blog' },
           'explorer-directory.nationalgeographic.org': { name: 'Explorers' },
-          'admin.nationalgeographic.org': { name: 'Admin' },
-          'staging.nationalgeographic.org': { name: 'Staging' },
         }
       },
     },

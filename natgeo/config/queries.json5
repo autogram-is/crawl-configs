@@ -35,8 +35,9 @@
       metadata: { category: 'natgeo', description: 'Overview of crawled sites' },
       collection: 'resources',
       filters: [
-        { document: 'resource', path: 'code', eq: 200 },
-        { document: 'resource', path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: 'code', eq: 200 },
+        { path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: 'parsed.subdomain', in: ['staging', 'admin', 'education.staging'], negate: true },
       ],
       aggregates: [
         { path: 'parsed.hostname', name: 'Site', function: 'collect' },
@@ -89,6 +90,7 @@
       count: "total",
       filters: [
         { path: 'parsed.domain', in: ['nationalgeographic.org', 'natgeostudenttravel.org'] },
+        { path: 'parsed.subdomain', in: ['staging', 'admin', 'education.staging'], negate: true },
         { path: "code", eq: 200},
         { path: "mime", eq: "text/html" }
       ],
@@ -115,6 +117,7 @@
         { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
         { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
         { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
+        { name: 'Paged URL', path: 'data.paged' },
         { name: 'Load Time', path: 'timing.duration' },
 
         // Inlink/outlink counts
@@ -164,6 +167,35 @@
         { name: "Inlinks", document: false, path: "inlinks", function: "length" },
       ]
     },
+
+    ngs_stage_links: {
+      document: "uu",
+      metadata: { category: "natgeo", description: "Links to staging sites" },
+      collection: "unique_urls",
+      subqueries: [{
+        collection: "links_to",
+        document: "lt",
+        filters: [{ path: "_to", join: "uu._id" }],
+        subqueries: [{
+          collection: "resources",
+          document: "r",
+          filters: [{ path: "_id", join: "lt._from" }],
+          inline: true
+        }],
+        inline: true
+      }],
+      count: "total",
+      filters: [
+        { document: 'uu', path: 'parsed.subdomain', in: ['staging', 'admin', 'education.staging'] },
+        { document: 'r', path: 'parsed.subdomain', in: ['staging', 'admin', 'education.staging'], negate: true },
+      ],
+      return: [
+        { name: "Staging Site", path: "parsed.subdomain" },
+        { name: "Staging URL", path: "url" },
+        { name: "Link Location", document: 'r', path: "url" },
+        { name: "Link Text", document: 'lt', path: "text" },
+      ]
+    },
     
     ngs_media: {
       document: "resource",
@@ -209,6 +241,145 @@
         { name: "Bytes", path: "size" },
         { document: false, name: "Inlinks", path: "inlinks", function: "length" },
       ]
-    }
-  }
+    },
+  
+    inlinks: {
+      metadata: {
+        category: "natgeo", description: "Links from many sources to a given page",
+      },
+      collection: 'resources',
+      document: 'target',
+      subqueries: [
+        {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [{ path: '_to', join: 'target._id' }],
+          subqueries: [
+            {
+              collection: 'links_to',
+              document: 'lt',
+              filters: [{ path: '_to', join: 'rw._from' }],
+              subqueries: [
+                {
+                  collection: 'resources',
+                  document: 'source',
+                  filters: [{ path: '_id', join: 'lt._from' }],
+                },
+              ],
+            }
+          ],
+        },
+      ],
+      return: [
+        { name: "Source", document: 'source', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
+      ]
+    },
+  
+    outlinks: {
+      metadata: {
+        category: "natgeo", description: "Links from a page to many target URLs",
+      },
+      collection: 'resources',
+      document: 'source',
+      subqueries: [
+        {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_from', join: 'source._id' }],
+          subqueries: [
+            {
+              collection: 'unique_urls',
+              document: 'target',
+              filters: [{ path: '_id', join: 'lt._to' }],
+            },
+          ],
+        }
+      ],
+      return: [
+        { name: "Target", document: 'target', path: 'url' },
+        { name: "Link Text", document: 'lt', path: 'text' },
+        { name: "Region", document: 'lt', path: 'region' },
+        { name: "Link ID", document: 'lt', path: '_key' },
+      ]
+
+    },
+  
+    invalid: {
+      metadata: {
+        category: "natgeo", description: "Unparsable links",
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        name: 'inlinks',
+        function: 'unique',
+        query: {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [{ path: '_to', join: 'uu._id' }],
+          subqueries: [{
+            collection: 'resources',
+            document: 'source',
+            filters: [{ path: '_id', join: 'lt._from' }],
+          }],
+        },
+        return: [{ path: 'url', document: 'source' }],
+      }],
+      filters: [{ path: 'parsed', function: 'is_null', eq: true }],
+      return: ['url', 'inlinks']
+    },
+
+    nonweb: {
+      metadata: {
+        category: "natgeo", description: "Links to non-web URL",
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        collection: 'links_to',
+        document: 'lt',
+        filters: [{ path: '_to', join: 'uu._id' }],
+        subqueries: [{
+          collection: 'resources',
+          document: 'source',
+          filters: [{ path: '_id', join: 'lt._from' }],
+        }],
+      }],
+      filters: [{ path: 'parsed.protocol', in: ['https:', 'http:'], negate: true }],
+      aggregates: [
+        { name: 'Protocol', path: 'parsed.protocol', function: 'collect' },
+        { name: 'Link', path: 'url', function: 'collect' },
+        { name: 'Pages', path: 'url', document: 'source', function: 'count_unique' },
+      ],
+      sorts: [{ path: 'Pages', direction: 'desc' }],
+    },
+
+    variations: {
+      metadata: {
+        category: "natgeo", description: 'Unique inlink variations'
+      },
+      collection: 'unique_urls',
+      document: 'uu',
+      subqueries: [{
+        collection: 'links_to',
+        document: 'lt',
+        filters: [{ path: '_to', join: 'uu._id' }]
+      }],
+      aggregates: [
+        { name: 'url', path: 'parsed.href', function: 'collect' },
+        { name: 'variations', path: 'url', document: 'lt', function: 'count_unique' },
+      ],
+      filters: [
+        { path: 'parsed.protocol', in: ['https:', 'http:'] },
+        { path: 'variations', document: false, gt: 1 }
+      ],
+      sorts: [{ path: 'variations', document: false, direction: 'desc' }],
+      return: [
+        { name: 'Variations', document: false, path: 'variations' },
+      ]
+    },
+  },
 }

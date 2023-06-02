@@ -524,6 +524,37 @@
         { name: 'Final URL', document: 'rs', path: 'url' }
       ]
     },
+    
+    outlinks: {
+      metadata: { group: 'NatGeo', description: 'Outbound links' },
+      collection: 'resources',
+      document: 'r',
+      subqueries: [
+        {
+          collection: 'links_to',
+          document: 'lt',
+          filters: [
+            { 'path': '_from', join: 'r._id' },
+          ],
+        },
+        {
+          collection: 'unique_urls',
+          document: 'uu',
+          filters: [
+            { 'path': '_id', join: 'lt._to' },
+          ]
+        }
+      ],
+      filters: [
+        { path: 'parsed.href', join: 'rs.parsed.href', negate: true },
+        { document: 'rw', path: 'redirects', gt: 1, function: 'count' },
+      ],
+      sorts: [{ document: 'rw', path: 'redirects', function: 'length', direction: 'desc' }],
+    },
+    
+    inlinks: {
+      metadata: { group: 'NatGeo', description: 'Inbound links' },
+    },
 
   },
 }

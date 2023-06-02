@@ -1,9 +1,10 @@
-configVersion: 0.9.22
+configVersion: 0.10.4
 extends:
   - ../../arango.config.yml
   - ./analysis.json5
   - ./queries.json5
   - ./reports.json5
+  - ./pagedetails.report.json5
 
 arango:
   databaseName: natgeo

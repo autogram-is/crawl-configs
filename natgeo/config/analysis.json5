@@ -23,8 +23,8 @@
         },
         'data.meta.og.type',
       ],
-      'paged': [
-        { source: 'parsed.searchParams.page', gt: 0, value: true },
+      'data.paged': [
+        { source: 'parsed.searchParams.page', eq: null, negate: true, value: true },
         { source: 'parsed.pathname', matching: '/**/page/[[:digit:]]', value: true }
       ],
       'content.title': [
