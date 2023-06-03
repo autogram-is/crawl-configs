@@ -103,7 +103,7 @@
         { name: "Params", path: "parsed.search" },
 
         // Content analysis
-        { name: 'CMS', path: 'tech.CMS[0]' },
+        { name: 'CMS', path: 'content.cms' },
         { name: 'Type', path: 'content.type' },
         { name: 'Title', path: 'content.title' },
         { name: 'Description', path: 'content.description' },

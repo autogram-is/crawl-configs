@@ -38,7 +38,7 @@
             { name: 'URL', path: 'parsed.href' },
             { name: 'Type', path: 'content.type' },
             { name: 'Title', path: 'content.title' },
-            { name: 'CMS', path: 'content.cms', function: 'first' },
+            { name: 'CMS', path: 'content.cms' },
             { name: 'Load Time', path: 'timing.duration' },
             { name: 'Cookies', path: 'cookies', function: 'length' },
             { name: 'External Requests', path: 'xhr', function: 'length' }
