@@ -1,0 +1,50 @@
+configVersion: 0.10.4
+extends:
+  - ../../arango.config.yml
+  - ./analysis.json5
+  - ./queries.json5
+  - ./reports.json5
+  - ./pagedetails.report.json5
+
+arango:
+  databaseName: dropbox
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p,category}'
+  discardTrailingSlash: false
+  collapseSearchParams: page
+  sortSearchParams: true
+
+spider:
+  seed: 
+    - https://experience.dropbox.com
+  maxConcurrency: 2,
+  maxRequests: 240,
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: true
+  headless: true
+  stealth: true
+  urls:
+    regions:
+      header: 'header.uni-nav-container, header.u01-header__header, nav.u01-secondary-nav'
+      main: 'div.main'
+      footer: 'footer'
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - "http*//experience.dropbox.com{*,*/**}"
+
+  downloadMimeTypes:
+    - '*/*'

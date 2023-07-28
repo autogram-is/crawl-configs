@@ -23,6 +23,11 @@
         },
         'data.meta.og.type',
       ],
+      'content.resourceType': 'data.json.[0].content.props.pageProps.data.post.contentType',
+      'content.tags': [
+        'data.json.[0].content.props.pageProps.data.post.subjects',
+        'data.meta.article.section',
+      ],
       'data.paged': [
         { source: 'parsed.searchParams.page', eq: null, negate: true, value: true },
         { source: 'parsed.pathname', matching: '/**/page/[[:digit:]]', value: true }
@@ -42,8 +47,9 @@
         'data.meta.author',
       ], 
       'content.date': [
-        'data.meta.article.published_time',     // Many pages put the info here
-        'data.schemaOrg.WebPage.datePublished', // The jobs site exposes Schema.org data!
+        'data.meta.datePublished',
+        'data.meta.article.published_time',
+        'data.schemaOrg.WebPage.datePublished',
         'data.info.CreationDate',               // PDF files
         'data.format.creationTime',             // audio
         'data.ModifyDate'                       // many photos

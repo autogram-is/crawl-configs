@@ -1,12 +1,12 @@
 {
   reports: {
     default: {
-      name: 'NGS Pages',
-      group: 'NatGeo',
+      name: 'Nitro Pages',
+      group: 'Nitro',
       description: 'Page, media, and error summaries',
       queries: {
         'Overview': {
-          parent: 'ngs_summary',
+          parent: 'nitro_summary',
           aggregates: [
             { path: 'mime', function: 'collect' },
           ],
@@ -14,53 +14,30 @@
             { path: 'mime', eq: 'text/html' },
           ],
         },
-        'Other Pages': 'ngs_pages',
+        'Other': 'nitro_pages',
       },
       alterData: {
-        'Other Pages': {
+        'Other': {
           action: 'split',
-          property: 'Site'
+          property: 'Tab'
         }
-      }
+      },
     },
     errors: {
-      name: 'NGS Error URLs',
-      group: 'NatGeo',
+      name: 'Nitro Error URLs',
+      group: 'Nitro',
       description: 'Error summaries',
       queries: {
-        'Other Errors': 'ngs_errors',
-        "Staging Links": 'ngs_stage_links',
-      },
-      alterData: {
-        'Other Errors': {
-          action: 'split',
-          property: 'Site',
-          mustMatch: [
-            'www.nationalgeographic.org',
-            'blog.nationalgeographic.org',
-            'education.nationalgeographic.org',
-            'blog.education.nationalgeographic.org',
-            'explorer-directory.nationalgeographic.org',
-          ]
-        }
-      },
-      settings: {
-        sheets: {
-          'www.nationalgeographic.org': { name: 'WWW' },
-          'blog.nationalgeographic.org': { name: 'Blog' },
-          'education.nationalgeographic.org': { name: 'Edu' },
-          'blog.education.nationalgeographic.org': { name: 'Edu Blog' },
-          'explorer-directory.nationalgeographic.org': { name: 'Explorers' },
-        }
+        'Errors': 'nitro_errors',
       },
     },
     media: {
-      name: 'NGS Downloadable Files',
-      group: 'NatGeo',
-      description: 'Non-HMTL files linked by NGS sites',
+      name: 'Nitro Downloadable Files',
+      group: 'Nitro',
+      description: 'Non-HMTL files linked by Nitro sites',
       queries: {
         'Overview': {
-          parent: 'ngs_summary',
+          parent: 'nitro_summary',
           aggregates: [
             { path: 'mime', function: 'collect' },
           ],
@@ -69,7 +46,7 @@
           ],
         },
         'PDFs': {
-          parent: 'ngs_media',
+          parent: 'nitro_media',
           filters: [{ path: 'mime', eq: 'application/pdf' }],
           return: [
             { name: 'Title', path: 'content.title' },
@@ -81,7 +58,7 @@
           ]
         },
         'Photos': {
-          parent: 'ngs_media',
+          parent: 'nitro_media',
           filters: [{ path: 'mime', in: ['image/png', 'image/jpeg'] }],
           return: [
             { name: 'Date', path: 'data.ModifyDate' },
@@ -91,14 +68,14 @@
           ]
         },
         'Audio': {
-          parent: 'ngs_media',
+          parent: 'nitro_media',
           filters: [{ path: 'mime', eq: 'audio/mpeg' }],
           return: [
             { name: 'Duration', path: 'data.format.duration' },
           ]
         },
         'Videos': {
-          parent: 'ngs_media',
+          parent: 'nitro_media',
           filters: [{ path: 'mime', eq: 'video/mp4' }],
           return: [
             { name: 'Date', path: 'data.format.creationTime' },
@@ -106,7 +83,7 @@
           ]
         },
         'Other Files': {
-          parent: 'ngs_media',
+          parent: 'nitro_media',
           filters: [{ path: 'mime', in: ['application/pdf', 'image/png', 'image/jpeg', 'audio/mpeg', 'video/mp4'], negate: true }]
         },
       }

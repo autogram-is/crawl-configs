@@ -1,0 +1,48 @@
+configVersion: 0.10.4
+extends:
+  - ../../arango.config.yml
+  - ./analysis.json5
+  - ./queries.json5
+  - ./reports.json5
+  - ./pagedetails.report.json5
+
+arango:
+  databaseName: magnolia
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p,category}'
+  discardTrailingSlash: false
+  collapseSearchParams: page
+  sortSearchParams: true
+
+spider:
+  seed: 
+    - https://www.magnolia-cms.com
+  maxConcurrency: 2,
+  maxRequests: 240,
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: false
+  headless: true
+  stealth: true
+  urls:
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - "http*//{magnolia-cms}.magnolia-cms.com{*,*/**}"
+
+  downloadMimeTypes:
+    - '*/*'

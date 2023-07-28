@@ -7,9 +7,35 @@
       dropEmptyQueries: true,
       
       repeat: {
-        'WWW Home': { path: 'url', eq: 'https://www.nationalgeographic.org/society/' },
-        'Activity': { path: 'url', eq: 'https://www.nationalgeographic.org/activity/a-history-of-trade-in-new-york-city/' },
-        'Resource': { path: 'url', eq: 'https://education.nationalgeographic.org/resource/endangered-species/' },
+        'Blog Post (All Caps Title)': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/2011/11/17/contest_thursday_geoeye_image_quiz/" },
+        'Blog Post (All Caps Desc)': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/2014/10/02/where-has-all-the-water-gone/" },
+        'Blog Post (Many Inlinks)': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/2015/08/31/how-big-is-a-blue-whales-heart/" },
+        'Custom Blog Page': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/post-processing-mliu-qc-by-cwl/" },
+        'Paged Landing': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/category/classroom-ideas/page/210/" },
+        'Blog Author Paged': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/author/shea6057/page/9/" },
+        'Paged Edu Blog Tags': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/tag/1-page-maps/" },
+        'Edu Blog Paged': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/page/32/" },
+        'Home (Edu Blog)': { path: 'parsed.href', eq: "https://blog.education.nationalgeographic.org/" },
+        'Ocean Animals': { path: 'parsed.href', eq: "https://education.nationalgeographic.org/resource/ocean-animals/" },
+        'Paged Events': { path: 'parsed.href', eq: "https://education.nationalgeographic.org/search/events/" },
+        'Paged Resources': { path: 'parsed.href', eq: "https://education.nationalgeographic.org/search/resources/" },
+        'Home (Edu)': { path: 'parsed.href', eq: "https://education.nationalgeographic.org/" },
+        'Activity': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/activity/weather-interconnections/" },
+        'Become a Member': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/society/become-a-member/" },
+        'Tickets (Becoming Jane Traveling)': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/tickets/events/traveling-exhibitions/becoming-jane-traveling/" },
+        'Tickets (Becoming Jane)': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/tickets/events/event/becoming-jane/" },
+        'Explorer Magazine': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/education/classroom-resources/explorer-magazine/" },
+        'Explorer Mag Resource List': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/education/classroom-resources/explorer-magazine/find-resources/" },
+        'Explorer Mag Issue': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/education/classroom-resources/explorer-magazine/products/adventurer/2016-09-01/" },
+        'Lesson': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/lesson/plastics-plastics-everywhere/" },
+        'Project (Big Cats)': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/projects/big-cats/" },
+        'Project': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/projects/labs/" },
+        'Quiz': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/quiz/carylsue-test-quiz/" },
+        'Unit': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/unit/climate-change-challenge/" },
+        'Home (Society)': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/society/" },
+        'Tickets (Traveling Exhibitions)': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/tickets/events/traveling-exhibitions/" },
+        'Careers': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/careers/internships/" },
+        'Education': { path: 'parsed.href', eq: "https://www.nationalgeographic.org/society/education-resources/" }
       },
       
       settings: {
@@ -17,6 +43,10 @@
         sheets: {
           overview: { name: 'Page Overview', template: 'inspector' },
           content: { name: 'Content Details', template: 'inspector' },
+          headers: { name: 'HTTP Headers', template: 'inspector' },
+          inlinks: { name: 'Inbound Links' },
+          outlinks: { name: 'Outbound Links' },
+          meta: { name: 'Page Metadata', template: 'inspector' },
           tech: { name: 'Technologies', template: 'inspector' },
           timing: { name: 'Load Time', template: 'inspector' },
           cookies: { name: 'Cookies' },
@@ -25,8 +55,6 @@
             template: 'table',
             columns: { xhr: { name: 'Address' } }
           },
-          inlinks: { name: 'Inbound Links' },
-          outlinks: { name: 'Outbound Links' },
         }
       },
       
@@ -38,10 +66,24 @@
             { name: 'URL', path: 'parsed.href' },
             { name: 'Type', path: 'content.type' },
             { name: 'Title', path: 'content.title' },
+            { name: 'Notes', path: 'flags.note' },
             { name: 'CMS', path: 'content.cms' },
             { name: 'Load Time', path: 'timing.duration' },
             { name: 'Cookies', path: 'cookies', function: 'length' },
             { name: 'External Requests', path: 'xhr', function: 'length' }
+          ]
+        },
+        headers: {
+          collection: 'resources',
+          return: [
+            { name: "HTTP Headers", path: 'headers' },
+          ]
+        },
+        meta: {
+          collection: 'resources',
+          return: [
+            { name: "Body Classes", path: 'data.attributes.classes' },
+            { name: "Meta Tags", path: 'data.meta' },
           ]
         },
         content: {
@@ -78,10 +120,6 @@
         xhr: {
           collection: 'resources',
           return: [{ path: 'xhr' }]
-        },
-        a11y: {
-          collection: 'resources',
-          return: [{ path: 'accessibility' }]
         },
         timing: {
           collection: 'resources',

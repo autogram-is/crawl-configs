@@ -1,0 +1,40 @@
+{
+  analysis: {
+    content: { selector: [
+      'main.ArticlePage-main',
+      'div.SectionPage-content',
+      'section.page__content',
+      'div.Page-content',
+      'body'
+    ]},
+    properties: {
+      'content.cms': [
+        'tech.CMS.[0]',
+        'tech.Blogs.[0]',
+      ],
+      'report.tab': [
+        { source: 'parsed.path.[0]', in: ['de', 'nl', 'it', 'es', 'fr'] },
+        { source: 'parsed.subdomain', in: ['www', 'community'] },
+      ],
+      'content.title': [
+        'data.meta.og.title', // OpenGraph
+        'data.title',         // HEAD description tag
+        'data.info.Title',    // PDF metadata
+      ],
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.meta.description',    // HEAD description tag
+        'data.schemaOrg.WebPage.description',    // SchemaOrg
+        'data.dc.description',       // PDF metadata
+      ],
+      'content.date': [
+        'data.meta.datePublished',
+        'data.meta.article.published_time',
+        'data.schemaOrg.WebPage.datePublished',
+        'data.info.CreationDate',               // PDF files
+        'data.format.creationTime',             // audio
+        'data.ModifyDate'                       // many photos
+      ],
+    }
+  },
+}
