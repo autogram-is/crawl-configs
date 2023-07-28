@@ -1,0 +1,32 @@
+{
+  pageTechnologies: {
+    technologies: {
+      "Drupal": {
+        "html": [
+          "<(?:link|style)[^>]+\"/sites/(?:default|all)/(?:themes|modules)/",
+          "<(?:script)[^>]+\"drupal-settings-json",
+        ],
+      },
+      "Brightspot":{
+        "cats":[1],
+        "headers":{"X-Powered-By":"^Brightspot$", "brightspot.contentId": ""},
+        "icon":"Brightspot.svg",
+        "implies":"Java",
+        "website":"https://www.brightspot.com"
+      },
+      "IPB":{
+        "cats":[2],
+        "cookies":{"ipbWWLmodpids":"","ipbWWLsession_id":""},
+        "html":[
+          "<link[^>]+ipb_[^>]+\\.css",
+          "ipsLayout_contentArea"
+        ],
+        "icon":"IPB.png",
+        "implies":["PHP","MySQL"],
+        "js":{"IPBoard":"","ipb_var":"","ipsSettings":""},
+        "scriptSrc":["jscripts/ips_", "invisioncic\\.com"],
+        "website":"https://invisioncommunity.com/"
+      },
+    }
+  },
+}
