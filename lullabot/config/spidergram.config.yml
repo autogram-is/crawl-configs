@@ -1,0 +1,61 @@
+configVersion: 0.10.5
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./pagedetails.report.json5
+  - ./reports.json5
+  - ./queries.json5
+
+arango:
+  databaseName: lullabot
+  
+offloadBodyHtml: 'db'
+
+spider:
+  seed:
+    - https://www.lullabot.com
+  saveXhrList: true
+  savePerformance: true
+  saveCookies: true
+  stealth: true
+  urls:
+    crawl:
+      - "http*//*lullabot.com{*,*/**}"
+      - property: "pathname"
+        glob: '/{user,admin,core,profiles,index.php}/{*,*/**}'
+        reject: true
+    regions: 
+      header: "header"
+      footer: "footer"
+      main: "div.main__content"
+  downloadMimeTypes: "*/*"
+
+analysis:
+  content:
+    selector: 
+      - "div.node-episode__content"
+      - "div.node-case-study__content"
+      - "div.node-article__content"
+      - "div.main__content div.text-long"
+      - "div.main__content"
+  properties:
+    "content.title":
+      - "data.meta.og.title"
+      - "data.meta.twitter.title"
+      - "data.head.title"
+    "content.description":
+      - "data.meta.og.description"
+      - "data.meta.twitter.description"
+      - "data.meta.description"
+    "content.published":
+      - "data.schemaOrg.Article.datePublished"
+      - "data.date"
+      - "source": "body"
+        "selector": "div.hero-article__date"
+    "content.tags":
+      - "data.schemaOrg.Article.about"
+      - "source": "body"
+        "selector": "li.tags-with-label__tag"
+    "content.author":
+      - "data.schemaOrg.Article.author.name"
+      - "data.artist"

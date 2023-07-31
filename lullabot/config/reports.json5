@@ -1,0 +1,92 @@
+{
+  reports: {
+    default: {
+      name: 'Pages',
+      group: 'Lullabot',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'Overview': {
+          parent: 'lb_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
+        'All Pages': 'lb_pages',
+      },
+      alterData: {
+        'All Pages': {
+          action: 'split',
+          property: 'Site'
+        }
+      },
+    },
+    errors: {
+      name: 'Error URLs',
+      group: 'Lullabot',
+      description: 'Error summaries',
+      queries: {
+        'Errors': 'lb_errors',
+      },
+    },
+    media: {
+      name: 'Downloadable Files',
+      group: 'Lullabot',
+      description: 'Non-HMTL files linked by sites',
+      queries: {
+        'Overview': {
+          parent: 'lb_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html', negate: true },
+          ],
+        },
+        'PDFs': {
+          parent: 'lb_media',
+          filters: [{ path: 'mime', eq: 'application/pdf' }],
+          return: [
+            { name: 'Title', path: 'content.title' },
+            { name: 'Date', path: 'content.published' },
+            { name: 'Pages', path: 'data.pages' },
+            { name: 'Words', path: 'content.readability.words' },
+            { name: 'Language', path: 'data.info.Language' },
+            { name: 'Links', path: 'content.urls', function: 'LENGTH' },
+          ]
+        },
+        'Photos': {
+          parent: 'lb_media',
+          filters: [{ path: 'mime', in: ['image/png', 'image/jpeg'] }],
+          return: [
+            { name: 'Date', path: 'data.ModifyDate' },
+            { name: 'Height', path: 'data.height' },
+            { name: 'Width', path: 'data.width' },
+            { name: 'Copyright', path: 'data.Copyright' },
+          ]
+        },
+        'Audio': {
+          parent: 'lb_media',
+          filters: [{ path: 'mime', eq: 'audio/mpeg' }],
+          return: [
+            { name: 'Duration', path: 'data.format.duration' },
+          ]
+        },
+        'Videos': {
+          parent: 'lb_media',
+          filters: [{ path: 'mime', eq: 'video/mp4' }],
+          return: [
+            { name: 'Date', path: 'data.format.creationTime' },
+            { name: 'Duration', path: 'data.format.duration' },
+          ]
+        },
+        'Other Files': {
+          parent: 'lb_media',
+          filters: [{ path: 'mime', in: ['application/pdf', 'image/png', 'image/jpeg', 'audio/mpeg', 'video/mp4'], negate: true }]
+        },
+      }
+    }
+  }
+}

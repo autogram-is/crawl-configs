@@ -13,6 +13,8 @@ offloadBodyHtml: 'db'
 
 normalizer:
   forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
   discardAnchor: true
   discardAuth: true
   discardIndex: '**/{index,default}.{htm,html,aspx,php}'
@@ -23,9 +25,9 @@ normalizer:
 
 spider:
   seed: 
-    - https://experience.dropbox.com
-  maxConcurrency: 2,
-  maxRequests: 240,
+    - https://www.dropbox.com
+  maxConcurrency: 1,
+  maxRequests: 5,
   saveCookies: true
   savePerformance: true
   saveXhrList: true
@@ -44,7 +46,10 @@ spider:
       - video
       - audio
     crawl: 
-      - "http*//experience.dropbox.com{*,*/**}"
+      - "http*//www.dropbox.com{*,*/**}"
+      - property: href
+        glob: "http*://www.dropbox.com/{static,password_expired,help/sl,help/vodafone,home,package_files_uploaded_via_chrome,photos/app_store_link,recover,sharing,sharing/folders,sharing/files,requests,account,referrals,downgrade,developers-v1,developers/downloads/sdks,developers/whats_new,reengageoptout,preview}*/**"
+        reject: true
 
   downloadMimeTypes:
     - '*/*'

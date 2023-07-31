@@ -1,0 +1,37 @@
+arango:
+  databaseName: eldrich
+  url: http://192.168.88.119:8529
+  auth:
+    username: root
+    password: bimRRf8pQrdsVH94uhud
+spider:
+  headless: false
+  savePerformance: true
+  saveXhrList: true
+  seed:
+    - http://eldrich.host
+  urls:
+    crawl: "same-hostname"
+    regions: 
+      header: header
+      main: div.main-container
+      footer: footer
+analysis:
+  content:
+    selector: 
+      - "section.main-body"
+      - "section#main-content ~ div"
+      - "div.main-container"
+  properties:
+    content.cms:
+      tech.CMS.[0]
+      tech.Blogs.[0]
+    content.title:
+      path: body
+      selector: div.region-header h1:first-child
+    content.callout:
+      path: body
+      selector: aside.info-callout
+normalizer:
+  forceProtocol: 'http'
+  discardSearch: '!{page}'

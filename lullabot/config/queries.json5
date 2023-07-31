@@ -1,8 +1,8 @@
 {
   queries: {
-    nitro_sites: {
+    lb_sites: {
       document: 'resource',
-      metadata: { category: 'Nitro', description: 'Builds a rough approximation of sites' },
+      metadata: { category: 'Lullabot', description: 'Builds a rough approximation of sites' },
       collection: 'resources',
       subqueries: [
         { collection: 'responds_with', document: 'request' },
@@ -30,9 +30,9 @@
       ]
     },
 
-    nitro_summary: {
+    lb_summary: {
       document: 'resource',
-      metadata: { category: 'Nitro', description: 'Overview of crawled sites' },
+      metadata: { category: 'Lullabot', description: 'Overview of crawled sites' },
       collection: 'resources',
       filters: [
         { path: 'code', eq: 200 },
@@ -44,9 +44,9 @@
       sorts: [{ path: 'total', direction: 'desc' }],
     },
 
-    nitro_pages: {
+    lb_pages: {
       document: "resource",
-      metadata: { category: "Nitro", description: "Successfully crawled pages" },
+      metadata: { category: 'Lullabot', description: "Successfully crawled pages" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -87,7 +87,7 @@
       }],
       count: "total",
       filters: [
-        { path: 'parsed.domain', in: ['gonitro.com'] },
+        { path: 'parsed.domain', in: ['lullabot.com'] },
         { path: "code", eq: 200},
         { path: "mime", eq: "text/html" }
       ],
@@ -97,17 +97,14 @@
       "return": [
         { name: "Site", path: "parsed.hostname" },
         { name: "Path", path: "parsed.pathname" },
-        { name: "Directory", path: "parsed.path[0]" },
-        { name: "Subdirectory", path: "parsed.path[1]" },
         { name: "Params", path: "parsed.search" },
-        { name: 'Tab', path: 'report.tab' },
 
         // Content analysis
         { name: 'CMS', path: 'content.cms' },
-        { name: 'Type', path: 'content.type' },
         { name: 'Title', path: 'content.title' },
         { name: 'Description', path: 'content.description' },
-        { name: 'Date', path: 'content.date' },
+        { name: 'Author', path: 'content.author' },
+        { name: 'Date', path: 'content.published' },
         { name: 'Words', path: 'content.readability.words' },
         { name: 'Readability', path: 'content.readability.score' },
 
@@ -126,9 +123,9 @@
       ]
     },
     
-    nitro_errors: {
+    lb_errors: {
       document: "resource",
-      metadata: { category: "Nitro", description: "Errors encountered" },
+      metadata: { category: 'Lullabot', description: "Errors encountered" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -167,9 +164,9 @@
       ]
     },
     
-    nitro_media: {
+    lb_media: {
       document: "resource",
-      metadata: { category: "Nitro", description: "Linked media files" },
+      metadata: { category: 'Lullabot', description: "Linked media files" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -214,7 +211,7 @@
   
     inlinks: {
       metadata: {
-        category: "Nitro", description: "Links from many sources to a given page",
+        category: 'Lullabot', description: "Links from many sources to a given page",
       },
       collection: 'resources',
       document: 'target',
@@ -249,7 +246,7 @@
   
     outlinks: {
       metadata: {
-        category: "Nitro", description: "Links from a page to many target URLs",
+        category: 'Lullabot', description: "Links from a page to many target URLs",
       },
       collection: 'resources',
       document: 'source',
@@ -278,7 +275,7 @@
   
     invalid: {
       metadata: {
-        category: "Nitro", description: "Unparsable links",
+        category: 'Lullabot', description: "Unparsable links",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -303,7 +300,7 @@
 
     nonweb: {
       metadata: {
-        category: "Nitro", description: "Links to non-web URL",
+        category: 'Lullabot', description: "Links to non-web URL",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -328,7 +325,7 @@
 
     variations: {
       metadata: {
-        category: "Nitro", description: 'Unique inlink variations'
+        category: 'Lullabot', description: 'Unique inlink variations'
       },
       collection: 'unique_urls',
       document: 'uu',
