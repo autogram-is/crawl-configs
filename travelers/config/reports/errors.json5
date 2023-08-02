@@ -1,0 +1,19 @@
+{
+  reports: {
+    errors: {
+      name: 'Error URLs',
+      group: 'client',
+      description: 'Error summaries',
+      queries: {
+        'Other Errors': 'project_errors',
+      },
+      alterData: {
+        'Other Errors': {
+          action: 'split',
+          property: 'Code',
+          mustMatch: [ 403, 404, 429, 500 ]
+        },
+      },
+    },
+  }
+}

@@ -1,0 +1,37 @@
+{
+  reports: {
+    default: {
+      name: 'Pages',
+      group: 'client',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'Overview': {
+          parent: 'project_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
+        'Other Pages': 'project_pages',
+      },
+      alterData: {
+        'Other Pages': {
+          action: 'split',
+          property: 'Site',
+          mustMatch: [
+            'agent.travelers.com',
+            'careers.travelers.com',
+            'www.travelers.com',
+            'investor.travelers.com',
+            'sustainability.travelers.com',
+            'pages.travelers.com',
+            'constructioninnovation.travelers.com',
+            'riskcontrol.travelers.com',
+          ]
+        }
+      }
+    }
+  }
+}

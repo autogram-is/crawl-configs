@@ -1,0 +1,49 @@
+configVersion: 0.10.4
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./analysis.json5
+  - ./reports/pagedetails.report.json5
+  - ./reports/errors.report.json5
+  - ./reports/pages.report.json5
+  - ./reports/downloads.report.json5
+  - ./reports/queries.json5
+
+arango:
+  databaseName: travelers
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p,category}'
+  discardTrailingSlash: false
+  sortSearchParams: true
+
+spider:
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: true
+  headless: true
+  stealth: false
+  urls:
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - property: "href"
+        glob: "http*//agent.travelers.com{*,*/**}"
+        reject: true
+      - "http*//*.travelers.com{*,*/**}"
+
+  downloadMimeTypes:
+    - '*/*'
