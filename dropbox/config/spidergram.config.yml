@@ -1,6 +1,7 @@
 configVersion: 0.10.4
 extends:
   - ../../arango.config.yml
+  - ../../page-tech.json5
   - ./analysis.json5
   - ./queries.json5
   - ./reports.json5
@@ -24,17 +25,13 @@ normalizer:
   sortSearchParams: true
 
 spider:
-  seed: 
-    - https://www.dropbox.com
-  maxConcurrency: 1,
-  maxRequests: 5,
   saveCookies: true
   savePerformance: true
   saveXhrList: true
   auditAccessibility: false
   shadowDom: true
   headless: true
-  stealth: true
+  stealth: false
   urls:
     regions:
       header: 'header.uni-nav-container, header.u01-header__header, nav.u01-secondary-nav'
@@ -46,10 +43,21 @@ spider:
       - video
       - audio
     crawl: 
-      - "http*//www.dropbox.com{*,*/**}"
       - property: href
         glob: "http*://www.dropbox.com/{static,password_expired,help/sl,help/vodafone,home,package_files_uploaded_via_chrome,photos/app_store_link,recover,sharing,sharing/folders,sharing/files,requests,account,referrals,downgrade,developers-v1,developers/downloads/sdks,developers/whats_new,reengageoptout,preview}*/**"
         reject: true
+      - property: href
+        glob: "http*://www.hellosign.com/{style-guide,helloworks/1993,form/support-to-sales-lp,form/salesforce-add-seats,digital-strength/internal,digital-strength/emails,hw/msg,home-copy-1,home-copy-2,home-copy-cc,home-copy-pro,hellosign-staging-copy,api-copy,helloworks/builder-beta,form/helloworks-builder-beta-waitlist,helloworks/builder-beta/success,content/hellosign-for-salesforce-guide,helloworks/use-case,products/helloworks-copy,products/helloworks-old,ps-helloworks/1,form/dropbox-to-hellosign,form/hellosignapi-app-approval,dropbox-esign,content/wine-and-cheese-event,products/helloforms,products/hello-works,andrews-template,andrews-template,integrations/dropbox-esign,mar-206,home-v2,reveal-homepage,products/b/api,products/b/salesforce,products/b/hellofax,b/enterprise,b/lp/digitally-sign-documents,b/lp/free-document-signing,mar-729,mar-755}*/**"
+        reject: true
+      - property: "href"
+        glob: "http?://{help,experience}.dropbox.com/??-??/**"
+        reject: true
+      - property: "href"
+        glob: "http?://www.dropbox.com/{??,??_??}/**"
+        reject: true
+      - "http*//{www,blog,developers,help,investors,experience}.dropbox.com{*,*/**}"
+      - "http*//www.docsend.com{*,*/**}"
+      - "http*//www.hellosign.com{*,*/**}"
 
   downloadMimeTypes:
     - '*/*'

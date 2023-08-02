@@ -1,17 +1,30 @@
 {
   analysis: {
-    content: { selector: [
-      'div.main', 'body'
-    ]},
     properties: {
+      'content.translated': [
+        {
+           source: 'parsed.href',
+           matching: 'https://www.dropbox.com/{??_??,??}/**',
+           value: "y"
+        },
+        {
+           source: 'parsed.href',
+           matching: 'https://experience.dropbox.com/??-??/**',
+           value: "y"
+        },
+      ],
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',
       ],
+      'report.tab': [
+        { source: 'parsed.hostname', eq: 'experience.dropbox.com', value: 'experience' },
+        'parsed.domainWithoutSuffix'
+      ],
       'content.title': [
         'data.meta.og.title', // OpenGraph
-        'data.title',         // HEAD description tag
         'data.info.Title',    // PDF metadata
+        'data.title',         // HEAD description tag
       ],
       'content.description': [
         'data.meta.og.description', // OpenGraph

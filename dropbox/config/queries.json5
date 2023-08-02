@@ -84,10 +84,27 @@
           }],
           return: [{ path: "url", document: "target" }]
         }
+      }, {
+        name: "redirectedFrom",
+        query: {
+          collection: 'responds_with',
+          document: 'rw',
+          filters: [
+            { path: '_to', join: 'resource._id' },
+            { path: 'redirects[0]', eq: null, negate: true }
+          ],
+          subqueries: [
+            {
+              collection: 'unique_urls',
+              document: 'source',
+              filters: [{ path: '_id', join: 'rw._from' }],
+            },
+          ],
+          return: [{ path: "url", document: "source" }]
+        }
       }],
       count: "total",
       filters: [
-        { path: 'parsed.domain', in: ['dropbox.com'] },
         { path: "code", eq: 200},
         { path: "mime", eq: "text/html" }
       ],
@@ -95,8 +112,11 @@
         { path: "url", direction: "asc" }
       ],
       "return": [
+        { name: "Tab", path: "report.tab" },
         { name: "Site", path: "parsed.hostname" },
         { name: "Path", path: "parsed.pathname" },
+        { name: "Directory", path: "parsed.path[0]" },
+        { name: "Subdirectory", path: "parsed.path[1]" },
         { name: "Params", path: "parsed.search" },
 
         // Content analysis
@@ -114,12 +134,13 @@
         { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
         { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
         { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
-        { name: 'Paged URL', path: 'data.paged' },
         { name: 'Load Time', path: 'timing.duration' },
 
         // Inlink/outlink counts
         { document: false, name: "Inlinks", path: "inlinks", function: "length" },
-        { document: false, name: "Outlinks", path: "outlinks", function: "length" }
+        { document: false, name: "Outlinks", path: "outlinks", function: "length" },
+        { document: false, name: "Inbound_Redirects", path: "redirectedFrom", function: "length" },
+        { document: false, name: "Redirected_From", path: "redirectedFrom[0]" },
       ]
     },
     

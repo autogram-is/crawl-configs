@@ -16,6 +16,18 @@
         },
         'Other Pages': 'dropbox_pages',
       },
+      alterData: {
+        'Other Pages': {
+          action: 'split',
+          property: 'Tab',
+          mustMatch: [
+            'dropbox',
+            'experience',
+            'hellosign',
+            'docsend',
+          ]
+        }
+      },
     },
     errors: {
       name: 'Dropbox Error URLs',
