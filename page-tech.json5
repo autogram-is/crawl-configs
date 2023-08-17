@@ -9,7 +9,8 @@
       },
       "Brightspot":{
         "cats":[1],
-        "headers":{"X-Powered-By":"^Brightspot$", "brightspot.contentId": ""},
+        "headers":{"X-Powered-By":"^Brightspot$"},
+        "meta":{"brightspot.contentId":""},
         "icon":"Brightspot.svg",
         "implies":"Java",
         "website":"https://www.brightspot.com"
