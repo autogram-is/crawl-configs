@@ -1,0 +1,54 @@
+configVersion: 0.10.4
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./analysis.json5
+  - ./reports/pagedetails.json5
+  - ./reports/errors.json5
+  - ./reports/pages.json5
+  - ./reports/downloads.json5
+  - ./reports/dataviz.json5
+  - ./reports/queries.json5
+
+arango:
+  databaseName: contento
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p,category}'
+  discardTrailingSlash: false
+  sortSearchParams: true
+
+spider:
+  seed:
+    - https://stripe.com
+    - https://www.intercom.com/
+    - https://www.teamwork.com/
+    - https://www.appraisd.com/
+    - https://www.webstacks.com/
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: false
+  headless: true
+  stealth: false
+  urls:
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - property: "domain"
+        glob: "{stripe,intercom,teamwork,appraisd,webstacks}.com"
+      - property: "path[0]"
+        glob: "{??-??,??-??-??}"
+        reject: true
+  downloadMimeTypes:
+    - '*/*'

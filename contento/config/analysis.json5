@@ -1,0 +1,32 @@
+{
+  analysis: {
+    properties: {
+      // In some cases Blogs/
+      'content.cms': [
+        'tech.CMS.[0]',
+        'tech.Blogs.[0]',
+        "tech.['Page Builders'].[0]",
+        "tech.['Message boards'].[0]",
+      ],
+      'content.title': [
+        'data.meta.og.title', // OpenGraph
+        'data.info.Title',    // PDF metadata
+        'data.title',         // HEAD description tag
+      ],
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.meta.description',    // HEAD description tag
+        'data.schemaOrg.WebPage.description',    // SchemaOrg
+        'data.dc.description',       // PDF metadata
+      ],
+      'content.date': [
+        'data.meta.datePublished',
+        'data.meta.article.published_time',
+        'data.schemaOrg.WebPage.datePublished',
+        'data.info.CreationDate',               // PDF files
+        'data.format.creationTime',             // audio
+        'data.ModifyDate'                       // many photos
+      ],
+    }
+  }
+}
