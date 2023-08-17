@@ -1,0 +1,27 @@
+// Example JSON export appropriate for data visualization etc.
+
+{
+  reports: {
+    dataviz: {
+      name: 'Site Dataviz',
+      group: 'project',
+      description: "JSON dump of data for visualizations",
+      settings: {
+        type: 'json',
+        path: 'dataviz',
+        combine: true
+      },
+      queries: {
+        nodes: {
+          collection: 'resources',
+          filters: [
+            { path: 'code', eq: 200 }, 
+            { path: 'mime', eq: 'text/html' }
+          ],
+          aggregates: [{ name: 'site', path: 'parsed.hostname', function: 'collect' }],
+          count: 'pages'
+        }
+      }
+    }
+  }
+}

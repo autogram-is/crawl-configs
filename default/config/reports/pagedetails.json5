@@ -1,0 +1,109 @@
+// A detailed multi-sheet report for each URL given.
+// Add named URLs to be analyzed for this report in the
+// reports.details.settings.sheets property below.
+
+{
+  reports: {
+    details: {
+      name: 'Page Detail',
+      group: 'project',
+      description: 'Detailed report for a single page',
+      dropEmptyQueries: true,
+      
+      repeat: {
+        'Home': { path: 'parsed.pathname', eq: "/" }
+      },
+      
+      settings: {
+        path: 'Page Details {{date}}/{{name}}',
+        sheets: {
+          overview: { name: 'Page Overview', template: 'inspector' },
+          content: { name: 'Content Details', template: 'inspector' },
+          headers: { name: 'HTTP Headers', template: 'inspector' },
+          inlinks: { name: 'Inbound Links' },
+          outlinks: { name: 'Outbound Links' },
+          meta: { name: 'Page Metadata', template: 'inspector' },
+          tech: { name: 'Technologies', template: 'inspector' },
+          timing: { name: 'Load Time', template: 'inspector' },
+          cookies: { name: 'Cookies' },
+          xhr: {
+            name: 'External Requests',
+            template: 'table',
+            columns: { xhr: { name: 'Address' } }
+          },
+        }
+      },
+      
+      queries: {
+        overview: {
+          collection: 'resources',
+          return: [
+            { name: 'Site', path: 'parsed.hostname' },
+            { name: 'URL', path: 'parsed.href' },
+            { name: 'Type', path: 'content.type' },
+            { name: 'Title', path: 'content.title' },
+            { name: 'Notes', path: 'flags.note' },
+            { name: 'CMS', path: 'content.cms' },
+            { name: 'Load Time', path: 'timing.duration' },
+            { name: 'Cookies', path: 'cookies', function: 'length' },
+            { name: 'External Requests', path: 'xhr', function: 'length' }
+          ]
+        },
+        headers: {
+          collection: 'resources',
+          return: [
+            { name: "HTTP Headers", path: 'headers' },
+          ]
+        },
+        meta: {
+          collection: 'resources',
+          return: [
+            { name: "Body Classes", path: 'data.attributes.classes' },
+            { name: "Meta Tags", path: 'data.meta' },
+          ]
+        },
+        content: {
+          collection: 'resources',
+          return: [
+            { name: 'Title', path: 'content.title' },
+            { name: 'Date', path: 'content.date' },
+            { name: 'Summary', path: 'content.summary' },
+            { name: 'Text', path: 'content.text' },
+            { name: 'Words', path: 'content.readability.words' },
+            { name: 'Sentences', path: 'content.readability.sentences' },
+            { name: 'Readability', path: 'content.readability.score' },
+          ]
+        },
+        cookies: {
+          collection: 'resources',
+          subqueries: [{
+            collection: 'item.cookies',
+            document: 'cookie'
+          }],
+          filters: [{ path: 'cookies', eq: null, negate: true }],
+          return: [
+            { name: 'Name', document: 'cookie', path: 'name' },
+            { name: 'Domain', document: 'cookie', path: 'domain' },
+            { name: 'Secure', document: 'cookie', path: 'secure' },
+            { name: 'Same Site', document: 'cookie', path: 'sameSite' },
+            { name: 'Value', document: 'cookie', path: 'value' },
+          ]
+        },
+        tech: {
+          collection: 'resources',
+          return: [{ path: 'tech' }]
+        },
+        xhr: {
+          collection: 'resources',
+          return: [{ path: 'xhr' }]
+        },
+        timing: {
+          collection: 'resources',
+          return: [{ path: 'timing' }]
+        },
+        inlinks: 'inlinks',
+        outlinks: 'outlinks',
+      },
+    },
+  },
+}

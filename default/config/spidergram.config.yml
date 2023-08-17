@@ -1,0 +1,53 @@
+configVersion: 0.10.5
+
+# This includes other config files. They can be JSON, JSON5, or YAML
+# because we're indecisive.
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./reports.yml
+  - ./analysis.json5
+
+# These are the default options that will be used if the 'arango'
+# section is removed. You can change them if you're using a different
+# server, or want to have multiple databases to store multiple crawls
+arango:
+  url: http://127.0.0.1:8529
+  databaseName: spidergram
+  auth:
+    username: root
+    password: 
+  
+offloadBodyHtml: 'db'            # Recommended for performance on large crawls
+
+normalizer:
+  forceLowercase: 'hostname'     # 'href' and false are other common options
+  discardFirstSegment: 'ww*'     # if the first url segment is 'www', strip it
+  supplySubdomain: 'www'         # add the 'www' subdomain if no subdomain is present
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: '!{page,p}'     # This is an allow-list that preserves page numbers; add other keys to let them through
+  discardTrailingSlash: false    # Some sites have numerous duplicate slash/no-slash URLs; this can collapse them
+  sortSearchParams: true
+
+spider:
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false      # Currently fussy on sites with complex JS
+  stealth: false                 # Activate to use stealth/bot-detection bypassing techniques
+  urls:
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    crawl:                       # setting this to 'same-domain' is the simplest option
+      - "http*//*.example.com{*,*/**}"
+      - property: "path"         # Valid properties: href, host, domain, subdomain, path, path[0-n]
+        glob: "/admin/**"        # https://lironzluf.github.io/minimatch-playground/ for glob-matching syntax; use 'regex' instead of 'glob' for regular expression matching
+        reject: true             # by default, anything with a match WILL be crawled. Set 'reject' to TRUE to ignore specific URLs
+
+  downloadMimeTypes:             # Remove this entry or change the filters to download fewer files
+    - '*/*'

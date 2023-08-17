@@ -1,0 +1,39 @@
+// These fingerprints are used by the Wappalyzer engine
+// to identify specific tech used on a given pages. See
+// https://www.wappalyzer.com/technologies/ for a list of
+// Wappalyzer's known technologies, and its documentation
+// for instructions on adding/customizing these entries.
+
+{
+  pageTechnologies: {
+    technologies: {
+      "Drupal": {
+        "html": [
+          "<(?:link|style)[^>]+\"/sites/(?:default|all)/(?:themes|modules)/",
+          "<(?:script)[^>]+\"drupal-settings-json",
+        ],
+      },
+      "Brightspot":{
+        "cats":[1],
+        "headers":{"X-Powered-By":"^Brightspot$"},
+        "meta":{"brightspot.contentId":""},
+        "icon":"Brightspot.svg",
+        "implies":"Java",
+        "website":"https://www.brightspot.com"
+      },
+      "IPB":{
+        "cats":[2],
+        "cookies":{"ipbWWLmodpids":"","ipbWWLsession_id":""},
+        "html":[
+          "<link[^>]+ipb_[^>]+\\.css",
+          "ipsLayout_contentArea"
+        ],
+        "icon":"IPB.png",
+        "implies":["PHP","MySQL"],
+        "js":{"IPBoard":"","ipb_var":"","ipsSettings":""},
+        "scriptSrc":["jscripts/ips_", "invisioncic\\.com"],
+        "website":"https://invisioncommunity.com/"
+      },
+    }
+  },
+}

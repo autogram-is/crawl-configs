@@ -1,0 +1,56 @@
+/*
+ * The 'analysis' configuration is probably the most important
+ * on an average site. We'll write up the details in a bit, but
+ * in a nutshell it's a set of keys (properties on each page to
+ * POPULATE) and values (information on where to get the value
+ * for that property). It supports a lot of options.
+ * 
+ * targetProperty: simplePropertyName
+ *
+ * targetProperty: 'dot.notation.path[1]'
+ *
+ * targetProperty: {
+ *   source: sourcePropertyName,
+ *   selector: 'some.css.selector'
+ * }
+ *
+ * propWithMultipleSources: [ source1, source2, finalSource ]
+ */
+
+{
+  analysis: {
+    properties: {
+      // This will only be populated if 'technoligies' are scanned
+      // during analysis; it will be empty otherwise.
+      'content.cms': [
+        'tech.CMS.[0]',
+        'tech.Blogs.[0]',
+        "tech.['Page Builders'].[0]",
+        "tech.['Message boards'].[0]",
+      ],
+      'content.title': [
+        'data.meta.og.title', // OpenGraph
+        'data.info.Title',    // PDF metadata
+        'data.title',         // HEAD description tag
+      ],
+      'content.description': [
+        'data.meta.og.description',             // OpenGraph
+        'data.meta.description',                // HEAD description tag
+        'data.schemaOrg.WebPage.description',   // SchemaOrg
+        'data.dc.description',                  // PDF metadata
+      ],
+      'content.date': [
+        'data.meta.datePublished',
+        'data.meta.article.published_time',
+        'data.schemaOrg.WebPage.datePublished',
+        'data.info.CreationDate',               // PDF files
+        'data.format.creationTime',             // audio
+        'data.ModifyDate'                       // many photos
+      ],
+      'content.customProperty': [
+        { source: 'body', selector: 'article.postAuthor' },
+        { source: 'body', selector: 'article.postAuthor' },
+      ]
+    }
+  }
+}

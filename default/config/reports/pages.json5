@@ -1,0 +1,21 @@
+{
+  reports: {
+    default: {
+      name: 'Pages',
+      group: 'project',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'Overview': {
+          parent: 'project_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
+        'All Pages': 'project_pages',
+      },
+    }
+  }
+}
