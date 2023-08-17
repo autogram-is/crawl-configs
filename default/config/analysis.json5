@@ -19,6 +19,8 @@
 
 {
   analysis: {
+  
+    // Custom properties for pages and how to populate them.
     properties: {
       // This will only be populated if 'technoligies' are scanned
       // during analysis; it will be empty otherwise.
@@ -52,5 +54,22 @@
         { source: 'body', selector: 'article.postAuthor' },
       ]
     }
-  }
+  },
+  
+  // Sub-page patterns to be extracted and tracked; each pattern
+  // needs a name, a description, and a CSS selector to be matched
+  // 
+  // These examples are taken from IBM's Carbon Design System.
+  patterns: [
+    {
+      name: 'carbonDataTable',
+      description: 'Data Table',
+      selector: 'div.cds--data-table-container'
+    },
+    {
+      name: 'carbonFileUpload',
+      description: 'File Upload',
+      selector: 'div.cds--file__container'
+    }
+  ]
 }
