@@ -3,10 +3,11 @@ extends:
   - ../../arango.config.yml
   - ../../page-tech.json5
   - ./analysis.json5
-  - ./reports/pagedetails.report.json5
-  - ./reports/errors.report.json5
-  - ./reports/pages.report.json5
-  - ./reports/downloads.report.json5
+  - ./reports/pagedetails.json5
+  - ./reports/errors.json5
+  - ./reports/pages.json5
+  - ./reports/downloads.json5
+  - ./reports/dataviz.json5
   - ./reports/queries.json5
 
 arango:

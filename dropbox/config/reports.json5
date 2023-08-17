@@ -1,4 +1,26 @@
 {
+  analysis: {
+    properties: {
+      'report.flagged': {
+        source: 'parsed.href',
+        in: [
+          'https://url-to-analyze.com/',
+        ]
+        value: true,
+      },
+      'report.property': [
+        {
+          source: 'parsed.subdomain', 
+          in: ['experience', 'help', 'blog', 'jobs', 'investors']
+        },
+        {
+          source: 'parsed.hostname', 
+          in: ['developers.hellosign.com', 'developers.dropbox.com']
+        },
+        'parsed.domainWithoutSuffix'
+      ],
+    }
+  }
   reports: {
     default: {
       name: 'Dropbox Pages',

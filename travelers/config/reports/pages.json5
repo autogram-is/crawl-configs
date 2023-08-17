@@ -2,7 +2,7 @@
   reports: {
     default: {
       name: 'Pages',
-      group: 'client',
+      group: 'project',
       description: 'Page, media, and error summaries',
       queries: {
         'Overview': {

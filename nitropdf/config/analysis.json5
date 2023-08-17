@@ -16,6 +16,9 @@
         { source: 'parsed.path.[0]', in: ['de', 'nl', 'it', 'es', 'fr'] },
         { source: 'parsed.subdomain', in: ['www', 'community'] },
       ],
+      'content.type': [
+        { source: 'data.attributes.classes', matching: '*Page-body' }
+      ],
       'content.title': [
         'data.meta.og.title', // OpenGraph
         'data.title',         // HEAD description tag

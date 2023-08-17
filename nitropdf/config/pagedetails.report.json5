@@ -10,7 +10,7 @@
         'Home': { path: 'parsed.href', eq: "https://www.gonitro.com/" },
         'Life-At-Nitro': { path: 'parsed.href', eq: "https://www.gonitro.com/about/life-at-nitro" },
         'Press': { path: 'parsed.href', eq: "https://www.gonitro.com/about/press" },
-        'Features': { path: 'parsed.href', eq: "https://www.gonitro.com/advanced-features" },
+        'Advanced Features': { path: 'parsed.href', eq: "https://www.gonitro.com/advanced-features" },
         'Analytics': { path: 'parsed.href', eq: "https://www.gonitro.com/analytics" },
         'Blog': { path: 'parsed.href', eq: "https://www.gonitro.com/blog" },
         'Blog-Post': { path: 'parsed.href', eq: "https://www.gonitro.com/blog/arming-the-modern-workforce-with-productivity-tools-it-needs" },

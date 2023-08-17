@@ -2,7 +2,7 @@
   reports: {
     media: {
       name: 'Downloadable Files',
-      group: 'client',
+      group: 'project',
       description: 'Non-HMTL files linked by project sites',
       queries: {
         'Overview': {

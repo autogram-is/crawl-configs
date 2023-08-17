@@ -112,7 +112,7 @@
         { path: "url", direction: "asc" }
       ],
       "return": [
-        { name: "Tab", path: "report.tab" },
+        { name: "Property", path: "report.property" },
         { name: "Site", path: "parsed.hostname" },
         { name: "Path", path: "parsed.pathname" },
         { name: "Directory", path: "parsed.path[0]" },

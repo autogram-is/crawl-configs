@@ -3,6 +3,7 @@ extends:
   - ../../arango.config.yml
   - ../../page-tech.json5
   - ./analysis.json5
+  - ./patterns.json5
   - ./queries.json5
   - ./reports.json5
   - ./pagedetails.report.json5
@@ -25,7 +26,7 @@ normalizer:
 
 spider:
   maxConcurrency: 2,
-  maxRequests: 240,
+  maxRequestsPerMinute: 240,
   saveCookies: true
   savePerformance: true
   saveXhrList: true

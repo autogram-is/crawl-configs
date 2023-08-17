@@ -2,7 +2,7 @@
   reports: {
     errors: {
       name: 'Error URLs',
-      group: 'client',
+      group: 'project',
       description: 'Error summaries',
       queries: {
         'Other Errors': 'project_errors',

@@ -1,0 +1,11 @@
+{
+  analysis: {
+    patterns: [
+      {
+        name: 'module',
+        description: 'Brightspot Module',
+        selector: 'div[data-module]'
+      }
+    ]
+  }
+}

@@ -1,25 +1,25 @@
 {
   analysis: {
     properties: {
-      'content.translated': [
-        {
-           source: 'parsed.href',
-           matching: 'https://www.dropbox.com/{??_??,??}/**',
-           value: "y"
-        },
-        {
-           source: 'parsed.href',
-           matching: 'https://experience.dropbox.com/??-??/**',
-           value: "y"
-        },
-      ],
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',
       ],
-      'report.tab': [
-        { source: 'parsed.hostname', eq: 'experience.dropbox.com', value: 'experience' },
-        'parsed.domainWithoutSuffix'
+      'content.type': [
+        {
+          source: 'data.meta.`resource-type-tag`',
+          split: ';'
+        },
+        {
+          source: 'data.schemaOrg.CollectionPage',
+          value: 'CollectionPage'
+        },
+        {
+          source: 'data.attributes.classes',
+          matching: 'post-template-*',
+          join: ','
+        },
+        'data.meta.og.type', // OpenGraph fallback
       ],
       'content.title': [
         'data.meta.og.title', // OpenGraph
@@ -35,6 +35,7 @@
       'content.date': [
         'data.meta.datePublished',
         'data.meta.article.published_time',
+        'data.schemaOrg.Article.datePublished',
         'data.schemaOrg.WebPage.datePublished',
         'data.info.CreationDate',               // PDF files
         'data.format.creationTime',             // audio

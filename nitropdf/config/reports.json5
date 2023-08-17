@@ -30,6 +30,13 @@
       queries: {
         'Errors': 'nitro_errors',
       },
+      alterData: {
+        'Other Errors': {
+          action: 'split',
+          property: 'Code',
+          mustMatch: [ 403, 404, 429, 500 ]
+        },
+      },
     },
     media: {
       name: 'Nitro Downloadable Files',

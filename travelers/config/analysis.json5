@@ -1,9 +1,12 @@
 {
   analysis: {
     properties: {
+      // In some cases Blogs/
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',
+        "tech.['Page Builders'].[0]",
+        "tech.['Message boards'].[0]",
       ],
       'content.title': [
         'data.meta.og.title', // OpenGraph
