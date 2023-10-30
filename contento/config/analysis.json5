@@ -1,7 +1,6 @@
 {
   analysis: {
     properties: {
-      // In some cases Blogs/
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',

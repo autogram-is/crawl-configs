@@ -1,0 +1,34 @@
+
+URL SUMMARY
+Total URLs: 234
+
+webstacks.com (18 hidden children, 249 total descendants)
+ ├─ capabilities (3 hidden children)
+ ├─ solutions (7 hidden children)
+ │   ╰─ hubspot (3 hidden children)
+ ├─ industries (4 hidden children)
+ ├─ partners (4 hidden children)
+ ├─ blog (95 hidden children)
+ │   ├─ category (1 hidden child)
+ │   │   ├─ insider
+ │   │   │   ╰─ page (4 hidden children)
+ │   │   ├─ web-design
+ │   │   │   ╰─ page (3 hidden children)
+ │   │   ├─ seo
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ marketing
+ │   │   │   ╰─ page (5 hidden children)
+ │   │   ├─ websites
+ │   │   │   ╰─ page (5 hidden children)
+ │   │   ╰─ blockchain-marketing
+ │   │       ╰─ page (3 hidden children)
+ │   ╰─ page (12 hidden children)
+ ├─ client-stories (15 hidden children)
+ ├─ podcast (10 hidden children)
+ │   ╰─ page (4 hidden children)
+ ├─ legal (1 hidden child)
+ ├─ go (4 hidden children)
+ ├─ resources (3 hidden children)
+ ├─ modular-web-design (5 hidden children)
+ ├─ partnerships (1 hidden child)
+ ╰─ success-stories (9 hidden children)

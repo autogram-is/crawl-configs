@@ -1,0 +1,824 @@
+
+URL SUMMARY
+Total URLs:    10,458
+Unique Hosts:  21
+Orphaned URLs: 30
+
+intercom.com (69 hidden children, 4,697 total descendants)
+ ├─ fin (1 hidden child)
+ ├─ customer-support-software (5 hidden children)
+ │   ╰─ drlp
+ │       ╰─ content (1 hidden child)
+ ├─ view-demos (3 hidden children)
+ │   ╰─ drlp
+ │       ╰─ view-demos (3 hidden children)
+ ├─ industry (4 hidden children)
+ ├─ customers (42 hidden children)
+ │   ├─ www.intercom.com (1 hidden child)
+ │   ╰─ intercom.com (1 hidden child)
+ ├─ resources (3 hidden children)
+ │   ├─ demos (16 hidden children)
+ │   ├─ bots-automation (1 hidden child)
+ │   ├─ books (10 hidden children)
+ │   ├─ guides (29 hidden children)
+ │   ╰─ marketing (1 hidden child)
+ ├─ blog (949 hidden children)
+ │   ├─ engineering
+ │   │   ╰─ page (13 hidden children)
+ │   ├─ author (263 hidden children)
+ │   │   ├─ niamh_oconnor
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ liamgeraghty
+ │   │   │   ╰─ page (9 hidden children)
+ │   │   ├─ katesugrue
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ bethmcentee
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ pauladams
+ │   │   │   ╰─ page (5 hidden children)
+ │   │   ├─ des
+ │   │   │   ╰─ page (13 hidden children)
+ │   │   ├─ anna_murphy
+ │   │   │   ╰─ page (3 hidden children)
+ │   │   ├─ zaraburke
+ │   │   │   ╰─ page (3 hidden children)
+ │   │   ├─ thoughtwax
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ tales_of_cake
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ brian_donohue
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ eoghan
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ gustavscirulis
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ nessa_morrissey
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ jeff
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ adamrisman
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ brian_scanlan
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ deereddy
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ courtney
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ davinodwyer
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ ruairi
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ geoffreykeating
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ ashleymlohmann
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ john
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ matthodges
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ danielharri5
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ╰─ karenpeacock
+ │   │       ╰─ page (1 hidden child)
+ │   ├─ podcasts (267 hidden children)
+ │   │   ├─ engineering
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ page (13 hidden children)
+ │   │   ├─ customer-support
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ ai-ml
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ marketing
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ product-and-design
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ news
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ scale
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ╰─ sales
+ │   │       ╰─ page (1 hidden child)
+ │   ├─ videos (97 hidden children)
+ │   │   ├─ onboard-signed-users-satisfied-users (10 hidden children)
+ │   │   ├─ page (10 hidden children)
+ │   │   ├─ customer-support
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ product-and-design
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ news
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ╰─ announcing-inbox-apps (2 hidden children)
+ │   ├─ customer-support
+ │   │   ╰─ page (14 hidden children)
+ │   ├─ ai-ml
+ │   │   ╰─ page (7 hidden children)
+ │   ├─ fin-ai-bot-customer-service
+ │   │   ╰─ intercom.com (1 hidden child)
+ │   ├─ marketing
+ │   │   ╰─ page (14 hidden children)
+ │   ├─ product-and-design
+ │   │   ╰─ page (14 hidden children)
+ │   ├─ news
+ │   │   ╰─ page (14 hidden children)
+ │   ├─ tag (4 hidden children)
+ │   │   ├─ intercom-on-product
+ │   │   │   ╰─ page (2 hidden children)
+ │   │   ├─ product-principles-series
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ╰─ built-for-you
+ │   │       ╰─ page (1 hidden child)
+ │   ├─ page (18 hidden children)
+ │   ├─ what-is-customer-service (1 hidden child)
+ │   ├─ scale
+ │   │   ╰─ page (6 hidden children)
+ │   ├─ wp-content
+ │   │   ├─ uploads
+ │   │   │   ├─ 2016
+ │   │   │   │   ├─ 12 (1 hidden child)
+ │   │   │   │   ├─ 03 (1 hidden child)
+ │   │   │   │   ╰─ 11 (1 hidden child)
+ │   │   │   ├─ 2017
+ │   │   │   │   ├─ 05 (4 hidden children)
+ │   │   │   │   ╰─ 11 (2 hidden children)
+ │   │   │   ╰─ 2018
+ │   │   │       ╰─ 07 (1 hidden child)
+ │   │   ╰─ plugins
+ │   │       ╰─ pdfjs-viewer-shortcode
+ │   │           ╰─ pdfjs
+ │   │               ╰─ web (1 hidden child)
+ │   ├─ authors
+ │   │   ├─ engineering
+ │   │   │   ╰─ page (8 hidden children)
+ │   │   ├─ customer-support
+ │   │   │   ╰─ page (9 hidden children)
+ │   │   ├─ ai-ml
+ │   │   │   ╰─ page (3 hidden children)
+ │   │   ├─ marketing
+ │   │   │   ╰─ page (7 hidden children)
+ │   │   ├─ product-and-design
+ │   │   │   ╰─ page (9 hidden children)
+ │   │   ├─ news
+ │   │   │   ╰─ page (9 hidden children)
+ │   │   ├─ scale
+ │   │   │   ╰─ page (1 hidden child)
+ │   │   ├─ page (9 hidden children)
+ │   │   ╰─ sales
+ │   │       ╰─ page (1 hidden child)
+ │   ├─ ship-fast-safe-learn-from-production (1 hidden child)
+ │   ├─ database-architecture-sharding-project (1 hidden child)
+ │   ├─ sales
+ │   │   ╰─ page (10 hidden children)
+ │   ├─ supporting-customers-in-context (1 hidden child)
+ │   ├─ how-to-use-intercom-to-generate-more-leads-and-close-bigger-deals-faster (3 hidden children)
+ │   ├─ live-chat-for-marketing (3 hidden children)
+ │   ├─ product-marketing-at-intercom
+ │   │   ╰─ www.instagram.com (1 hidden child)
+ │   ├─ tackling-complex-design-debt-a-three-step-framework (1 hidden child)
+ │   ├─ ship-fast-safe-learn-from-production-rec (1 hidden child)
+ │   ╰─ intercom-hipaa-2021 (1 hidden child)
+ ├─ webinars (93 hidden children)
+ ├─ webinar-series (2 hidden children)
+ ├─ product-tours (1 hidden child)
+ ├─ articles (1 hidden child)
+ ├─ live-chat (2 hidden children)
+ ├─ changes
+ │   ╰─ en (117 hidden children)
+ │       ╰─ news (15 hidden children)
+ ├─ app-store (13 hidden children)
+ │   ╰─ apps (24 hidden children)
+ ├─ help
+ │   ├─ en
+ │   │   ├─ articles (925 hidden children)
+ │   │   ╰─ collections (143 hidden children)
+ │   ├─ articles (14 hidden children)
+ │   ├─ install-on-your-product-or-site
+ │   │   ├─ other-ways-to-get-started (1 hidden child)
+ │   │   ╰─ quick-install (1 hidden child)
+ │   ├─ product-tours (1 hidden child)
+ │   │   ├─ share-your-tour (2 hidden children)
+ │   │   ├─ set-up-a-tour (3 hidden children)
+ │   │   ╰─ ensure-your-tours-deliver (4 hidden children)
+ │   ├─ intercom-s-key-features-explained
+ │   │   ├─ tracking-user-data (2 hidden children)
+ │   │   ├─ supporting-customers (1 hidden child)
+ │   │   ├─ sending-messages (6 hidden children)
+ │   │   ╰─ grouping-users (3 hidden children)
+ │   ├─ configure-intercom
+ │   │   ├─ customize-the-intercom-messenger (1 hidden child)
+ │   │   ├─ staying-secure (1 hidden child)
+ │   │   ├─ customize-intercom-to-be-about-your-users (1 hidden child)
+ │   │   ╰─ configure-intercom-for-your-team (1 hidden child)
+ │   ├─ apps-in-intercom (2 hidden children)
+ │   │   ├─ messenger-apps (14 hidden children)
+ │   │   ├─ apps (9 hidden children)
+ │   │   ╰─ apps-built-by-partners (1 hidden child)
+ │   ├─ support-and-retain-customers (1 hidden child)
+ │   │   ├─ set-expectations (2 hidden children)
+ │   │   ├─ see-your-team-s-progress (3 hidden children)
+ │   │   ├─ respond-to-issues-quicker (3 hidden children)
+ │   │   ╰─ work-as-a-team (2 hidden children)
+ │   ├─ onboard-and-engage-customers (1 hidden child)
+ │   │   ├─ see-how-your-messages-are-doing (3 hidden children)
+ │   │   ├─ send-emails-that-work (1 hidden child)
+ │   │   ╰─ ensure-your-emails-get-delivered (2 hidden children)
+ │   ├─ capture-and-convert-leads
+ │   │   ├─ convert-leads-to-customers (1 hidden child)
+ │   │   ├─ track-your-team-s-success (1 hidden child)
+ │   │   ├─ capture-high-value-prospects (1 hidden child)
+ │   │   ╰─ qualify-and-assign-leads (2 hidden children)
+ │   ├─ faqs (2 hidden children)
+ │   ├─ faqs-and-troubleshooting
+ │   │   ├─ the-intercom-messenger (1 hidden child)
+ │   │   ├─ getting-set-up (1 hidden child)
+ │   │   ├─ your-users-and-leads-data-in-intercom (5 hidden children)
+ │   │   ├─ educating-customers (1 hidden child)
+ │   │   ├─ capture-qualify-and-convert-leads (1 hidden child)
+ │   │   ╰─ sending-messages (1 hidden child)
+ │   ├─ intercoms-key-features-explained (4 hidden children)
+ │   ├─ learn-from-your-customers (1 hidden child)
+ │   ├─ the-intercom-platform (2 hidden children)
+ │   ├─ provide-self-service-support
+ │   │   ├─ get-organized (2 hidden children)
+ │   │   ├─ keep-improving (1 hidden child)
+ │   │   ╰─ get-started (1 hidden child)
+ │   ├─ support-customers (1 hidden child)
+ │   │   ├─ respond-to-issues-quicker (1 hidden child)
+ │   │   ╰─ work-as-a-team (1 hidden child)
+ │   ├─ acquire-new-customers
+ │   │   ╰─ capture-high-value-prospects (1 hidden child)
+ │   ├─ configure-intercom-for-your-product-or-site
+ │   │   ├─ customize-intercom-to-be-about-your-users (3 hidden children)
+ │   │   ╰─ configure-intercom-for-your-team (2 hidden children)
+ │   ├─ pricing-privacy-and-terms (1 hidden child)
+ │   │   ├─ terms-of-service (1 hidden child)
+ │   │   ╰─ data-protection (1 hidden child)
+ │   ├─ configuring-intercom (6 hidden children)
+ │   ├─ intercom-for-user-analysis (2 hidden children)
+ │   ├─ acquire-customers
+ │   │   ├─ target-key-accounts-with-account-based-marketing (5 hidden children)
+ │   │   ╰─ capture-high-value-prospects (1 hidden child)
+ │   ├─ fr
+ │   │   ├─ collections (6 hidden children)
+ │   │   ╰─ articles (5 hidden children)
+ │   ├─ install-intercom-on-your-product-or-site
+ │   │   ╰─ quick-install (2 hidden children)
+ │   ├─ intercom-for-customer-communication (9 hidden children)
+ │   ├─ intercom-for-customer-support (1 hidden child)
+ │   ╰─ operator
+ │       ├─ task-bots (5 hidden children)
+ │       ├─ answer-bot (4 hidden children)
+ │       ╰─ custom-bots (9 hidden children)
+ ├─ roi-calculator (1 hidden child)
+ ├─ about (12 hidden children)
+ ├─ careers (6 hidden children)
+ ├─ newsroom (2 hidden children)
+ ├─ partner (2 hidden children)
+ ├─ terms-and-policies (1 hidden child)
+ ├─ de (49 hidden children)
+ │   ├─ customer-support-software (3 hidden children)
+ │   ├─ industry (4 hidden children)
+ │   ├─ customers (35 hidden children)
+ │   │   ├─ www.intercom.com (1 hidden child)
+ │   │   ╰─ intercom.com (1 hidden child)
+ │   ├─ resources
+ │   │   ╰─ guides (4 hidden children)
+ │   ├─ newsroom (2 hidden children)
+ │   ├─ about (11 hidden children)
+ │   ├─ careers (5 hidden children)
+ │   ├─ partner (1 hidden child)
+ │   ├─ fin (1 hidden child)
+ │   ├─ webinar-series (1 hidden child)
+ │   ├─ view-demos (4 hidden children)
+ │   ├─ roi-calculator (1 hidden child)
+ │   ├─ legal (22 hidden children)
+ │   │   ├─ terms-and-policies (2 hidden children)
+ │   │   │   ╰─ terms-and-policies (1 hidden child)
+ │   │   ╰─ www.intercom.com
+ │   │       ╰─ legal (1 hidden child)
+ │   ├─ drlp
+ │   │   ╰─ content (3 hidden children)
+ │   ├─ campaign (1 hidden child)
+ │   │   ╰─ conversational-support-funnel (1 hidden child)
+ │   ├─ blog (2 hidden children)
+ │   ├─ sales (1 hidden child)
+ │   ╰─ integrations (1 hidden child)
+ ├─ es (49 hidden children)
+ │   ├─ customer-support-software (3 hidden children)
+ │   ├─ industry (4 hidden children)
+ │   ├─ customers (35 hidden children)
+ │   │   ├─ www.intercom.com (1 hidden child)
+ │   │   ╰─ intercom.com (1 hidden child)
+ │   ├─ resources
+ │   │   ╰─ guides (4 hidden children)
+ │   ├─ newsroom (2 hidden children)
+ │   ├─ about (11 hidden children)
+ │   ├─ careers (5 hidden children)
+ │   ├─ partner (1 hidden child)
+ │   ├─ legal (22 hidden children)
+ │   │   ├─ terms-and-policies (2 hidden children)
+ │   │   │   ╰─ terms-and-policies (1 hidden child)
+ │   │   ╰─ www.intercom.com
+ │   │       ╰─ legal (1 hidden child)
+ │   ├─ fin (1 hidden child)
+ │   ├─ view-demos (4 hidden children)
+ │   ├─ webinar-series (1 hidden child)
+ │   ├─ roi-calculator (1 hidden child)
+ │   ├─ drlp
+ │   │   ╰─ content (3 hidden children)
+ │   ├─ campaign (1 hidden child)
+ │   │   ╰─ conversational-support-funnel (1 hidden child)
+ │   ├─ blog (2 hidden children)
+ │   ├─ sales (1 hidden child)
+ │   ╰─ integrations (1 hidden child)
+ ├─ fr (49 hidden children)
+ │   ├─ customer-support-software (3 hidden children)
+ │   ├─ industry (4 hidden children)
+ │   ├─ customers (35 hidden children)
+ │   │   ├─ www.intercom.com (1 hidden child)
+ │   │   ╰─ intercom.com (1 hidden child)
+ │   ├─ resources
+ │   │   ╰─ guides (4 hidden children)
+ │   ├─ newsroom (2 hidden children)
+ │   ├─ about (11 hidden children)
+ │   ├─ careers (5 hidden children)
+ │   ├─ partner (1 hidden child)
+ │   ├─ legal (22 hidden children)
+ │   │   ├─ terms-and-policies (2 hidden children)
+ │   │   │   ╰─ terms-and-policies (1 hidden child)
+ │   │   ╰─ www.intercom.com
+ │   │       ╰─ legal (1 hidden child)
+ │   ├─ fin (1 hidden child)
+ │   ├─ view-demos (4 hidden children)
+ │   ├─ webinar-series (1 hidden child)
+ │   ├─ roi-calculator (1 hidden child)
+ │   ├─ drlp
+ │   │   ╰─ content (3 hidden children)
+ │   ├─ campaign (1 hidden child)
+ │   │   ╰─ conversational-support-funnel (1 hidden child)
+ │   ├─ blog (2 hidden children)
+ │   ├─ sales (1 hidden child)
+ │   ╰─ integrations (1 hidden child)
+ ├─ pt-BR (45 hidden children)
+ │   ├─ customer-support-software (3 hidden children)
+ │   ├─ industry (4 hidden children)
+ │   ├─ customers (35 hidden children)
+ │   ├─ newsroom (2 hidden children)
+ │   ├─ about (11 hidden children)
+ │   ├─ careers (5 hidden children)
+ │   ├─ partner (1 hidden child)
+ │   ├─ legal (21 hidden children)
+ │   │   ╰─ terms-and-policies (1 hidden child)
+ │   ├─ campaign (1 hidden child)
+ │   │   ╰─ conversational-support-funnel (1 hidden child)
+ │   ├─ sales (1 hidden child)
+ │   ╰─ integrations (1 hidden child)
+ ├─ drlp (9 hidden children)
+ │   ├─ view-demos (4 hidden children)
+ │   ╰─ content (9 hidden children)
+ │       ├─ support-bootcamp (3 hidden children)
+ │       ╰─ customer-support-trends (1 hidden child)
+ ├─ campaign (3 hidden children)
+ │   ├─ conversational-support-funnel (1 hidden child)
+ │   ╰─ resolution-bothttps:
+ │       ╰─ d.pr
+ │           ╰─ i (1 hidden child)
+ ├─ books (10 hidden children)
+ ├─ press (1 hidden child)
+ ├─ legal (21 hidden children)
+ │   ├─ terms-and-policies (1 hidden child)
+ │   │   ╰─ terms-and-policies (1 hidden child)
+ │   ╰─ www.intercom.com
+ │       ╰─ legal (1 hidden child)
+ ├─ starter-kits (9 hidden children)
+ ├─ integrations (2 hidden children)
+ ├─ sales (1 hidden child)
+ ├─ watch-a-demo (2 hidden children)
+ │   ╰─ resources
+ │       ╰─ guides (3 hidden children)
+ ├─ events
+ │   ╰─ inside-intercom (1 hidden child)
+ ╰─ j (1 hidden child)
+
+developers.intercom.com (5 hidden children, 2,897 total descendants)
+ ├─ docs (10 hidden children)
+ ├─ building-apps
+ │   ├─ docs (56 hidden children)
+ │   ├─ v2.0
+ │   │   ╰─ docs (1 hidden child)
+ │   ├─ reference (5 hidden children)
+ │   ╰─ v1.0
+ │       ╰─ docs (3 hidden children)
+ ├─ installing-intercom (1 hidden child)
+ │   ├─ docs (68 hidden children)
+ │   ╰─ edit (67 hidden children)
+ ├─ intercom-api-reference
+ │   ├─ reference (186 hidden children)
+ │   ├─ v2.0
+ │   │   ╰─ reference (98 hidden children)
+ │   ├─ v0
+ │   │   ╰─ reference (165 hidden children)
+ │   ├─ v2.6
+ │   │   ╰─ reference (130 hidden children)
+ │   ├─ v2.8
+ │   │   ╰─ reference (143 hidden children)
+ │   ├─ v2.7
+ │   │   ╰─ reference (125 hidden children)
+ │   ├─ v2.4
+ │   │   ╰─ reference (124 hidden children)
+ │   ├─ v2.5
+ │   │   ╰─ reference (129 hidden children)
+ │   ├─ v2.3
+ │   │   ╰─ reference (124 hidden children)
+ │   ├─ v2.2
+ │   │   ╰─ reference (118 hidden children)
+ │   ├─ v2.1
+ │   │   ╰─ reference (116 hidden children)
+ │   ├─ v1.3
+ │   │   ╰─ reference (115 hidden children)
+ │   ├─ v1.4
+ │   │   ╰─ reference (115 hidden children)
+ │   ├─ v1.2
+ │   │   ╰─ reference (113 hidden children)
+ │   ├─ v1.1
+ │   │   ╰─ reference (114 hidden children)
+ │   ╰─ v1.0
+ │       ╰─ reference (123 hidden children)
+ ├─ canvas-kit-reference (26 hidden children)
+ │   ├─ reference (28 hidden children)
+ │   ├─ v0 (26 hidden children)
+ │   │   ╰─ reference (28 hidden children)
+ │   ├─ v2.3 (27 hidden children)
+ │   ├─ v2.2 (26 hidden children)
+ │   │   ╰─ reference (28 hidden children)
+ │   ├─ v2.1 (25 hidden children)
+ │   │   ╰─ reference (27 hidden children)
+ │   ├─ v2.0 (25 hidden children)
+ │   │   ╰─ reference (26 hidden children)
+ │   ├─ v1.3 (25 hidden children)
+ │   │   ╰─ reference (26 hidden children)
+ │   ├─ v1.4 (25 hidden children)
+ │   │   ╰─ reference (26 hidden children)
+ │   ├─ v1.2 (23 hidden children)
+ │   │   ╰─ reference (26 hidden children)
+ │   ├─ v1.1 (23 hidden children)
+ │   │   ╰─ reference (26 hidden children)
+ │   ╰─ v1.0 (23 hidden children)
+ │       ╰─ reference (26 hidden children)
+ ├─ messenger-framework-reference
+ │   ╰─ reference (27 hidden children)
+ ├─ go (1 hidden child)
+ ├─ v2.0 (1 hidden child)
+ │   ╰─ docs (2 hidden children)
+ ╰─ page (1 hidden child)
+
+community.intercom.com (26 hidden children, 1,572 total descendants)
+ ├─ topic (3 hidden children)
+ ├─ site (1 hidden child)
+ ├─ news-updates-2 (6 hidden children)
+ ├─ product-area-5 (11 hidden children)
+ ├─ messages-series-11 (32 hidden children)
+ ├─ inbox-9 (33 hidden children)
+ ├─ article-help-center-6 (33 hidden children)
+ ├─ custom-bots-7 (31 hidden children)
+ ├─ resolution-bots-13 (27 hidden children)
+ ├─ surveys-15 (27 hidden children)
+ ├─ product-tours-10 (30 hidden children)
+ ├─ messenger-8 (39 hidden children)
+ ├─ operator-task-bots-12 (27 hidden children)
+ ├─ contacts-companies-14 (34 hidden children)
+ ├─ fin-59 (9 hidden children)
+ ├─ popular-topics-20 (5 hidden children)
+ ├─ settings-security-permissions-22 (29 hidden children)
+ ├─ apps-integrations-25 (30 hidden children)
+ ├─ workspace-data-management-37 (3 hidden children)
+ ├─ reporting-21 (30 hidden children)
+ ├─ api-webhooks-23 (30 hidden children)
+ ├─ intercom-mobile-app-26 (18 hidden children)
+ ├─ mobile-sdks-24 (30 hidden children)
+ ├─ customer-faq-28 (28 hidden children)
+ ├─ intercom-community-27 (29 hidden children)
+ ├─ third-party-apps-plugins-38 (4 hidden children)
+ ├─ getting-started-with-intercom-43 (1 hidden child)
+ ├─ tips-for-developers-44 (4 hidden children)
+ ├─ intercom-for-human-support-45 (5 hidden children)
+ ├─ intercom-for-automated-support-46 (5 hidden children)
+ ├─ getting-started-with-intercom-34 (1 hidden child)
+ ├─ use-intercom-like-a-pro-35 (2 hidden children)
+ ├─ apps-intergrations-36 (1 hidden child)
+ ├─ new-members-41 (4 hidden children)
+ ├─ members (710 hidden children)
+ ├─ member (2 hidden children)
+ ├─ groups (4 hidden children)
+ │   ├─ welcome-party-30 (4 hidden children)
+ │   ╰─ tips-tricks-and-workarounds-32 (1 hidden child)
+ ├─ events (11 hidden children)
+ ├─ product-updates (27 hidden children)
+ ├─ ssoproxy (1 hidden child)
+ ├─ tips-tricks-and-workarounds-32 (41 hidden children)
+ ├─ fin-user-group-connect-with-fin-users-60 (4 hidden children)
+ ├─ p (1 hidden child)
+ ├─ search (1 hidden child)
+ │   ╰─ activity (4 hidden children)
+ │       ╰─ recent (7 hidden children)
+ ├─ questions (42 hidden children)
+ ├─ welcome-party-30 (25 hidden children)
+ ├─ conversations (3 hidden children)
+ ├─ fin-product-feedback-member-group-49 (1 hidden child)
+ ╰─ fin-tips-and-tricks-connect-with-the-intercom-team-54 (2 hidden children)
+
+forum.intercom.com (1 hidden child, 935 total descendants)
+ ├─ topic (2 hidden children)
+ ├─ site (1 hidden child)
+ ├─ members (460 hidden children)
+ ├─ messenger-8 (127 hidden children)
+ │   ╰─ how-do-i-install-the-same-intercom-instance-on-multiple-apps-1458 (1 hidden child)
+ ├─ fin-59 (9 hidden children)
+ ├─ inbox-9 (33 hidden children)
+ ├─ resolution-bots-13 (27 hidden children)
+ ├─ custom-bots-7 (31 hidden children)
+ ├─ apps-integrations-25 (30 hidden children)
+ ├─ mobile-sdks-24 (31 hidden children)
+ ├─ messages-series-11 (32 hidden children)
+ ├─ product-area-5 (5 hidden children)
+ ├─ popular-topics-20 (5 hidden children)
+ ├─ s
+ │   ├─ topic
+ │   │   ├─ 0TO2G000000XdOVWA0 (1 hidden child)
+ │   │   ╰─ 0TO2G000000XdOfWAK (1 hidden child)
+ │   ├─ question
+ │   │   ├─ 0D52G00004jgclwSAA (1 hidden child)
+ │   │   ├─ 0D52G00004RFUC7 (1 hidden child)
+ │   │   ├─ 0D52G00004WxoAw (1 hidden child)
+ │   │   ├─ 0D52G00004YDkMw (1 hidden child)
+ │   │   ├─ 0D52G00004YF2mXSAT (1 hidden child)
+ │   │   ├─ 0D52G00004cNuxFSAS (1 hidden child)
+ │   │   ├─ 0D52G00004b3gCS (1 hidden child)
+ │   │   ├─ 0D52G00004YFGdOSAX (1 hidden child)
+ │   │   ├─ 0D52G00004cKyWY (1 hidden child)
+ │   │   ├─ 0D52G00004WxsbcSAB (1 hidden child)
+ │   │   ├─ 0D52G00004Q2NfkSAF (1 hidden child)
+ │   │   ├─ 0D52G00004b5oU7SAI (1 hidden child)
+ │   │   ├─ 0D52G00004WxWLsSAN (1 hidden child)
+ │   │   ├─ 0D52G00004ZiikhSAB (1 hidden child)
+ │   │   ├─ 0D52G00004Uk5J2SAJ (1 hidden child)
+ │   │   ├─ 0D52G00004Wz4L6SAJ (1 hidden child)
+ │   │   ├─ 0D52G00004Q2OKQSA3 (1 hidden child)
+ │   │   ├─ 0D52G00004Q2l5qSAB (1 hidden child)
+ │   │   ├─ 0D52G00004i0BNdSAM (1 hidden child)
+ │   │   ├─ 0D52G00004Q2NiUSAV (1 hidden child)
+ │   │   ├─ 0D52G00004ZjnDRSAZ (1 hidden child)
+ │   │   ├─ 0D52G00004YGl0tSAD (1 hidden child)
+ │   │   ├─ 0D52G00004W6ejhSAB (1 hidden child)
+ │   │   ├─ 0D52G00004i0CcZSAU (1 hidden child)
+ │   │   ├─ 0D52G00004evhGZSAY (1 hidden child)
+ │   │   ╰─ 0D52G00004i0aHwSAI (1 hidden child)
+ │   ├─ feed (3 hidden children)
+ │   ├─ group
+ │   │   ├─ 0F92G000000boRiSAI (1 hidden child)
+ │   │   ╰─ CollaborationGroup (1 hidden child)
+ │   ╰─ profile (1 hidden child)
+ ├─ member (1 hidden child)
+ ├─ tips-tricks-and-workarounds-32 (1 hidden child)
+ ├─ groups (2 hidden children)
+ ├─ product-tours-10 (2 hidden children)
+ ├─ reporting-21 (1 hidden child)
+ ├─ surveys-15 (3 hidden children)
+ ├─ fin-user-group-connect-with-fin-users-60 (1 hidden child)
+ ├─ search
+ │   ╰─ activity (3 hidden children)
+ │       ├─ recent (5 hidden children)
+ │       ╰─ solved (5 hidden children)
+ ├─ article-help-center-6 (2 hidden children)
+ ├─ operator-task-bots-12 (1 hidden child)
+ ├─ third-party-apps-plugins-38 (1 hidden child)
+ ├─ api-webhooks-23 (4 hidden children)
+ ├─ intercom-community-27 (2 hidden children)
+ ╰─ contacts-companies-14 (1 hidden child)
+     ├─ can-i-add-multiple-email-addresses-to-one-contact-manually-merge-duplicates-322 (1 hidden child)
+     ╰─ why-do-i-have-duplicate-users-1588 (1 hidden child)
+
+docs.intercom.com (39 hidden children, 366 total descendants)
+ ├─ faqs-and-troubleshooting (1 hidden child)
+ │   ├─ the-intercom-messenger (2 hidden children)
+ │   ├─ sending-messages (3 hidden children)
+ │   ├─ your-users-and-leads-data-in-intercom (4 hidden children)
+ │   ├─ capture-qualify-and-convert-leads (1 hidden child)
+ │   ├─ getting-set-up (3 hidden children)
+ │   ├─ unsubscribing-users (1 hidden child)
+ │   ├─ educating-customers (1 hidden child)
+ │   ├─ live-chat-for-sales (2 hidden children)
+ │   ├─ your-users-data-in-intercom (1 hidden child)
+ │   ╰─ how-do-i-unsubscribe-users (1 hidden child)
+ ├─ the-intercom-platform (4 hidden children)
+ ├─ pricing-privacy-and-terms (6 hidden children)
+ │   ├─ data-protection (3 hidden children)
+ │   ╰─ terms-and-policies (1 hidden child)
+ ├─ intercom-s-key-features-explained (2 hidden children)
+ │   ├─ tracking-user-data (1 hidden child)
+ │   ├─ sending-messages (8 hidden children)
+ │   ├─ supporting-customers (2 hidden children)
+ │   ├─ automatically-answer-questions (1 hidden child)
+ │   ├─ grouping-users (2 hidden children)
+ │   ╰─ the-intercom-messenger (1 hidden child)
+ ├─ help (1 hidden child)
+ ├─ configure-intercom-for-your-product-or-site (1 hidden child)
+ │   ├─ customize-intercom-to-be-about-your-users (3 hidden children)
+ │   ├─ customize-the-intercom-messenger (4 hidden children)
+ │   ├─ staying-secure (1 hidden child)
+ │   ╰─ configure-intercom-for-your-team (1 hidden child)
+ ├─ FAQs (1 hidden child)
+ ├─ configuring-intercom (3 hidden children)
+ ├─ educating-your-customers
+ │   ├─ get-started (3 hidden children)
+ │   ├─ keep-improving (4 hidden children)
+ │   ├─ get-quick-feedback (1 hidden child)
+ │   ╰─ start-writing (2 hidden children)
+ ├─ support-and-retain-customers (1 hidden child)
+ │   ├─ respond-to-issues-quicker (1 hidden child)
+ │   ├─ see-your-team-s-progress (1 hidden child)
+ │   ├─ work-as-a-team (3 hidden children)
+ │   ╰─ set-expectations (1 hidden child)
+ ├─ onboard-and-engage-customers (1 hidden child)
+ │   ├─ retain-your-users (1 hidden child)
+ │   ├─ see-how-your-messages-are-doing (2 hidden children)
+ │   ├─ ensure-your-emails-get-delivered (1 hidden child)
+ │   ╰─ send-emails-that-work (1 hidden child)
+ ├─ resolving-your-customers-issues (1 hidden child)
+ │   ├─ resolve-customer-issues-quicker (2 hidden children)
+ │   ╰─ see-your-team-s-progress (1 hidden child)
+ ├─ install-on-your-product-or-site
+ │   ├─ quick-install (1 hidden child)
+ │   ╰─ other-ways-to-get-started (1 hidden child)
+ ├─ capture-and-convert-leads
+ │   ├─ capture-high-value-prospects (2 hidden children)
+ │   ├─ qualify-and-assign-leads (6 hidden children)
+ │   ╰─ convert-leads-to-customers (1 hidden child)
+ ├─ responding-to-users-and-visitors (2 hidden children)
+ │   ├─ set-expectations (2 hidden children)
+ │   ├─ see-your-team-s-progress (1 hidden child)
+ │   ├─ respond-to-issues-quicker (2 hidden children)
+ │   ╰─ work-as-a-team (3 hidden children)
+ ├─ live-chat-for-sales
+ │   ├─ qualify-and-assign-leads (3 hidden children)
+ │   ├─ track-your-team-s-success (1 hidden child)
+ │   ╰─ capture-high-value-prospects (2 hidden children)
+ ├─ learning-from-your-customers (2 hidden children)
+ ├─ engaging-your-customers (3 hidden children)
+ │   ├─ send-emails-that-work (2 hidden children)
+ │   ├─ ensure-your-emails-get-delivered (1 hidden child)
+ │   ╰─ onboard-new-users (1 hidden child)
+ ├─ help-and-faqs
+ │   ╰─ your-users-data-in-intercom (1 hidden child)
+ ├─ provide-self-service-support
+ │   ├─ get-started (2 hidden children)
+ │   ╰─ answer-customer-questions (1 hidden child)
+ ├─ apps-in-intercom
+ │   ├─ messenger-apps (12 hidden children)
+ │   ╰─ apps (3 hidden children)
+ ├─ intercom-for-user-analysis (1 hidden child)
+ ├─ intercoms-key-features-explained (2 hidden children)
+ ├─ acquiring-customers (1 hidden child)
+ ├─ live-chat-with-users-and-visitors
+ │   ╰─ converting-visitors-to-customers (1 hidden child)
+ ├─ intercom-for-customer-communication (4 hidden children)
+ ├─ industry (4 hidden children)
+ ├─ webinar-series (1 hidden child)
+ ├─ legal (22 hidden children)
+ ├─ roi-calculator (1 hidden child)
+ ├─ partner (1 hidden child)
+ ├─ de
+ │   ╰─ legal (2 hidden children)
+ ├─ es
+ │   ╰─ legal (2 hidden children)
+ ├─ fr
+ │   ╰─ legal (2 hidden children)
+ ├─ pt-BR
+ │   ╰─ legal (2 hidden children)
+ ├─ Intercom-for-user-analysis (1 hidden child)
+ ├─ Integrations (3 hidden children)
+ ├─ intercom-for-customer-support (1 hidden child)
+ ├─ recorded-intercom-demos (1 hidden child)
+ ├─ integrations (10 hidden children)
+ ╰─ engaging-your-users-and-visitors (5 hidden children)
+     ├─ see-how-your-messages-are-doing (1 hidden child)
+     ├─ send-emails-that-work (3 hidden children)
+     ├─ onboard-new-users (1 hidden child)
+     ╰─ retain-your-users (1 hidden child)
+
+app.intercom.com
+ ├─ admins (2 hidden children)
+ │   ╰─ password (1 hidden child)
+ ├─ a (2 hidden children)
+ │   ├─ signup (1 hidden child)
+ │   ├─ apps
+ │   │   ├─ _ (7 hidden children)
+ │   │   │   ├─ operator (5 hidden children)
+ │   │   │   │   ├─ resolution-bot (6 hidden children)
+ │   │   │   │   ╰─ task-bots (2 hidden children)
+ │   │   │   ├─ reports (3 hidden children)
+ │   │   │   │   ├─ lead-generation
+ │   │   │   │   │   ╰─ sales (1 hidden child)
+ │   │   │   │   ├─ customer-support (13 hidden children)
+ │   │   │   │   │   ╰─ custom-bots (1 hidden child)
+ │   │   │   │   ├─ outbound-engagement (1 hidden child)
+ │   │   │   │   │   ╰─ email-deliverability (1 hidden child)
+ │   │   │   │   ├─ conversational-insights (1 hidden child)
+ │   │   │   │   ╰─ inbox (2 hidden children)
+ │   │   │   │       ╰─ performance (1 hidden child)
+ │   │   │   ├─ inbox
+ │   │   │   │   ╰─ automation
+ │   │   │   │       ╰─ rules (1 hidden child)
+ │   │   │   ├─ settings (41 hidden children)
+ │   │   │   │   ├─ identity-verification (1 hidden child)
+ │   │   │   │   ├─ teammates (1 hidden child)
+ │   │   │   │   ├─ rules (1 hidden child)
+ │   │   │   │   ╰─ switch (2 hidden children)
+ │   │   │   ├─ billing (5 hidden children)
+ │   │   │   ├─ articles
+ │   │   │   │   ├─ articles
+ │   │   │   │   │   ╰─ list (1 hidden child)
+ │   │   │   │   ╰─ site (1 hidden child)
+ │   │   │   │       ╰─ settings (3 hidden children)
+ │   │   │   ├─ outbound (10 hidden children)
+ │   │   │   │   ├─ news (1 hidden child)
+ │   │   │   │   ╰─ settings (4 hidden children)
+ │   │   │   ├─ account (1 hidden child)
+ │   │   │   ├─ educate
+ │   │   │   │   ╰─ site (1 hidden child)
+ │   │   │   ├─ messenger (3 hidden children)
+ │   │   │   ├─ users
+ │   │   │   │   ╰─ segments (3 hidden children)
+ │   │   │   ├─ new-messenger (4 hidden children)
+ │   │   │   ╰─ companies
+ │   │   │       ╰─ segments (1 hidden child)
+ │   │   ├─ g1zkvebs (1 hidden child)
+ │   │   │   ├─ reports
+ │   │   │   │   ╰─ customer-support (1 hidden child)
+ │   │   │   ├─ settings (1 hidden child)
+ │   │   │   ╰─ _
+ │   │   │       ╰─ resolution-bot (1 hidden child)
+ │   │   ├─ tx2p130c (1 hidden child)
+ │   │   │   ├─ settings
+ │   │   │   │   ╰─ identity-verification (1 hidden child)
+ │   │   │   ╰─ reports
+ │   │   │       ├─ lead-generation
+ │   │   │       │   ╰─ custom-bots (1 hidden child)
+ │   │   │       ├─ customer-support
+ │   │   │       │   ╰─ custom-bots (1 hidden child)
+ │   │   │       ╰─ conversational-insights (1 hidden child)
+ │   │   ├─ schcnr2t
+ │   │   │   ╰─ _ (1 hidden child)
+ │   │   ╰─ ikv1oniu
+ │   │       ╰─ settings (1 hidden child)
+ │   ├─ canvas-kit-builder (1 hidden child)
+ │   ├─ inbox
+ │   │   ╰─ _ (3 hidden children)
+ │   │       ╰─ inbox
+ │   │           ╰─ admin (1 hidden child)
+ │   ╰─ changes (17 hidden children)
+ ├─ developers
+ │   ╰─ _ (1 hidden child)
+ ├─ ember (1 hidden child)
+ ├─ apps
+ │   ╰─ abc123
+ │       ╰─ outbound
+ │           ╰─ emails (1 hidden child)
+ ╰─ changes
+     ╰─ en (1 hidden child)
+
+academy.intercom.com (22 hidden children, 57 total descendants)
+ ├─ page (6 hidden children)
+ ├─ path
+ │   ╰─ provide-a-great-customer-support-experience (3 hidden children)
+ ╰─ checkout (22 hidden children)
+
+directory.intercom.com
+ ├─ profile (20 hidden children)
+ ╰─ www.linkedin.com
+     ╰─ in (1 hidden child)
+
+events.intercom.com (2 hidden children, 19 total descendants)
+ ├─ events
+ │   ╰─ details (11 hidden children)
+ ╰─ accounts (1 hidden child)
+     ╰─ password (1 hidden child)
+
+app.eu.intercom.com
+ ├─ a (1 hidden child)
+ │   ╰─ apps
+ │       ╰─ _
+ │           ├─ settings (1 hidden child)
+ │           ╰─ billing (1 hidden child)
+ ╰─ admins (1 hidden child)
+     ╰─ password (1 hidden child)
+
+credentials.intercom.com (10 hidden children, 12 total descendants)
+ ╰─ group (1 hidden child)
+
+app.au.intercom.com
+ ├─ a (1 hidden child)
+ │   ╰─ apps
+ │       ╰─ _
+ │           ╰─ settings (1 hidden child)
+ ╰─ admins (1 hidden child)
+     ╰─ password (1 hidden child)

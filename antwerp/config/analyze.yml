@@ -8,22 +8,24 @@ analysis:
     'content.cms':
       - 'tech.CMS.[0]'
       - 'tech.Blogs.[0]'
+    'content.locale':
+      - data.json.[0].content.locale
+      - data.json.[0].content.props.pageProps.locale
     'content.type':
+      - data.json.[0].content.props.pageProps.metaData.pageType
       - data.meta.og.type
     'content.title':
+      - data.json.[0].content.props.pageProps.metaData.metaTitle
+      - data.json.[0].content.props.pageProps.meta.title.opengraph
       - data.meta.og.title
       - data.title
       - source: body
         selector: h1.page-title
+    'content.description':
+      - data.json.[0].content.props.pageProps.metaData.metaDescription
+      - data.json.[0].content.props.pageProps.meta.title.description
+      - data.meta.description
     'content.date': 
       - data.schemaOrg.NewsArticle.datePublished
       - data.meta.article.published_time
       - data.info.CreationDate
-      - source: body
-        selector: 'main section.wdg-u-section time'
-        attribute: datetime
-    'content.tags': 
-      - source: body
-        selector: 'div.article-content div.td-topics > div > div > a'
-      - source: body
-        selector: '#root main > div > div:nth-child(4) > div > div'

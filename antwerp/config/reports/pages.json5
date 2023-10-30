@@ -4,17 +4,6 @@
       name: 'Pages',
       group: 'project',
       description: 'Page, media, and error summaries',
-      
-      repeat: {
-        'Stripe': { path: 'parsed.domain', eq: "stripe.com" },
-        'Intercom': { path: 'parsed.domain', eq: "intercom.com" },
-        'Teamwork': { path: 'parsed.domain', eq: "teamwork.com" },
-        'Appraisd': { path: 'parsed.domain', eq: "appraisd.com" },
-        'Webstacks': { path: 'parsed.domain', eq: "webstacks.com" }
-      },
-      settings: {
-        path: '{{name}} Pages',
-      },
       queries: {
         'Summary': {
           parent: 'project_summary',
@@ -25,12 +14,25 @@
             { path: 'mime', eq: 'text/html' },
           ],
         },
-        'All Pages': 'project_pages',
+        'All Pages': {
+          parent: 'project_pages',
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+            { path: 'parsed.domain', eq: 'antwerpen.be' },
+          ],
+        },
       },
       alterData: {
         'All Pages': {
           action: 'split',
           property: 'Site',
+          mustMatch: [
+            'www',
+            'assets',
+            'www.zorgbedrijf',
+            'visit',
+            'ebesluit',
+          ]
         },
       },
     }

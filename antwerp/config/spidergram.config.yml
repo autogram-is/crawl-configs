@@ -2,6 +2,11 @@ configVersion: 0.9.22
 extends:
   - ../../arango.config.yml
   - ./analyze.yml
+  - ./reports/queries.json5
+  - ./reports/errors.json5
+  - ./reports/downloads.json5
+  - ./reports/pages.json5
+  - ./reports/pagedetails.json5
 
 arango:
   databaseName: antwerp
@@ -22,6 +27,9 @@ normalizer:
 spider:
   seed: 
     - https://www.antwerpen.be
+    - https://www.antwerpen.be/en
+    - https://www.antwerpen.be/de
+    - https://www.antwerpen.be/fr
   maxConcurrency: 2,
   maxRequests: 240,
   saveCookies: true
@@ -29,7 +37,7 @@ spider:
   saveXhrList: true
   auditAccessibility: false
   shadowDom: true
-  headless: false
+  waitUntil: networkidle
   urls:
     regions:
       header: '#mtn-o-header '
@@ -40,6 +48,6 @@ spider:
       - iframe
       - video
       - audio
-    crawl: "http*//*{antwerpen.be}{*,*/**}"
+    crawl: "http*//{,*.}antwerpen.be{/,/**}"
   downloadMimeTypes:
     - '*/*'
