@@ -1,8 +1,8 @@
 {
   queries: {
-    dropbox_sites: {
+    project_sites: {
       document: 'resource',
-      metadata: { category: 'dropbox', description: 'Builds a rough approximation of sites' },
+      metadata: { group: 'project', description: 'Builds a rough approximation of sites' },
       collection: 'resources',
       subqueries: [
         { collection: 'responds_with', document: 'request' },
@@ -29,9 +29,10 @@
         { name: 'tld', path: 'parsed.publicSuffix' },
       ]
     },
-    dropbox_summary: {
+
+    project_summary: {
       document: 'resource',
-      metadata: { category: 'dropbox', description: 'Overview of crawled sites' },
+      metadata: { group: 'project', description: 'Overview of crawled sites' },
       collection: 'resources',
       filters: [
         { path: 'code', eq: 200 },
@@ -42,9 +43,10 @@
       count: 'total',
       sorts: [{ path: 'total', direction: 'desc' }],
     },
-    dropbox_pages: {
+
+    project_pages: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Successfully crawled pages" },
+      metadata: { group: 'project', description: "Successfully crawled pages" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -119,12 +121,14 @@
         // Content analysis
         { name: 'CMS', path: 'content.cms' },
         { name: 'Type', path: 'content.type' },
-        { name: 'Language', path: 'content.language' },
         { name: 'Title', path: 'content.title' },
         { name: 'Description', path: 'content.description' },
         { name: 'Date', path: 'content.date' },
         { name: 'Words', path: 'content.readability.words' },
         { name: 'Readability', path: 'content.readability.score' },
+        { name: 'PostType', path: 'content.postType' },
+        { name: 'PostId', path: 'content.postId' },
+        { name: 'Language', path: 'content.language' },
 
          // Detected data
         { name: 'Cookies', path: 'cookies', function: 'length' },
@@ -142,9 +146,9 @@
       ]
     },
     
-    dropbox_errors: {
+    project_errors: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Errors encountered" },
+      metadata: { group: 'project', description: "Errors encountered" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -183,9 +187,9 @@
       ]
     },
     
-    dropbox_media: {
+    project_media: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Linked media files" },
+      metadata: { group: 'project', description: "Linked media files" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -230,7 +234,7 @@
   
     inlinks: {
       metadata: {
-        category: "dropbox", description: "Links from many sources to a given page",
+        group: 'project', description: "Links from many sources to a given page",
       },
       collection: 'resources',
       document: 'target',
@@ -265,7 +269,7 @@
   
     outlinks: {
       metadata: {
-        category: "dropbox", description: "Links from a page to many target URLs",
+        group: 'project', description: "Links from a page to many target URLs",
       },
       collection: 'resources',
       document: 'source',
@@ -294,7 +298,7 @@
   
     invalid: {
       metadata: {
-        category: "dropbox", description: "Unparsable links",
+        group: 'project', description: "Unparsable links",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -319,7 +323,7 @@
 
     nonweb: {
       metadata: {
-        category: "dropbox", description: "Links to non-web URL",
+        group: 'project', description: "Links to non-web URL",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -344,7 +348,7 @@
 
     variations: {
       metadata: {
-        category: "dropbox", description: 'Unique inlink variations'
+        group: 'project', description: 'Unique inlink variations'
       },
       collection: 'unique_urls',
       document: 'uu',

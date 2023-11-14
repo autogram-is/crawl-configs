@@ -1,0 +1,47 @@
+configVersion: 0.10.6
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./analysis.json5
+  - ./reports/pagedetails.json5
+  - ./reports/errors.json5
+  - ./reports/pages.json5
+  - ./reports/downloads.json5
+  - ./reports/dataviz.json5
+  - ./reports/queries.json5
+
+arango:
+  databaseName: contento-repricer
+  
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: '**/{index,default}.{htm,html,aspx,php}'
+  discardSearch: 'utm_*'
+  discardTrailingSlash: false
+  sortSearchParams: true
+
+spider:
+  seed:
+    - https://www.repricer.com
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: false
+  headless: true
+  stealth: false
+  urls:
+    selectors:
+      - a
+      - iframe
+      - video
+      - audio
+    regions:
+      header: 'header'
+      body: 'main'
+      footer: 'footer'
+    crawl: same-hostname

@@ -1,0 +1,30 @@
+{
+  reports: {
+    errors: {
+      name: 'Dropbox Error URLs',
+      group: 'dropbox',
+      description: 'Error summaries',
+      queries: {
+        'HTTP Errors': 'dropbox_errors',
+        'Language Errors': 'dropbox_lang_errors',
+      },
+    },
+  },
+  queries: {
+    dropbox_lang_errors: {
+      document: 'resource',
+      metadata: { category: 'dropbox', description: 'Mislabeled language attributes' },
+      collection: 'resources',
+      filters: [
+        { path: 'code', eq: 200 },
+        { path: 'content.language', in: ['null', 'en', 'en-us'] },
+        { path: 'parsed.path[0]', contains: '__-__', type: 'string' },
+      ],
+      return: [
+        { name: 'url', path: 'url' },
+        { name: 'Language', path: 'content.language' }
+      ]
+    },
+
+  }
+}

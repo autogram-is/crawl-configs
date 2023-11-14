@@ -6,9 +6,12 @@ extends:
   - ./queries.json5
   - ./reports.json5
   - ./pagedetails.report.json5
+  - ./resources.report.json5
+  - ./errors.report.json5
+  - ./patterns.json5
 
 arango:
-  databaseName: dropbox
+  databaseName: dropbox-eng
   
 offloadBodyHtml: 'db'
 
@@ -21,10 +24,16 @@ normalizer:
   discardIndex: '**/{index,default}.{htm,html,aspx,php}'
   discardSearch: '!{page,p,category}'
   discardTrailingSlash: false
-  collapseSearchParams: page
   sortSearchParams: true
+  replace:
+    match: '/_jcr_content/root/u06_main_content/par/responsivegrid/b20_article_grid_pla.query.'
+    value: '?page='
 
 spider:
+  seed:
+    - https://www.dropbox.com
+    - https://blog.dropbox.com
+    - https://experience.dropbox.com
   saveCookies: true
   savePerformance: true
   saveXhrList: true
@@ -32,32 +41,33 @@ spider:
   shadowDom: true
   headless: true
   stealth: false
+  maxConcurrency: 1
+  maxRequestsPerMinute: 20
+  sameDomainDelaySecs: 4
+  userAgent: "Screaming Frog SEO Spider/19.3 (Robots: Screaming Frog SEO Spider)"
   urls:
     regions:
-      header: 'header.uni-nav-container, header.u01-header__header, nav.u01-secondary-nav'
-      main: 'div.main'
-      footer: 'footer'
+      nav: 'header.u01-header__header, div.dwg-nav'
+      subnav: 'nav.u01-secondary-nav'
+      main: 'div#main, main#page-content, main#main-content'
+      footer: 'footer.dbx-footer, footer.u02-footer, footer.contentinfo'
     selectors:
+      - head link[rel="alternate"]
       - a
       - iframe
       - video
       - audio
     crawl: 
       - property: href
-        glob: "http*://www.dropbox.com/{static,password_expired,help/sl,help/vodafone,home,package_files_uploaded_via_chrome,photos/app_store_link,recover,sharing,sharing/folders,sharing/files,requests,account,referrals,downgrade,developers-v1,developers/downloads/sdks,developers/whats_new,reengageoptout,preview}*/**"
+        glob: "http*://www.dropbox.com/{static,password_expired,help/sl,help/vodafone,home*,package_files_uploaded_via_chrome,photos/app_store_link,recover*,sharing/*,sharing/folders*,sharing/files*,requests*,account*,referrals*,downgrade*,developers-v1,developers/downloads/sdks,developers/whats_new,reengageoptout,preview}/**"
         reject: true
-      - property: href
-        glob: "http*://www.hellosign.com/{style-guide,helloworks/1993,form/support-to-sales-lp,form/salesforce-add-seats,digital-strength/internal,digital-strength/emails,hw/msg,home-copy-1,home-copy-2,home-copy-cc,home-copy-pro,hellosign-staging-copy,api-copy,helloworks/builder-beta,form/helloworks-builder-beta-waitlist,helloworks/builder-beta/success,content/hellosign-for-salesforce-guide,helloworks/use-case,products/helloworks-copy,products/helloworks-old,ps-helloworks/1,form/dropbox-to-hellosign,form/hellosignapi-app-approval,dropbox-esign,content/wine-and-cheese-event,products/helloforms,products/hello-works,andrews-template,andrews-template,integrations/dropbox-esign,mar-206,home-v2,reveal-homepage,products/b/api,products/b/salesforce,products/b/hellofax,b/enterprise,b/lp/digitally-sign-documents,b/lp/free-document-signing,mar-729,mar-755}*/**"
+      - property: 'href'
+        glob: 'http*//blog.dropbox.com/**/_jcr_content/**'
         reject: true
-      - property: "href"
-        glob: "http?://{help,experience}.dropbox.com/??-??/**"
+      - property: 'href'
+        glob: 'http*//blog.dropbox.com/**/*feed'
         reject: true
-      - property: "href"
-        glob: "http?://www.dropbox.com/{??,??_??}/**"
+      - property: 'path.0'
+        glob: '{??-??,??_??,sh,de,fr,es,ja,it,ru,id,pl,ko,ms,t5,lp,en,ep}'
         reject: true
-      - "http*//{www,blog,developers,help,investors,experience}.dropbox.com{*,*/**}"
-      - "http*//www.docsend.com{*,*/**}"
-      - "http*//www.hellosign.com{*,*/**}"
-
-  downloadMimeTypes:
-    - '*/*'
+      - "http*//{blog,experience,www}.dropbox.com{*,*/**}"

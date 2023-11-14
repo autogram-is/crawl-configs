@@ -1,0 +1,30 @@
+{
+  reports: {
+    default: {
+      name: 'Pages',
+      group: 'project',
+      description: 'Page, media, and error summaries',
+      settings: {
+        path: '{{name}} Pages',
+      },
+      queries: {
+        'Summary': {
+          parent: 'project_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
+        'All Pages': 'project_pages',
+      },
+      alterData: {
+        'All Pages': {
+          action: 'split',
+          property: 'Language',
+        },
+      },
+    }
+  }
+}

@@ -1,29 +1,7 @@
 {
-  analysis: {
-    properties: {
-      'report.flagged': {
-        source: 'parsed.href',
-        in: [
-          'https://url-to-analyze.com/',
-        ]
-        value: true,
-      },
-      'report.property': [
-        {
-          source: 'parsed.subdomain', 
-          in: ['experience', 'help', 'blog', 'jobs', 'investors']
-        },
-        {
-          source: 'parsed.hostname', 
-          in: ['developers.hellosign.com', 'developers.dropbox.com']
-        },
-        'parsed.domainWithoutSuffix'
-      ],
-    }
-  }
   reports: {
     default: {
-      name: 'Dropbox Pages',
+      name: 'Dropbox English Pages',
       group: 'dropbox',
       description: 'Page, media, and error summaries',
       queries: {
@@ -36,27 +14,52 @@
             { path: 'mime', eq: 'text/html' },
           ],
         },
-        'Other Pages': 'dropbox_pages',
+        'Other Pages': {
+          parent: 'dropbox_pages',
+          filters: [
+            { path: 'content.language', in: [null, 'en', 'en-us'] },
+            { path: 'parsed.path[0]', contains: '__-__', type: 'string', negate: true },
+          ],
+        },
       },
       alterData: {
         'Other Pages': {
           action: 'split',
-          property: 'Tab',
+          property: 'Site',
           mustMatch: [
-            'dropbox',
-            'experience',
-            'hellosign',
-            'docsend',
+            'www.dropbox.com',
+            'experience.dropbox.com',
+            'blog.dropbox.com',
           ]
         }
       },
     },
-    errors: {
-      name: 'Dropbox Error URLs',
+    localized: {
+      name: 'Dropbox International Pages',
       group: 'dropbox',
-      description: 'Error summaries',
+      description: 'Page, media, and error summaries',
       queries: {
-        'Other Errors': 'dropbox_errors',
+        'Overview': {
+          parent: 'dropbox_summary',
+          aggregates: [
+            { path: 'mime', function: 'collect' },
+          ],
+          filters: [
+            { path: 'mime', eq: 'text/html' },
+          ],
+        },
+        'All Pages': {
+          parent: 'dropbox_pages',
+          filters: [
+            { path: 'content.language', in: [null, 'en', 'en-us'], negate: true },
+          ],
+        },
+      },
+      alterData: {
+        'All Pages': {
+          action: 'split',
+          property: 'Language',
+        }
       },
     },
     media: {

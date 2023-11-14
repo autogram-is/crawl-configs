@@ -1,20 +1,23 @@
 {
+  content: { selector: "header + div,header + main" },
   analysis: {
-    body: "div#main, main#main-content, main#page-content",
     properties: {
+      'content.type': [
+        { source: 'body', selector: 'header + div,header + main', attribute: 'data-elementor-type' },
+      ],
+      'content.postType': [
+        { source: 'body', selector: 'header + div,header + main', attribute: 'data-elementor-post-type' },
+      ],
+      'content.postId': [
+        { source: 'body', selector: 'header + div,header + main', attribute: 'data-elementor-post-id' },
+      ],
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',
+        "tech.['Page Builders'].[0]",
+        "tech.['Message boards'].[0]",
       ],
-      'content.language': [
-        { 'source': 'body', 'selector': 'html', 'attribute': 'data-cms-lang' },
-        { 'source': 'body', 'selector': 'html', 'attribute': 'lang' },
-      ],
-      'content.uuid': ['data.attributes.data.article-uuid'],
-      'content.pageId': ['data.meta.page-id'],
-      'content.tags': ['data.meta.data-tags'],
-      'content.taxonomyTags': ['data.meta.data-tagTaxonomy'],
-      'content.type': ['data.meta.resource-type-tag'],
+      'content.language': { source: 'body', selector: 'html', attribute: 'lang' },
       'content.title': [
         'data.meta.og.title', // OpenGraph
         'data.info.Title',    // PDF metadata
@@ -29,7 +32,6 @@
       'content.date': [
         'data.meta.datePublished',
         'data.meta.article.published_time',
-        'data.schemaOrg.Article.datePublished',
         'data.schemaOrg.WebPage.datePublished',
         'data.info.CreationDate',               // PDF files
         'data.format.creationTime',             // audio

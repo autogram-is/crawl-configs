@@ -2,18 +2,16 @@
   reports: {
     details: {
       name: 'Page Detail',
-      group: 'dropbox',
+      group: 'project',
       description: 'Detailed report for a single page',
       dropEmptyQueries: true,
-      
       repeat: {
-        'Dropbox Home': { path: 'parsed.href', eq: "https://www.dropbox.com/" },
-        'Exp Home': { path: 'parsed.href', eq: "https://experience.dropbox.com/" },
-        'Exp Comparison': { path: 'parsed.href', eq: "https://experience.dropbox.com/resources/dropbox-vs-box" },
-        'Exp Article': { path: 'parsed.href', eq: "https://experience.dropbox.com/resources/simplifying-hr-processes" },
-        'Exp Customer Story': { path: 'parsed.href', eq: "https://experience.dropbox.com/customer-stories/snowdrop-creative" },
-        'Exp Video': { path: 'parsed.href', eq: "https://experience.dropbox.com/resources/working-smarter-miro-slack-dropbox" },
-        'Exp Role': { path: 'parsed.href', eq: "https://experience.dropbox.com/roles/creatives/collaborate-with-creative-team" }
+        "Home": { path: 'url', eq: 'https://www.edesk.com/' },
+        "Resources": { path: 'url', eq: 'https://www.edesk.com/resources/' },
+        "AppStore": { path: 'url', eq: 'https://www.edesk.com/appstore/' },
+        "Feature-CustomerView": { path: 'url', eq: 'https://www.edesk.com/customer-view/' },
+        "BlogPost": { path: 'url', eq: 'https://www.edesk.com/blog/helpscout-alternatives/' },
+        "Integration-BigCommerce": { path: 'url', eq: 'https://www.edesk.com/appstore/bigcommerce/' },
       },
       
       settings: {
@@ -46,7 +44,6 @@
             { name: 'Title', path: 'content.title' },
             { name: 'Notes', path: 'flags.note' },
             { name: 'CMS', path: 'content.cms' },
-            { name: 'Language', path: 'content.language' },
             { name: 'Load Time', path: 'timing.duration' },
             { name: 'Cookies', path: 'cookies', function: 'length' },
             { name: 'External Requests', path: 'xhr', function: 'length' }
