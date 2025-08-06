@@ -1,0 +1,130 @@
+{
+  reports: {
+    pages: {
+      name: 'Intel Page Overview',
+      group: 'intel',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'Overview': {
+          document: 'page',
+          collection: 'pages',
+          aggregates: [
+            { path: 'hcr', name: 'Section', function: 'collect' },
+          ],
+          count: 'total',
+          sorts: [{ path: 'total', direction: 'desc' }],
+        },
+        'other': {
+          document: 'page',
+          collection: 'pages',
+          return: [
+            { name: 'url', path: 'url' },
+            { name: 'section', path: 'hcr' },
+            { name: 'status', path: 'status.code' },
+            { name: 'title', path: 'title' },
+            { name: 'created', path: 'date.created' },
+            { name: 'modified', path: 'date.modified' },
+            { name: 'owner', path: 'owner.primary' },
+            { name: 'template', path: 'template' },
+            { name: 'type', path: 'tags.emtcontenttype[0]' },
+            { name: 'subject', path: 'tags.emtsubject[0]' },
+            { name: 'audience', path: 'tags.emtaudience[0]' },
+          ]
+        }
+      },
+      alterData: {
+        'other': {
+          action: 'split',
+          property: 'section',
+          mustMatch: ['docs', 'support', 'developer', 'secure', 'security-center', 'newsroom']
+        },
+      },
+    },
+    oddballs: {
+      name: 'Intel Data Anomolies',
+      group: 'intel',
+      queries: {
+        multipleTypes: {
+          parent: "oddPages",
+          filters: [
+            { path: 'template', eq: '/apps/intel/dm/templates/data', negate: true },
+            { path: 'contentTypes', document: false, gt: 1 },
+          ],
+        },
+        missingType: {
+          parent: "oddPages",
+          filters: [
+            { path: 'template', eq: '/apps/intel/dm/templates/data', negate: true },
+            { path: 'contentTypes', document: false, eq: 0 }
+          ],
+        },
+      },
+    },
+    docs: {
+      name: 'Documentation Pages',
+      group: 'Intel',
+      queries: {
+        pages: {
+          parent: "filteredPages",
+          filters: [{ path: 'hcr', eq: 'docs' }],
+        },
+      },
+    },
+    bysection: {
+      name: 'Intentions',
+      description: 'Pages by Section',
+      group: 'Intel',
+      queries: {
+        other: {
+          parent: "filteredPages",
+          filters: [
+            { path: 'hcr', in: ['docs', 'secure', 'support'], negate: true }
+          ],
+        },
+      },
+      alterData: {
+        'other': {
+          action: 'split',
+          property: 'section',
+          mustMatch: ['developer', 'products', 'newsroom', 'security-center', 'internet-of-things', 'supplier', 'customer-spotlight', 'partner', 'research']
+        },
+      },
+    },
+    byintent: {
+      name: 'Pages By Intent',
+      description: 'Intention Mapping Breakdown',
+      group: 'Intel',
+      queries: {
+        other: {
+          parent: "filteredPages",
+          filters: [
+            { path: 'hcr', in: ['docs', 'secure', 'support'], negate: true }
+          ],
+        },
+      },
+      alterData: {
+        'other': {
+          action: 'split',
+          property: 'intent',
+        },
+      },
+    },
+    overviews: {
+      name: 'Overview reports',
+      group: 'Intel',
+      queries: {
+        templatesBySection: "FOR p IN content\n  FILTER p.status.code == 'active'\n  FILTER p.tld == 'https://www.intel.com'\n  FILTER p.locale.loc == 'us' && p.locale.lang == 'en'\nCOLLECT section = p.hcr, template = p.template WITH COUNT into total\nSORT section, total desc\nRETURN { section, template, total }",
+        yearlyBySection: "FOR p IN content\n  FILTER p.status.code == 'active'\n  FILTER p.tld == 'https://www.intel.com'\n  FILTER p.locale.loc == 'us' && p.locale.lang == 'en'\nCOLLECT section = p.hcr, year = DATE_YEAR(p.date.created) WITH COUNT INTO total\nSORT section, total DESC\nRETURN { section, year, total }"
+      }
+    },
+    tags: {
+      name: 'Intel Tag Usage',
+      group: 'Intel',
+      queries: {
+        EMT: "for p in pages \nfilter p.tags != null \nfor taxName in KEYS(p.tags) \nfor tagName in p.tags[taxName] \ncollect taxonomy = taxName, tag = tagName with count into total \nfilter taxonomy LIKE 'emt%' \nsort taxonomy asc, total desc \nreturn { taxonomy, tag, total } \n",
+        EUT: "for p in pages \nfilter p.tags != null \nfor taxName in KEYS(p.tags) \nfor tagName in p.tags[taxName] \ncollect taxonomy = taxName, tag = tagName with count into total \nfilter taxonomy LIKE 'uet%' \nsort taxonomy asc, total desc \nreturn { taxonomy, tag, total } \n",
+        SEO: "for p in pages \nfilter p.tags != null \nfor taxName in KEYS(p.tags) \nfor tagName in p.tags[taxName] \ncollect taxonomy = taxName, tag = tagName with count into total \nfilter taxonomy == 'seo' \nsort taxonomy asc, total desc \nreturn { taxonomy, tag, total } \n",
+      }
+    }
+  }
+}

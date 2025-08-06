@@ -1,5 +1,46 @@
 {
   analysis: {
-    patterns: []
+    patterns: [
+      {
+        name: 'component',
+        selector: '[data-component]',
+        exclusive: true,
+        properties: {
+          type: 'data.component',
+          id: 'data.component-instance',
+          title: {
+            source: 'html',
+            selector: '*[class$="__title"]'
+          },
+          copy: {
+            source: 'html',
+            selector: '*[class$="__copy"]'
+          },
+          videos: {
+            source: 'html',
+            selector: 'div.inline-video-player',
+            count: true
+          },
+          marketoForms: {
+            source: 'html',
+            selector: 'form.mktoForm',
+            count: true
+          },
+          allForms: {
+            source: 'html',
+            selector: 'form.mktoForm',
+            count: true
+          },
+        }
+      },
+      {
+        name: 'dwg-plank',
+        selector: '[id*="_plank-"]',
+        exclusive: true,
+        properties: {
+          type: { source: 'id', split: '-', limit: 1, join: '' },
+        }
+      }
+    ]
   }
 }

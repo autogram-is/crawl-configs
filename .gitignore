@@ -5,3 +5,7 @@ output
 arango.config.*
 /arango.config.yml
 arango.config.yml
+input
+/intel/Dropbox
+node_modules
+*.json

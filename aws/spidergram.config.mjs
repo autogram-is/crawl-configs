@@ -1,5 +1,6 @@
 import * as queries from './config/queries/index.mjs';
 import * as reports from './config/reports/index.mjs';
+import { analysis } from './spidergram.analysis.mjs';
 
 export default () => {
   return {
@@ -28,14 +29,17 @@ export default () => {
           content: "main",
           drawer: "div[class^=awsui_root_] > div[class^=awsui_layout_] > div[class^=awsui_drawer_]",
           footer: "div[data-testid=footer]"
-        }
+        },
+        crawl: [
+          { property: "href", glob: 'https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/**' },
+          { property: "href", glob: 'https://docs.aws.amazon.com/AWSEC2/latest/APIReference/**' },
+          { property: "href", glob: 'https://docs.aws.amazon.com/cli/latest/reference/apigatewayv2/**' },
+          { property: "href", glob: 'https://docs.aws.amazon.com/sdk-for-javascript/v3/developer-guide/**' },
+          { property: "href", glob: 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/**' },
+        ]
       }
     },
-    analysis: {
-      content: {
-        selector: "main"
-      }
-    },
+    analysis,
     queries,
     reports,
   }

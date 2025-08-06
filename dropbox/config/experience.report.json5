@@ -1,0 +1,183 @@
+{
+  reports: {
+    experience: {
+      name: 'DMEP English Pages',
+      group: 'dropbox',
+      description: 'Page, media, and error summaries',
+      queries: {
+        'DMEP English Pages': {
+          metadata: { category: "dropbox", description: "Experience site english pages" },
+          document: "resource",
+          collection: "resources",
+          filters: [
+            { path: "code", eq: 200},
+            { path: "mime", eq: "text/html" },
+            { path: 'parsed.hostname', eq: 'experience.dropbox.com' },
+            { path: 'content.language', in: ['null', 'en', 'en-us', 'en-US'] },
+            { path: 'parsed.path[0]', contains: '__-__', type: 'string', negate: true },
+          ],
+          subqueries: [{
+            name: "inlinks",
+            function: "unique",
+            query: {
+              collection: "responds_with",
+              document: "rw",
+              filters: [{ path: "_to", join: "resource._id" }],
+              subqueries: [{
+                collection: "links_to",
+                document: "lt",
+                filters: [{ path: "_to", join: "rw._from" }],
+                subqueries: [{
+                  collection: "resources",
+                  document: "source",
+                  filters: [{ path: "_id", join: "lt._from" }],
+                  inline: true
+                }],
+                inline: true
+              }],
+              "return": [{ path: "url", document: "source" }]
+            }
+          }, {
+            name: "outlinks",
+            function: "unique",
+            query: {
+              collection: "links_to",
+              document: "lt",
+              filters: [{ path: "_from", join: "resource._id" }],
+              subqueries: [{
+                collection: "unique_urls",
+                document: "target",
+                filters: [{ path: "_id", join: "lt._to" }],
+                inline: true
+              }],
+              return: [{ path: "url", document: "target" }]
+            }
+          }, {
+            name: "redirectedFrom",
+            query: {
+              collection: 'responds_with',
+              document: 'rw',
+              filters: [
+                { path: '_to', join: 'resource._id' },
+                { path: 'redirects[0]', eq: null, negate: true }
+              ],
+              subqueries: [
+                {
+                  collection: 'unique_urls',
+                  document: 'source',
+                  filters: [{ path: '_id', join: 'rw._from' }],
+                },
+              ],
+              return: [{ path: "url", document: "source" }]
+            }
+          }, {
+            name: "karen",
+            function: "first",
+            query: {
+              collection: "ds_karen",
+              filters: [{ path: "url", join: "resource.url" }],
+            },
+          }, {
+            name: "knotch",
+            function: "first",
+            query: {
+              collection: "ds_knotch",
+              filters: [{ path: "url", join: "resource.url" }],
+            },
+          }, {
+            name: "notes",
+            function: "first",
+            query: {
+              collection: "kv_notes",
+              filters: [{ path: "val.url", join: "resource.url" }],
+              return: ['val']
+            },
+          }, {
+            name: "traffic",
+            function: "first",
+            query: {
+              collection: "kv_traffic",
+              filters: [{ path: "val.url", join: "resource.url" }],
+              return: ['val']
+            },
+          }, {
+            name: "planks",
+            query: {
+              collection: "appears_on",
+              filters: [{ path: "_to", join: "resource._id" }]
+            }
+          }],
+          count: "total",
+          "sorts": [
+            { path: "url", direction: "asc" }
+          ],
+          "return": [
+            { name: "Move", document: false, path: "karen.Move" },
+            { name: "What", document: false, path: "karen.What" },
+            { name: "How", document: false, path: "karen.How" },
+            { name: "Dbx", document: false, path: "karen.Dbx" },
+
+            { name: 'Journey', document: false, path: 'notes.stage' },
+            { name: "Site", path: "parsed.hostname" },
+            { name: "Path", path: "parsed.pathname" },
+            { name: "Directory", path: "parsed.path[0]" },
+            { name: "New Directory", document: false, path: "karen.New" },
+            { name: "Subdirectory", path: "parsed.path[1]" },
+            { name: "Params", path: "parsed.search" },
+
+            // Content analysis
+            { name: 'CMS', path: 'content.cms' },
+            { name: 'Type', path: 'content.type' },
+            { name: 'Language', path: 'content.language' },
+            { name: 'Title', path: 'content.title' },
+            { name: 'Description', path: 'content.description' },
+            { name: 'Date', path: 'content.date' },
+            { name: 'Words', path: 'content.readability.words' },
+            { name: 'Readability', path: 'content.readability.score' },
+            { name: 'Planks', document: false, path: 'planks', function: 'length' },
+            { name: 'Videos', path: 'content.videos' },
+            { name: 'Marketo', path: 'content.marketoForms' },
+            { name: 'IFrames', path: 'content.iframes', function: 'length' },
+
+            // Audit data
+            { name: 'Audience', document: false, path: 'notes.audience' },
+            { name: 'PageType', document: false, path: 'notes.pageType' },
+            { name: 'Industry', document: false, path: 'notes.industry' },
+            { name: 'Notes', document: false, path: 'notes.notes' },
+            { name: 'TotalSignups',document: false,  path: 'notes.totalSignups' },
+            { name: 'TeamSignups', document: false, path: 'notes.teamSignups' },
+            { name: 'ProSignups', document: false, path: 'notes.proSignups' },
+            { name: 'PlusSignups', document: false, path: 'notes.plusSignups' },
+            { name: 'Views', document: false, path: 'traffic.views' },
+            { name: 'Sessions', document: false, path: 'traffic.sessions' },
+            { name: 'ExitRate', document: false, path: 'traffic.exit' },
+            { name: 'BounceRate', document: false, path: 'traffic.bounce' },
+        
+            // Knotch DataView
+            { name: 'Perceive', document: false, path: 'knotch.perception.positiveResponseRate' },
+            { name: 'Recommend', document: false, path: 'knotch.recommend.positiveResponseRate' },
+            { name: 'Inform', document: false, path: 'knotch.inform.positiveResponseRate' },
+
+             // Detected data
+            { name: 'Cookies', path: 'cookies', function: 'length' },
+            { name: 'Technologies', path: 'tech', function: 'length' },
+            { name: 'Pagespeed', path: 'pagespeed.overall' },
+            { name: 'Load Time', path: 'pagespeed.speedIndex' },
+            { name: 'Perf', path: 'pagespeed.performance' },
+            { name: 'SEO', path: 'pagespeed.seo' },
+
+            // Inlink/outlink counts
+            { document: false, name: "Inlinks", path: "inlinks", function: "length" },
+            { document: false, name: "Outlinks", path: "outlinks", function: "length" },
+            { document: false, name: "Inbound_Redirects", path: "redirectedFrom", function: "length" },
+            { document: false, name: "Redirected_From", path: "redirectedFrom[0]" },
+
+            { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
+            { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
+            { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
+          ]
+        },
+      },
+    }
+  }
+}

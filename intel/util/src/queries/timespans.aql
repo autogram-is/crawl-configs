@@ -1,0 +1,13 @@
+FOR p IN pages
+RETURN {
+  section: p.hcr, 
+  path: p.hcp,
+  status: p.status.code,
+  template: p.shortTemplate, 
+  type: p.shortType,
+  intent: p.intent.proposed ? p.intent.proposed : 'uncategorized', 
+  created: DATE_YEAR(p.date.created),
+  modified: DATE_YEAR(p.date.modified),
+  timespan: DATE_DIFF(p.date.created, p.date.modified, "months"),
+  staleness: DATE_DIFF(p.date.modified, DATE_NOW(), "months"),
+}

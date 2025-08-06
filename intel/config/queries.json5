@@ -1,0 +1,89 @@
+{
+  queries: {
+    pages: {
+      document: 'page',
+      metadata: { category: 'intel', description: 'Overview of AEM managed dotcom pages' },
+      collection: 'pages',
+      return: [
+        { name: 'url', path: 'url' },
+        { name: 'section', path: 'hcr' },
+        { name: 'status', path: 'status.code' },
+        { name: 'title', path: 'title' },
+        { name: 'created', path: 'date.created' },
+        { name: 'modified', path: 'date.modified' },
+        { name: 'owner', path: 'owner.primary' },
+        { name: 'template', path: 'template' },
+        { name: 'type', path: 'tags.emtcontenttype[0]' },
+        { name: 'subject', path: 'tags.emtsubject[0]' },
+        { name: 'audience', path: 'tags.emtaudience[0]' },
+      ]
+    },
+    
+    filteredPages: {
+      metadata: { category: 'intel' },
+      collection: 'pages',
+      filters: [
+        { path: 'status.code', eq: 'active' },
+        { path: 'tld', eq: 'https://www.intel.com' },
+        { path: 'locale.lang', eq: 'en' },
+        { path: 'locale.loc', eq: 'us' },
+        { path: 'hcp', function: 'is_null', eq: false },
+        { path: 'template', eq: '/apps/intel/dm/templates/data', negate: true },
+      ],
+      return: [
+        { name: 'section', path: 'hcr' },
+        { name: 'url', path: 'hcp' },
+        { name: 'title', path: 'title' },
+        { name: 'intent', path: 'intent.proposed' },
+        { name: 'fallbackIntent', path: 'intent.fallback' },
+        { name: 'creator', path: 'owner.creator' },
+        { name: 'type', path: 'shortType' },
+        { name: 'template', path: 'shortTemplate' },
+        { name: 'audience', path: 'tags.emtaudience', function: 'first' },
+        { name: 'subject', path: 'tags.emtsubject', function: 'first' },
+        { name: 'format', path: 'tags.uetcontentformat', function: 'first' },
+        { name: 'category', path: 'tags.primarycontenttagging', function: 'first' },
+        { name: 'created', path: 'date.created' },
+        { name: 'modified', path: 'date.modified' },
+      ]
+    },
+    oddPages: {
+      metadata: { category: 'intel', description: 'Data anomolies' },
+      collection: 'pages',
+      filters: [
+        { path: 'tld', eq: 'https://www.intel.com' },
+        { path: 'locale.lang', eq: 'en' },
+        { path: 'locale.loc', eq: 'us' },
+      ],
+      return: [
+        { name: 'section', path: 'hcr' },
+        { name: 'url', path: 'hcp' },
+        { name: 'title', path: 'title' },
+        { name: 'creator', path: 'owner.creator' },
+        { name: 'template', path: 'template' },
+        { name: 'formats', path: 'tags.uetcontentformat', function: 'length' },
+        { name: 'contentTypes', path: 'tags.emtcontenttype', function: 'length' },
+        { name: 'created', path: 'date.created' },
+        { name: 'modified', path: 'date.modified' },
+      ]
+    },
+    pageDatesByIntent: {
+      metadata: { category: 'intel', description: 'Pages With Dates' },
+      collection: 'pages',
+      filters: [
+        { path: 'tld', eq: 'https://www.intel.com' },
+        { path: 'locale.lang', eq: 'en' },
+        { path: 'locale.loc', eq: 'us' },
+      ],
+      return: [
+        { name: 'section', path: 'hcr' },
+        { name: 'url', path: 'hcp' },
+        { name: 'template', path: 'shortTemplate' },
+        { name: 'type', path: 'shortType' },
+        { name: 'intent', path: 'intent.proposed' },
+        { name: 'created', path: 'date.created' },
+        { name: 'modified', path: 'date.modified' },
+      ]
+    },
+  },
+}

@@ -2,33 +2,12 @@
   reports: {
     details: {
       name: 'Page Detail',
-      group: 'dropbox',
+      group: 'intel',
       description: 'Detailed report for a single page',
       dropEmptyQueries: true,
       
       repeat: {
-        'Dropbox Home': { path: 'url', eq: "https://www.dropbox.com/" },
-        'Exp Home': { path: 'url', eq: "https://experience.dropbox.com/" },
-        'Partner Locator': { path: 'url', eq: "https://experience.dropbox.com/partner-locator" },
-        'Plans/Basic Plan': { path: 'url', eq: "https://experience.dropbox.com/basic-plan" },
-        'Plans/Pro Plan': { path: 'url', eq: "https://experience.dropbox.com/pro-plan-for-creatives" },
-        'Resources/PC Transfer': { path: 'url', eq: "https://experience.dropbox.com/resources/pc-to-pc-transfer" },
-        'Resources/Zip Files': { path: 'url', eq: "https://experience.dropbox.com/resources/what-is-a-zip-file" },
-        'Resources/Scanning Documents': { path: 'url', eq: "https://experience.dropbox.com/resources/how-to-scan-documents" },
-        'Resources/Travel Planning': { path: 'url', eq: "https://experience.dropbox.com/resources/travel-planning" },
-        'Get-Organized/Tax Prep': { path: 'url', eq: "https://experience.dropbox.com/get-organized/dropbox-for-tax-prep" },
-        'Get-Organized/Share Photos': { path: 'url', eq: "https://experience.dropbox.com/get-organized/best-way-to-share-photos" },
-        'Get-Organized/Send Files': { path: 'url', eq: "https://experience.dropbox.com/get-organized/send-large-files-transfer" },
-        'Compare/Backblaze': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-backup-vs-backblaze" },
-        'Compare/Carbonite': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-backup-vs-carbonite" },
-        'Compare/iDrive': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-backup-vs-idrive" },
-        'Compare/Lastpass': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-passwords-vs-lastpass" },
-        'Compare/OneDrive': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-vs-microsoft-onedrive" },
-        'Compare/Box': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-vs-box" },
-        'Compare/GoogleDrive': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-vs-google-drive" },
-        'Compare/Vimeo': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-replay-vs-vimeo" },
-        'Compare/WeTransfer': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-vs-wetransfer" },
-        'Compare/iCloud': { path: 'url', eq: "https://experience.dropbox.com/resources/dropbox-vs-icloud" },
+        'intel Home': { path: 'url', eq: "https://www.intel.com/" },
       },
       
       settings: {
@@ -38,7 +17,6 @@
           content: { name: 'Content Details', template: 'inspector' },
           headers: { name: 'HTTP Headers', template: 'inspector' },
           analytics: { name: 'Analytics' },
-          knotch: { name: 'Knotch Data', template: 'inspector' },
           performance: { name: 'Performance', template: 'inspector' },
           patterns: { name: 'Planks' },
           inlinks: { name: 'Inbound Links' },
@@ -83,30 +61,6 @@
             { name: "Meta Tags", path: 'data.meta' },
           ]
         },
-        analytics: {
-          collection: 'resources',
-          document: 'r',
-          subqueries: [{
-            collection: 'kv_notes',
-            document: 'notes',
-            filters: [{ path: "val.url", join: "r.url" }],
-          }, {
-            collection: 'kv_traffic',
-            document: 'traffic',
-            filters: [{ path: "val.url", join: "r.url" }],
-          }],
-          return: [
-            { name: 'Views', document: 'traffic', path: 'val.views' },
-            { name: 'Sessions', document: 'traffic', path: 'val.sessions' },
-            { name: 'BounceRate', document: 'traffic', path: 'val.bounce' },
-            { name: 'ExitRate', document: 'traffic', path: 'val.exit' },
-            { name: 'SignupRate', document: 'notes', path: 'val.signupRate' },
-            { name: 'Signups', document: 'notes', path: 'val.totalSignups' },
-            { name: 'Teams', document: 'notes', path: 'val.teamsSignups' },
-            { name: 'Pro', document: 'notes', path: 'val.proSignups' },
-            { name: 'Plus', document: 'notes', path: 'val.plusSignups' },
-          ]
-        },
         content: {
           collection: 'resources',
           return: [
@@ -142,9 +96,6 @@
           collection: 'resources',
           return: [{ path: 'xhr' }]
         },
-        knotch: {
-          collection: 'ds_knotch'
-        },
         performance: {
           collection: 'resources',
           return: [{ path: 'pagespeed' }]
@@ -160,8 +111,6 @@
           return: [
             { name: 'Type', document: 'pattern', path: 'type' },
             { name: 'ID', document: 'pattern', path: 'id' },
-            { name: 'Title', document: 'pattern', path: 'title' },
-            { name: 'Copy', document: 'pattern', path: 'copy' },
             { name: 'Markup Bytes', document: 'pattern', path: 'html', function: 'length' },
             { name: 'DOM Location', document: 'pattern', path: 'uniqueSelector' },
           ]

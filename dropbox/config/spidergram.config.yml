@@ -8,6 +8,7 @@ extends:
   - ./pagedetails.report.json5
   - ./resources.report.json5
   - ./errors.report.json5
+  - ./experience.report.json5
   - ./patterns.json5
 
 arango:
@@ -31,22 +32,21 @@ normalizer:
 
 spider:
   seed:
-    - https://www.dropbox.com
-    - https://blog.dropbox.com
     - https://experience.dropbox.com
   saveCookies: true
   savePerformance: true
   saveXhrList: true
-  auditAccessibility: false
+  auditAccessibility: true
   shadowDom: true
   headless: true
   stealth: false
   maxConcurrency: 1
-  maxRequestsPerMinute: 20
+  maxRequestsPerMinute: 6
   sameDomainDelaySecs: 4
   userAgent: "Screaming Frog SEO Spider/19.3 (Robots: Screaming Frog SEO Spider)"
   urls:
     regions:
+      head: 'head'
       nav: 'header.u01-header__header, div.dwg-nav'
       subnav: 'nav.u01-secondary-nav'
       main: 'div#main, main#page-content, main#main-content'

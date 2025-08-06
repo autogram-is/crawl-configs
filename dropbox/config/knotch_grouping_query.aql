@@ -1,0 +1,24 @@
+FOR kv IN kv_knotch
+FILTER kv.val.url LIKE 'https://experience.dropbox.com%'
+
+COLLECT
+    url = kv.val.url,
+    title = kv.val.content_name,
+    folder = kv.val.folder_name,
+    type = kv.val.content_type
+
+LET questions = MERGE_RECURSIVE(
+    FOR q IN kv_knotch
+    FILTER q.val.url == url
+    RETURN { [q.val.question]: {
+        question: q.val.question_text,
+        brandContributionScore: TO_NUMBER(q.val.contribution_to_brand_score),
+        positiveResponseRate: TO_NUMBER(q.val.positive_response_rate),
+        contentActivityScore: TO_NUMBER(q.val.content_activity_score),
+        attentionRate: TO_NUMBER(q.val.attention_rate),
+        fleeRate: TO_NUMBER(q.val.flee_rate),
+        recircMultiplier: TO_NUMBER(q.val.recirculation_multiplier),
+    } }
+)
+
+RETURN MERGE({ url, title, folder, type }, questions)

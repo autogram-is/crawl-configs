@@ -1,0 +1,18 @@
+{
+  analysis: {
+    patterns: [
+      {
+        name: 'component',
+        selector: '[data-component]',
+        exclusive: true,
+        properties: {
+          type: 'data.component',
+          title: {
+            source: 'html',
+            selector: 'h3'
+          }
+        }
+      }
+    ]
+  }
+}

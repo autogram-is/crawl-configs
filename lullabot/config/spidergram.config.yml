@@ -9,7 +9,7 @@ extends:
 arango:
   databaseName: lullabot
   
-offloadBodyHtml: 'db'
+offloadBodyHtml: 'file'
 
 spider:
   seed:

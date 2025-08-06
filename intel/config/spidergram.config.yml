@@ -1,0 +1,114 @@
+configVersion: 0.10.8
+extends:
+  - ../../page-tech.json5
+  - ./analysis.json5
+  - ./queries.json5
+  - ./reports.json5
+  - ./pagedetails.report.json5
+  - ./errors.report.json5
+  - ./patterns.json5
+
+arango:
+  databaseName: intel
+  url: http://arango.192.168.88.119.sslip.io:8529
+  auth:
+    username: root
+    password: jizPgOEd3Oc6NtCjF9KU
+
+offloadBodyHtml: 'db'
+
+normalizer:
+  forceLowercase: 'hostname'
+  discardFirstSegment: 'ww*'
+  supplySubdomain: 'www'
+  discardAnchor: true
+  discardAuth: true
+  discardIndex: false
+  discardSearch: '!{page,p,category}'
+  discardTrailingSlash: false
+  sortSearchParams: true
+
+spider:
+  seed:
+    - https://www.intel.com
+  saveCookies: true
+  savePerformance: true
+  saveXhrList: true
+  auditAccessibility: false
+  shadowDom: true
+  headless: true
+  stealth: true
+  maxConcurrency: 4
+  maxRequestsPerMinute: 60
+  userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.3"
+  urls:
+    regions:
+      nav: 'body + div.global'
+      subnav: 'nav.u01-secondary-nav'
+      main: 'main#primary-content'
+      footer: 'footer'
+    selectors:
+      - head link[rel="alternate"]
+      - a
+      - iframe
+      - video
+      - audio
+    crawl: 
+      - property: 'pathname'
+        glob: '/{cgi,iaweb,emergency,now}/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/{intel,design}/june297/*'
+        reject: true
+      - property: 'pathname'
+        glob: '**/_jcr_content/*'
+        reject: true
+      - property: 'pathname'
+        glob: '**/*&_escaped_fragment_=*'
+        reject: true
+      - property: 'pathname'
+        glob: '/*countrylabel=*&countrylabel=*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/www/{br/pt,xl/es,de/de,es/es,fr/fr,jp/ja,id/id,kr/ko,th/th,tw/zh,vn/vi}/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/cpc/{archive,dia,ecs,eps,fcs,gif,OptContent,pix,sound,feature,now,vision}/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/www/*/*/buy/{intelinside,inteltechnologyprovider,intelproducts,test}/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/*/secure/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/*/wp-expand-server-memory-with-optane*.pdf'
+        reject: true
+      - property: 'pathname'
+        glob: '/*/wp-01288-intel-fpgas-accelerate-intel-xeon-scalable*.pdf'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/dam/www/secure/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/www/*/*/contentlibrary.html?*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/data/disclaimers/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/iip/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/dam/products/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/dam/altera-www/global/*/pdfs/assets/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/dam/www/programmable/*/*/pdfs/assets/*'
+        reject: true
+      - property: 'pathname'
+        glob: '/content/dam/www/public/*/forms/*'
+        reject: true
+      - "http*//www.intel.com{*,*/**}"

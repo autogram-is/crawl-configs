@@ -1,0 +1,16 @@
+configVersion: 0.10.5
+extends:
+  - ../arango.config.yml
+  - ../page-tech.json5
+
+arango:
+  databaseName: sitemaps
+  
+offloadBodyHtml: 'db'
+
+spider:
+  saveXhrList: true
+  savePerformance: true
+  saveCookies: true
+  stealth: true
+  downloadMimeTypes: "*/*"

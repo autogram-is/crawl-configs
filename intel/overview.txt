@@ -1,0 +1,30 @@
+# Intel Data sources
+
+## content
+- sourced from "All-Published-UAM-Content-Details_2024.03.20.xlsx"
+- ~700,000 documents
+
+## pages
+- sourced from "AEM Inventory 11Mar2024 Filtered.xlsx"
+- ~300,000 documents
+
+## assets
+
+- sourced from "weekly_asset_inventory.xlsx"
+- ~360,000 documents 
+
+## data
+
+- sourced from "weekly_data_inventory.xlsx"
+- ~150,000 documents
+
+
+
+
+Demand
+Activation
+Conversion: 
+Success:  
+Wayfinding: 
+Self-Sufficiency: 
+Compliance: 

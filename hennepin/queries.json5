@@ -1,8 +1,8 @@
 {
   queries: {
-    dropbox_sites: {
+    hp_sites: {
       document: 'resource',
-      metadata: { category: 'dropbox', description: 'Builds a rough approximation of sites' },
+      metadata: { category: 'Hennepin', description: 'Builds a rough approximation of sites' },
       collection: 'resources',
       subqueries: [
         { collection: 'responds_with', document: 'request' },
@@ -29,9 +29,10 @@
         { name: 'tld', path: 'parsed.publicSuffix' },
       ]
     },
-    dropbox_summary: {
+
+    hp_summary: {
       document: 'resource',
-      metadata: { category: 'dropbox', description: 'Overview of crawled sites' },
+      metadata: { category: 'Hennepin', description: 'Overview of crawled sites' },
       collection: 'resources',
       filters: [
         { path: 'code', eq: 200 },
@@ -42,9 +43,10 @@
       count: 'total',
       sorts: [{ path: 'total', direction: 'desc' }],
     },
-    dropbox_pages: {
+
+    hp_pages: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Successfully crawled pages" },
+      metadata: { category: 'Hennepin', description: "Successfully crawled pages" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -82,53 +84,6 @@
           }],
           return: [{ path: "url", document: "target" }]
         }
-      }, {
-        name: "redirectedFrom",
-        query: {
-          collection: 'responds_with',
-          document: 'rw',
-          filters: [
-            { path: '_to', join: 'resource._id' },
-            { path: 'redirects[0]', eq: null, negate: true }
-          ],
-          subqueries: [
-            {
-              collection: 'unique_urls',
-              document: 'source',
-              filters: [{ path: '_id', join: 'rw._from' }],
-            },
-          ],
-          return: [{ path: "url", document: "source" }]
-        }
-      }, {
-        name: "knotch",
-        function: "first",
-        query: {
-          collection: "ds_knotch",
-          filters: [{ path: "url", join: "resource.url" }],
-        },
-      }, {
-        name: "notes",
-        function: "first",
-        query: {
-          collection: "kv_notes",
-          filters: [{ path: "val.url", join: "resource.url" }],
-          return: ['val']
-        },
-      }, {
-        name: "traffic",
-        function: "first",
-        query: {
-          collection: "kv_traffic",
-          filters: [{ path: "val.url", join: "resource.url" }],
-          return: ['val']
-        },
-      }, {
-        name: "planks",
-        query: {
-          collection: "appears_on",
-          filters: [{ path: "_to", join: "resource._id" }]
-        }
       }],
       count: "total",
       filters: [
@@ -141,40 +96,19 @@
       "return": [
         { name: "Site", path: "parsed.hostname" },
         { name: "Path", path: "parsed.pathname" },
-        { name: "Directory", path: "parsed.path[0]" },
-        { name: "Subdirectory", path: "parsed.path[1]" },
         { name: "Params", path: "parsed.search" },
 
         // Content analysis
         { name: 'CMS', path: 'content.cms' },
-        { name: 'Type', path: 'content.type' },
-        { name: 'Language', path: 'content.language' },
         { name: 'Title', path: 'content.title' },
         { name: 'Description', path: 'content.description' },
-        { name: 'Date', path: 'content.date' },
+        { name: 'Creator', path: 'content.creator' },
+        { name: 'Contributor', path: 'content.contributor' },
+        { name: 'Audience', path: 'content.audience' },
+        { name: 'Subject', path: 'content.subject' },
+        { name: 'Date', path: 'content.published' },
         { name: 'Words', path: 'content.readability.words' },
         { name: 'Readability', path: 'content.readability.score' },
-        { name: 'Planks', document: false, path: 'planks', function: 'length' },
-
-        // Audit data
-        { name: 'Journey', document: false, path: 'notes.stage' },
-        { name: 'Audience', document: false, path: 'notes.audience' },
-        { name: 'PageType', document: false, path: 'notes.pageType' },
-        { name: 'Industry', document: false, path: 'notes.industry' },
-        { name: 'Notes', document: false, path: 'notes.notes' },
-        { name: 'TotalSignups',document: false,  path: 'notes.totalSignups' },
-        { name: 'TeamSignups', document: false, path: 'notes.teamSignups' },
-        { name: 'ProSignups', document: false, path: 'notes.proSignups' },
-        { name: 'PlusSignups', document: false, path: 'notes.plusSignups' },
-        { name: 'Views', document: false, path: 'traffic.views' },
-        { name: 'Sessions', document: false, path: 'traffic.sessions' },
-        { name: 'ExitRate', document: false, path: 'traffic.exit' },
-        { name: 'BounceRate', document: false, path: 'traffic.bounce' },
-        
-        // Knotch DataView
-        { name: 'Perceive', document: false, path: 'knotch.perception.positiveResponseRate' },
-        { name: 'Recommend', document: false, path: 'knotch.recommend.positiveResponseRate' },
-        { name: 'Inform', document: false, path: 'knotch.inform.positiveResponseRate' },
 
          // Detected data
         { name: 'Cookies', path: 'cookies', function: 'length' },
@@ -182,22 +116,18 @@
         { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
         { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
         { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
-        { name: 'Pagespeed', path: 'pagespeed.overall' },
-        { name: 'Load Time', path: 'pagespeed.speedIndex' },
-        { name: 'Perf', path: 'pagespeed.performance' },
-        { name: 'SEO', path: 'pagespeed.seo' },
+        { name: 'Paged URL', path: 'data.paged' },
+        { name: 'Load Time', path: 'timing.duration' },
 
         // Inlink/outlink counts
         { document: false, name: "Inlinks", path: "inlinks", function: "length" },
-        { document: false, name: "Outlinks", path: "outlinks", function: "length" },
-        { document: false, name: "Inbound_Redirects", path: "redirectedFrom", function: "length" },
-        { document: false, name: "Redirected_From", path: "redirectedFrom[0]" },
+        { document: false, name: "Outlinks", path: "outlinks", function: "length" }
       ]
     },
     
-    dropbox_errors: {
+    hp_errors: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Errors encountered" },
+      metadata: { category: 'Hennepin', description: "Errors encountered" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -236,9 +166,9 @@
       ]
     },
     
-    dropbox_media: {
+    hp_media: {
       document: "resource",
-      metadata: { category: "dropbox", description: "Linked media files" },
+      metadata: { category: 'Hennepin', description: "Linked media files" },
       collection: "resources",
       subqueries: [{
         name: "inlinks",
@@ -283,7 +213,7 @@
   
     inlinks: {
       metadata: {
-        category: "dropbox", description: "Links from many sources to a given page",
+        category: 'Hennepin', description: "Links from many sources to a given page",
       },
       collection: 'resources',
       document: 'target',
@@ -318,7 +248,7 @@
   
     outlinks: {
       metadata: {
-        category: "dropbox", description: "Links from a page to many target URLs",
+        category: 'Hennepin', description: "Links from a page to many target URLs",
       },
       collection: 'resources',
       document: 'source',
@@ -347,7 +277,7 @@
   
     invalid: {
       metadata: {
-        category: "dropbox", description: "Unparsable links",
+        category: 'Hennepin', description: "Unparsable links",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -372,7 +302,7 @@
 
     nonweb: {
       metadata: {
-        category: "dropbox", description: "Links to non-web URL",
+        category: 'Hennepin', description: "Links to non-web URL",
       },
       collection: 'unique_urls',
       document: 'uu',
@@ -397,7 +327,7 @@
 
     variations: {
       metadata: {
-        category: "dropbox", description: 'Unique inlink variations'
+        category: 'Hennepin', description: 'Unique inlink variations'
       },
       collection: 'unique_urls',
       document: 'uu',

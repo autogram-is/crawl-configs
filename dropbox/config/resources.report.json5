@@ -40,6 +40,35 @@
           }],
           return: [{ path: "url", document: "target" }]
         }
+      }, {
+        name: "knotch",
+        function: "first",
+        query: {
+          collection: "ds_knotch",
+          filters: [{ path: "url", join: "resource.url" }],
+        },
+      }, {
+        name: "notes",
+        function: "first",
+        query: {
+          collection: "kv_notes",
+          filters: [{ path: "val.url", join: "resource.url" }],
+          return: ['val']
+        },
+      }, {
+        name: "traffic",
+        function: "first",
+        query: {
+          collection: "kv_traffic",
+          filters: [{ path: "val.url", join: "resource.url" }],
+          return: ['val']
+        },
+      }, {
+        name: "planks",
+        query: {
+          collection: "appears_on",
+          filters: [{ path: "_to", join: "resource._id" }]
+        }
       }],
       count: "total",
       filters: [
@@ -47,7 +76,7 @@
         { path: "mime", eq: "text/html" },
         { path: "parsed.subdomain", eq: "experience" },
         { path: "parsed.path[0]", eq: "resources" },
-        { path: "content.language", in: [null, 'en', 'en-us', 'en-US'] },
+        { path: "content.language", in: ['null', 'en', 'en-us', 'en-US'] },
       ],
       "sorts": [
         { path: "url", direction: "asc" }
@@ -64,6 +93,27 @@
         { name: 'Date', path: 'content.date' },
         { name: 'Words', path: 'content.readability.words' },
         { name: 'Readability', path: 'content.readability.score' },
+        { name: 'Planks', document: false, path: 'planks', function: 'length' },
+
+        // Audit data
+        { name: 'Journey', document: false, path: 'notes.stage' },
+        { name: 'Audience', document: false, path: 'notes.audience' },
+        { name: 'PageType', document: false, path: 'notes.pageType' },
+        { name: 'Industry', document: false, path: 'notes.industry' },
+        { name: 'Notes', document: false, path: 'notes.notes' },
+        { name: 'TotalSignups',document: false,  path: 'notes.totalSignups' },
+        { name: 'TeamSignups', document: false, path: 'notes.teamSignups' },
+        { name: 'ProSignups', document: false, path: 'notes.proSignups' },
+        { name: 'PlusSignups', document: false, path: 'notes.plusSignups' },
+        { name: 'Views', document: false, path: 'traffic.views' },
+        { name: 'Sessions', document: false, path: 'traffic.sessions' },
+        { name: 'ExitRate', document: false, path: 'traffic.exit' },
+        { name: 'BounceRate', document: false, path: 'traffic.bounce' },
+
+        // Knotch DataView
+        { name: 'Perceive', document: false, path: 'knotch.perception.positiveResponseRate' },
+        { name: 'Recommend', document: false, path: 'knotch.recommend.positiveResponseRate' },
+        { name: 'Inform', document: false, path: 'knotch.inform.positiveResponseRate' },
 
          // Detected data
         { name: 'Cookies', path: 'cookies', function: 'length' },
@@ -71,7 +121,10 @@
         { name: 'Opengraph', path: 'data.meta.og', function: 'is_object' },
         { name: 'Twitter', path: 'data.meta.twitter', function: 'is_object' },
         { name: 'Schema_Org', path: 'data.schemaOrg', function: 'is_object' },
-        { name: 'Load Time', path: 'timing.duration' },
+        { name: 'Pagespeed', path: 'pagespeed.overall' },
+        { name: 'Load Time', path: 'pagespeed.speedIndex' },
+        { name: 'Perf', path: 'pagespeed.performance' },
+        { name: 'SEO', path: 'pagespeed.seo' },
 
         // AEM metadata
         { name: "PageID", path: "content.pageId" },

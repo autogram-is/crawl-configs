@@ -1,1 +1,1 @@
-export {};
+export * from './svc-pages-by-lang.mjs';

@@ -1,11 +1,16 @@
 {
   analysis: {
-    body: "div#main, main#main-content, main#page-content",
+    content: { selector: "div#main, main#main-content, main#page-content" },
     properties: {
       'content.cms': [
         'tech.CMS.[0]',
         'tech.Blogs.[0]',
       ],
+      
+      'content.videos': { source: 'body', selector: 'div.inline-video-player__canvas[id], section.c19-video-hero__wrapper', count: true, fallback: 0 },
+      'content.marketoForms': { source: 'body', selector: 'form[data-marketo-form-id]+*', count: true, fallback: 0 },
+      'content.otherForms': { source: 'body', selector: 'form:not([data-marketo-form-id])+*', count: true, fallback: 0 },
+      'content.iframes': { source: 'body', selector: 'iframe', attribute: 'src' },
       'content.language': [
         { 'source': 'body', 'selector': 'html', 'attribute': 'data-cms-lang' },
         { 'source': 'body', 'selector': 'html', 'attribute': 'lang' },

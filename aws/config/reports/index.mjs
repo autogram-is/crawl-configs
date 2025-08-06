@@ -1,1 +1,1 @@
-export * from './aws-svc-langs.mjs';
+export * from './services.mjs';

@@ -1,12 +1,12 @@
 {
   reports: {
     default: {
-      name: 'Dropbox English Pages',
-      group: 'dropbox',
+      name: 'Pages',
+      group: 'Hennepin',
       description: 'Page, media, and error summaries',
       queries: {
         'Overview': {
-          parent: 'dropbox_summary',
+          parent: 'hp_summary',
           aggregates: [
             { path: 'mime', function: 'collect' },
           ],
@@ -14,61 +14,31 @@
             { path: 'mime', eq: 'text/html' },
           ],
         },
-        'Other Pages': {
-          parent: 'dropbox_pages',
-          filters: [
-            { path: 'content.language', in: ['null', 'en', 'en-us', 'en-US'] },
-            { path: 'parsed.path[0]', contains: '__-__', type: 'string', negate: true },
-          ],
-        },
+        'All Other': 'hp_pages',
       },
       alterData: {
-        'Other Pages': {
+        'All Other': {
           action: 'split',
           property: 'Site',
-          mustMatch: [
-            'www.dropbox.com',
-            'experience.dropbox.com',
-            'blog.dropbox.com',
-          ]
+          mustMatch: ['www.hennepin.us']
         }
       },
     },
-    localized: {
-      name: 'Dropbox International Pages',
-      group: 'dropbox',
-      description: 'Page, media, and error summaries',
+    errors: {
+      name: 'Error URLs',
+      group: 'Hennepin',
+      description: 'Error summaries',
       queries: {
-        'Overview': {
-          parent: 'dropbox_summary',
-          aggregates: [
-            { path: 'mime', function: 'collect' },
-          ],
-          filters: [
-            { path: 'mime', eq: 'text/html' },
-          ],
-        },
-        'All Pages': {
-          parent: 'dropbox_pages',
-          filters: [
-            { path: 'content.language', in: [null, 'en', 'en-us'], negate: true },
-          ],
-        },
-      },
-      alterData: {
-        'All Pages': {
-          action: 'split',
-          property: 'Language',
-        }
+        'Errors': 'hp_errors',
       },
     },
     media: {
-      name: 'dropbox Downloadable Files',
-      group: 'dropbox',
-      description: 'Non-HMTL files linked by Dropbox sites',
+      name: 'Downloadable Files',
+      group: 'Hennepin',
+      description: 'Non-HMTL files linked by sites',
       queries: {
         'Overview': {
-          parent: 'dropbox_summary',
+          parent: 'hp_summary',
           aggregates: [
             { path: 'mime', function: 'collect' },
           ],
@@ -77,11 +47,11 @@
           ],
         },
         'PDFs': {
-          parent: 'dropbox_media',
+          parent: 'hp_media',
           filters: [{ path: 'mime', eq: 'application/pdf' }],
           return: [
             { name: 'Title', path: 'content.title' },
-            { name: 'Date', path: 'content.date' },
+            { name: 'Date', path: 'content.published' },
             { name: 'Pages', path: 'data.pages' },
             { name: 'Words', path: 'content.readability.words' },
             { name: 'Language', path: 'data.info.Language' },
@@ -89,7 +59,7 @@
           ]
         },
         'Photos': {
-          parent: 'dropbox_media',
+          parent: 'hp_media',
           filters: [{ path: 'mime', in: ['image/png', 'image/jpeg'] }],
           return: [
             { name: 'Date', path: 'data.ModifyDate' },
@@ -99,14 +69,14 @@
           ]
         },
         'Audio': {
-          parent: 'dropbox_media',
+          parent: 'hp_media',
           filters: [{ path: 'mime', eq: 'audio/mpeg' }],
           return: [
             { name: 'Duration', path: 'data.format.duration' },
           ]
         },
         'Videos': {
-          parent: 'dropbox_media',
+          parent: 'hp_media',
           filters: [{ path: 'mime', eq: 'video/mp4' }],
           return: [
             { name: 'Date', path: 'data.format.creationTime' },
@@ -114,7 +84,7 @@
           ]
         },
         'Other Files': {
-          parent: 'dropbox_media',
+          parent: 'hp_media',
           filters: [{ path: 'mime', in: ['application/pdf', 'image/png', 'image/jpeg', 'audio/mpeg', 'video/mp4'], negate: true }]
         },
       }

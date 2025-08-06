@@ -1,0 +1,41 @@
+configVersion: 0.10.5
+extends:
+  - ../../arango.config.yml
+  - ../../page-tech.json5
+  - ./queries.json5
+  - ./reports.json5
+  - ./cookies.json
+
+arango:
+  databaseName: lucet
+  
+offloadBodyHtml: 'file'
+
+spider:
+  seed:
+    - https://eap.ndbh.com
+  saveXhrList: true
+  savePerformance: true
+  saveCookies: true
+  maxConcurrency: 4
+  maxRequestsPerMinute: 60
+  headless: true
+  stealth: false
+  urls:
+    crawl:
+      - property: "pathname"
+        glob: '/home/management-login'
+        reject: true
+      - property: "pathname"
+        glob: '**/1-800-624-5544'
+        reject: true
+      - "http*//{*.,}ndbh.com{*,*/**}"
+  downloadMimeTypes: "*/*"
+  prefetchMethod: GET
+
+analysis:
+  content:
+    selector: 
+      - "body"
+  properties:
+    "content.cms": "tech.CMS[0]"

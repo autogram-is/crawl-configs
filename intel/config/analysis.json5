@@ -1,0 +1,71 @@
+{
+  analysis: {
+    content: { selector: "main#primary-content" },
+    properties: {
+      'content.cms': [
+        'tech.CMS.[0]',
+        'tech.Blogs.[0]',
+      ],
+      
+      'content.title': [
+        'data.meta.title',
+        'data.meta.og.title', // OpenGraph
+        'data.info.Title',    // PDF metadata
+        'data.title',         // HEAD description tag
+      ],
+      'content.keywords': {
+         source: 'data.meta.localecode',
+         split: ','
+      },
+      'content.description': [
+        'data.meta.og.description', // OpenGraph
+        'data.meta.description',    // HEAD description tag
+        'data.schemaOrg.WebPage.description',    // SchemaOrg
+        'data.dc.description',       // PDF metadata
+      ],
+      
+      'content.created': 'data.meta.authoreddate',
+      'content.modified': 'data.meta.lastModifieddate',
+      'content.locale': 'data.meta.localecode',
+      'content.format': 'data.meta.format',
+      'content.menu': 'data.meta.menu',
+
+      'taxonomy.type': {
+         source: 'data.meta.emtcontenttype',
+         split: ';'
+      },
+      'taxonomy.skillLevel': {
+         source: 'data.meta.skilllevel',
+         split: ';'
+      },
+      'taxonomy.programminglanguage': {
+         source: 'data.meta.programminglanguage',
+         split: ';'
+      },
+      'taxonomy.category': {
+         source: 'data.meta.reimaginetoplevelcategory',
+         split: ';'
+      },
+      'taxonomy.operatingsystem': {
+         source: 'data.meta.operatingsystem',
+         split: ';'
+      },
+      'taxonomy.system': {
+         source: 'data.meta.system',
+         split: ';'
+      },
+      'taxonomy.tag': {
+         source: 'data.meta.localizedtagname',
+         split: ';'
+      },
+      'taxonomy.subject': {
+         source: 'data.meta.emtsubject',
+         split: ';'
+      },
+      'taxonomy.audience': {
+         source: 'data.meta.emtaudience',
+         split: ';'
+      },
+    }
+  }
+}
